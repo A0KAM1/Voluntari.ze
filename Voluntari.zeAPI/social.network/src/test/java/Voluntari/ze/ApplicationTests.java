@@ -1,10 +1,10 @@
-package com.voluntarize.tshare;
+package Voluntari.ze;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TshareApplicationTests {
+class ApplicationTests {
 
 	@Test
 	void contextLoads() {
