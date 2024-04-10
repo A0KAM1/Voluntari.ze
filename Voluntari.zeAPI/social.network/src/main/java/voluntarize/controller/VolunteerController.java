@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import voluntarize.entity.Volunteer;
-import voluntarize.service.Volunteer;
+import voluntarize.service.VolunteerService;
 
 @RestController
 @RequestMapping("/volunteers")
@@ -20,4 +20,5 @@ public class VolunteerController {
     public ResponseEntity<Volunteer> create(@RequestBody Volunteer volunteer){
         return ResponseEntity.status(HttpStatus.CREATED).body(_volunteerService.create(volunteer));
     }
+
 }

@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
 
@@ -22,25 +24,25 @@ public class Volunteer {
     private String password;
     @Column(unique = true)
     private String username;
-    private String name;
-    @Column(name = "last_name")
-    private String lastName;
-    private Date birthday;
-    @Column(name = "profile_picture")
-    private String profilePicture;
     private String description;
+    private String name;
     @Column(name = "phone_number")
     private String phoneNumber;
+    @Column(name = "profile_picture")
+    private String profilePicture;
     private String city;
     private String state;
     private String country;
+    private String cpf;
+    @Column(name = "last_name")
+    private String lastName;
+    private Date birthday;
+    private int level;
     @CreationTimestamp
     @Column(name = "created_at")
     private Date createdAt;
     @UpdateTimestamp
     @Column(name = "updated_at")
     private Date updatedAt;
-    private String cpf;
-    private int level;
 
 }
