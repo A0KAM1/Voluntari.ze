@@ -16,11 +16,28 @@ public class Ong {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ongs_sq")
     @SequenceGenerator(name = "ongs_sq", sequenceName = "ongs_sq", initialValue = 1, allocationSize = 1)
     private Long id;
+    private String email;
+    private String password;
+    @Column(unique = true)
+    private String username;
+    private String description;
+    private String name;
     private String cnpj;
     private String address;
-    @Column(name = "qr_code")
+    @Column(name = "profile_picture")
+    private String profilePicture;
+    @Column(name = "phone_number")
+    private String phoneNumber;
+    private String city;
+    private String state;
+    private String country;
     private String qrCode;
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @CreationTimestamp
+    @Column(name = "created_at")
+    private Date createdAt;
+    @UpdateTimestamp
+    @Column(name = "updated_at")
+    private Date updatedAt;
+    @Column(name = "qr_code")
+    
 }
