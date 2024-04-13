@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import voluntarize.entity.Ong;
+import voluntarize.request.OngRequest;
 import voluntarize.service.OngService;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class OngController {
 
     @Operation(summary = "Create a new ong", tags = "Ong")
     @PostMapping
-    public ResponseEntity<Ong> create(@RequestBody Ong ong){
+    public ResponseEntity<Ong> create(@RequestBody OngRequest ong){
         return ResponseEntity.status(HttpStatus.CREATED).body(_ongService.create(ong));
     }
 
