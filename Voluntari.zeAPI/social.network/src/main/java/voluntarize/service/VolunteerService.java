@@ -74,7 +74,6 @@ public class VolunteerService {
         res.setLastName(request.lasName);
         res.setUser(user);
         res.setBirthday(request.birthday);
-        res.setLevel(request.Level);
         return res;
     }
 }
