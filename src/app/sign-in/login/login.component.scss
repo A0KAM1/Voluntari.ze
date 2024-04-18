@@ -1,0 +1,42 @@
+.login-background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: max-content;
+    min-height: max-content;
+    background-color: #EEF6F4;
+}
+
+.login-card {
+    width: 800px;
+    height: 650px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-email-label, .input-password-label {
+    color: #08A3D3;
+}
+
+.input-email, .input-password {
+    border-color: #08A3D3;
+    width: 500px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.forgot-password-link {
+    color: #D12B49E5;
+}
+
+.button-sign-in {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.sign-in-button {
+    background-color: #08A3D3;
+    width: 280px;
+}
