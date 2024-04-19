@@ -1,1 +1,37 @@
-<p>login works!</p>
+<div class="login-background">
+    <p-card 
+        class="login-card" 
+        header="Voluntari.ze" 
+        subheader="Cada átomo de bondade conta!">
+        <span class="p-float-label">
+            <input 
+                class="input-email" 
+                pInputText 
+                id="email">
+            <label class="input-email-label" for="email">E-mail</label>
+        </span>
+        <span class="p-float-label">
+            <input 
+                class="input-password" 
+                pInputText 
+                id="password">
+            <label class="input-password-label" for="password">Senha</label>
+        </span>
+        <div>
+            <a 
+                class="forgot-password-link" 
+                (click)="showDialog()"
+                [routerLink]="['/forgot-my-password']">Esqueceu a senha?</a>
+        </div>
+        <div class="button-sign-in">
+            <button 
+            pButton 
+            pRipple 
+            label="Entrar" 
+            class="sign-in-button"></button>
+        </div>
+        <div>
+            <a class="create-profile-link">Não possui um perfil?</a>
+        </div>
+    </p-card>
+</div>

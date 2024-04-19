@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './forgot-my-password.component.html',
-  styleUrl: './forgot-my-password.component.scss'
+  // styleUrl: './forgot-my-password.component.scss'
 })
 export class ForgotMyPasswordComponent {
 
