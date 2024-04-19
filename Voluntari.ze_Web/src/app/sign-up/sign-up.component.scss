@@ -1,0 +1,19 @@
+.sign-up-backgroud{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: max-content;
+    min-height: max-content;
+    background-color: #EEF6F4;
+}
+
+.sign-up-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.sign-up-form label{
+    padding-top: 20px;
+}
