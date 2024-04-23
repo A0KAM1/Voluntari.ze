@@ -24,6 +24,13 @@ public class OngController {
         return ResponseEntity.status(HttpStatus.CREATED).body(_ongService.create(ong));
     }
 
+    @Operation(summary = "find ong(s) by filter")
+    @GetMapping("/filter")
+    public ResponseEntity<List<Ong>> findByFilter(@RequestParam String keyword , @RequestParam int category){
+        List<Ong> res = _ongService.findByFilter(keyword, category);
+        return res != null ? ResponseEntity.ok(res) : ResponseEntity.notFound().build();
+    }
+
     @Operation(summary = "Find all ongs", tags = "Ong")
     @GetMapping
     public ResponseEntity<List<Ong>> findAll(){

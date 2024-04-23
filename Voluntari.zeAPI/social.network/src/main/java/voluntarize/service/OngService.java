@@ -52,6 +52,11 @@ public class OngService {
         return null;
     }
 
+    public List<Ong> findByFilter(String keyword, int category){
+        List<Ong> res = _ongRepository.findByFilter(keyword, category);
+        return res;
+    }
+
     private User getUserAttributes(OngRequest request){
         User res = new User();
         res.setEmail(request.email);
