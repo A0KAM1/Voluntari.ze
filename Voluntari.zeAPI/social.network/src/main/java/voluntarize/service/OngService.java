@@ -27,8 +27,9 @@ public class OngService {
         return res;
     }
 
-    public List<Ong> findAll(){
-        return _ongRepository.findAll();
+    public List<Ong> findByFilter(String keyword, List<Long> category){
+        List<Ong> res = _ongRepository.findByFilter(keyword, category);
+        return res;
     }
 
     public Ong findById(Long id){
@@ -50,11 +51,6 @@ public class OngService {
         Ong res = this.findById(id);
         if(res != null) return _ongRepository.save(ong);
         return null;
-    }
-
-    public List<Ong> findByFilter(String keyword, int category){
-        List<Ong> res = _ongRepository.findByFilter(keyword, category);
-        return res;
     }
 
     private User getUserAttributes(OngRequest request){
