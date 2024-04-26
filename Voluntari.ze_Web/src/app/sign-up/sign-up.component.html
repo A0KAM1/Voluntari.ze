@@ -1,63 +1,12 @@
 <p-card header="Cadastro">
     <div class="sign-up-background">
         <div>
-            <p-button label="Cadastro de Perfil" [raised]="true"></p-button>
-            <p-button label="Cadastro de ONG" [raised]="true" [disabled]="true"></p-button>
+            <p-selectButton [options]="stateOptions"  optionLabel="label" optionValue="value"></p-selectButton>
+            <!-- <p-button label="Cadastro de Perfil" [raised]="true"></p-button>
+            <p-button label="Cadastro de ONG" [raised]="true" [disabled]="true"></p-button> -->
         </div>
         <div>
-            <form action="">
-                <div class="sign-up-form">
-                    <h3>Informações Pessoais</h3>
-                    <div>
-                        <h4>Imagem de perfil</h4>
-                        <p-fileUpload mode="basic" chooseLabel="Escolher imagem" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" maxFileSize="1000000" (onUpload)="onUpload()"></p-fileUpload>
-                    </div>
-                    <p-floatLabel>
-                        <!-- [(ngModel)]="value" -->
-                        <input id="fullName" type="text" pInputText  />
-                        <label for="fullName">Nome Completo</label>
-                    </p-floatLabel>
-                    <div></div>
-                    <label for="userCPF">CPF</label>
-                    <input name="userCPF" type="text" placeholder="Informe seu CPF">
-                    <label for="userPhone">Telefone/Celular</label>
-                    <input name="userPhone" type="tel" placeholder="Informe seu telefone">
-                    <label for="userDesription">Descrição</label>
-                    <textarea name="userDesription"></textarea>
-                    <label for="userUsername">Nome de usuário</label>
-                    <input name="userUsername" type="text" placeholder="Informe o nome de seu usuário">
-                    <label for="userEmail">E-mail</label>
-                    <input name="userEmail" type="email" placeholder="Informe seu e-mail">
-                    <div>
-                        <label for="userPassword">Senha</label>
-                        <input for="userPassword" type="password" placeholder="Informe sua senha">
-                        <label for="userPasswordConfirm">Confirme sua senha</label>
-                        <input for="userPasswordConfirm" type="password" placeholder="Confirme sua senha">
-                    </div>
-                </div>
-                <p-divider></p-divider>
-                <div>
-                    <h3>Informações Regionais</h3>
-                    <label for="userCEP">CEP</label>
-                    <input type="text" placeholder="Informe seu CEP">
-                    <div>
-                        <label for="userCountry">País</label>
-                        <input type="text" name="userCountry" placeholder="Informe seu país">
-                        <label for="userCity">Cidade</label>
-                        <input type="text" name="userCity" placeholder="Informe sua cidade">
-                        
-                        <p-dropdown formControlName="selectedCity" [options]="[]" optionLabel="name" placeholder="Escolha o estado"></p-dropdown>
-                        
-                    </div>
-                    <div>
-                        <label for="userLogradouro">Logradouro</label>
-                        <input type="text" name="userLogradouro">
-                        <label for="userLogradouroNumber">Número</label>
-                        <input type="text" name="userLogradouroNumber" placeholder="Informe o número do logradouro">
-                    </div>
-                </div>
-                <p-button label="Cadastrar"></p-button>
-            </form>
+            
             <p>
                 Já tem uma conta? Então 
                 

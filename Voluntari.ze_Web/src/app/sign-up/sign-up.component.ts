@@ -5,6 +5,7 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { CardModule } from 'primeng/card';
 import { DividerModule } from 'primeng/divider';
 import { FileUploadModule } from 'primeng/fileupload';
+import { SelectButtonModule } from 'primeng/selectbutton';
 
 
 @Component({
@@ -16,14 +17,25 @@ import { FileUploadModule } from 'primeng/fileupload';
         FloatLabelModule,
         CardModule,
         DividerModule,
-        FileUploadModule 
+        FileUploadModule, 
+        SelectButtonModule
     ],
     templateUrl: './sign-up.component.html',
     styleUrl: './sign-up.component.scss'
 })
 export class SignUpComponent{
     value: string | undefined;
-    onUpload() {
+    // onUpload() {
         
-    }
+    // }
+    stateOptions: any[] = [
+        { 
+            label: 'Cadastro de Perfil', 
+            value: './register-ngo-component.html' 
+        },
+        { 
+            label: 'Cadastro de ONG', 
+            value: './register-user-component.html' 
+        }
+    ];
 }
