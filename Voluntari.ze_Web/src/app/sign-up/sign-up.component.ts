@@ -16,7 +16,7 @@ import { FileUploadModule } from 'primeng/fileupload';
         FloatLabelModule,
         CardModule,
         DividerModule,
-        FileUploadModule 
+        FileUploadModule,
     ],
     templateUrl: './sign-up.component.html',
     styleUrl: './sign-up.component.scss'

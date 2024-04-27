@@ -3,8 +3,8 @@ import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
-import { RouterModule, RouterOutlet, Routes } from '@angular/router';
-import { ForgotMyPasswordComponent } from '../forgot-my-password/forgot-my-password.component';
+import { RouterModule } from '@angular/router';
+import { ImageModule } from 'primeng/image';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +14,8 @@ import { ForgotMyPasswordComponent } from '../forgot-my-password/forgot-my-passw
     InputTextModule,
     ButtonModule,
     DialogModule,
-    RouterModule
+    RouterModule,
+    ImageModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'

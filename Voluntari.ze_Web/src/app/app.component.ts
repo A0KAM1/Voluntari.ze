@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule, RouterOutlet } from '@angular/router';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { LoginComponent } from './sign-in/login/login.component';
 
@@ -9,7 +9,8 @@ import { LoginComponent } from './sign-in/login/login.component';
   imports: [
     RouterOutlet,
     SignUpComponent,
-    LoginComponent
+    LoginComponent,
+    RouterModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
