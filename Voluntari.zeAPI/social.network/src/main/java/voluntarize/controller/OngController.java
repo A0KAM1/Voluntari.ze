@@ -29,7 +29,7 @@ public class OngController {
     public ResponseEntity<List<Ong>> findByFilter(
             @RequestParam(required = false) String keyword,
             @RequestParam(required = false) List<Long> category){
-        List<Ong> res = _ongService.findByFilter(keyword, category);
+        List<Ong> res= _ongService.findByFilter(keyword, category);
         return res != null ? ResponseEntity.ok(res) : ResponseEntity.notFound().build();
     }
 

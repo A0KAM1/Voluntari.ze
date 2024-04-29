@@ -16,4 +16,5 @@ public interface OngRepository extends JpaRepository<Ong, Long> {
             "OR (:category IS NULL OR c.id IN (:category))")
     List<Ong> findByFilter(@Param("keyword") String keyword,
                            @Param("category") List<Long> category);
+
 }

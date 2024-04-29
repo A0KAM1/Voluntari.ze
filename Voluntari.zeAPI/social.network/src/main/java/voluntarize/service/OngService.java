@@ -76,4 +76,5 @@ public class OngService {
         res.setQrCode(request.qrCode);
         return res;
     }
+
 }
