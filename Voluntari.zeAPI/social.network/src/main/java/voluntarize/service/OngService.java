@@ -12,6 +12,7 @@ import voluntarize.request.OngRequest;
 import voluntarize.request.PublicationRequest;
 import voluntarize.service.interfaces.OngServiceInterface;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -45,7 +46,9 @@ public class OngService implements OngServiceInterface {
 
     public OngDto findById(Long id){
         Optional<Ong> ong = _ongRepository.findById(id);
-        return this.ongToDto(ong.get());
+        //OngDto res = this.ongToDto(ong.get());
+        if(ong.isPresent()) return this.ongToDto(ong.get());
+        return null;
     }
 
     public boolean deleteOngById(Long id){
@@ -58,21 +61,18 @@ public class OngService implements OngServiceInterface {
     }
 
     public OngDto updateOngById(Long id, OngRequest request){
-        OngDto exists = this.findById(id);
-        if(exists != null){
-            User user = this.getUserAttributes(request);
-            Ong ong = this.ongToEntity(request, user);
-            _ongRepository.save(ong);
-            return this.ongToDto(ong);
-        }
-        return null;
+        User user = this.getUserAttributes(request);
+        Ong ong = this.ongToEntity(request, user);
+        ong.setId(id);
+        Ong res = _ongRepository.save(ong);
+        return this.ongToDto(res);
     }
 
     public PublicationDto createPublication (PublicationRequest request){
-        //Post post = this.getPostAttributes(request);
         Post post = _postRepository.save(this.getPostAttributes(request));
-        return this._publicationRepository.save(post);
-        return res;
+        Publication res = _publicationRepository.save(this.toPublicationEntity(post));
+        List<Picture> pictures = _pictureRepository.saveAll(this.getListOfPhotos(request.photos, post));
+        return this.publicationToDto(res, pictures);
     }
 
     public boolean deletePublication(Long id){return false;};
@@ -123,23 +123,34 @@ public class OngService implements OngServiceInterface {
     }
     private Post getPostAttributes(PublicationRequest request){
         Optional<Ong> ong = this._ongRepository.findById(request.ongId);
-
         Post res = new Post();
-        res.setContent(request.description);
+
         res.setOng(ong.get());
+        res.setContent(request.description);
         return res;
     }
-    private PublicationDto publicationToDto(Publication publication){
+    private Publication toPublicationEntity(Post post){
+        Publication res = new Publication();
+        res.setPost(post);
+        return res;
+    }
+    private List<Picture> getListOfPhotos(List<String> photos, Post post){
+        List<Picture> res = new ArrayList<>();
+        photos.forEach(picture -> {
+            Picture pic = new Picture();
+            pic.setUrl(picture);
+            pic.setPost(post);
+            res.add(pic);
+        });
+        return res;
+    }
+    private PublicationDto publicationToDto(Publication publication, List<Picture> pictures){
         PublicationDto res = new PublicationDto();
         res.setId(publication.getId());
+        res.setPhotos(pictures);
         res.setDescription(publication.getPost().getContent());
-        res.setPhotos(publication.getPost().get);
+        res.setOngId(publication.getPost().getOng().getId());
         return res;
     }
-
-    private void savePictures(List<String> picture, Post post){
-        Picture res  = new Picture();
-    }
-
 
 }

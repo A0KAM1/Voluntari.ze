@@ -17,7 +17,7 @@ public class Picture {
     @SequenceGenerator(name = "pictures_sq", sequenceName = "pictures_sq", initialValue = 1, allocationSize = 1)
     private Long id;
     private String url;
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "post_id")
     private Post post;
 }

@@ -30,4 +30,5 @@ public class Post {
     @ManyToOne
     @JoinColumn(name = "ong_id")
     private Ong ong;
+
 }
