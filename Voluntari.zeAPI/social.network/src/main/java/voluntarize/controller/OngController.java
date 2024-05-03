@@ -2,20 +2,27 @@ package voluntarize.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import voluntarize.dto.EventDto;
 import voluntarize.dto.OngDto;
 import voluntarize.dto.PublicationDto;
 import voluntarize.entity.Ong;
+import voluntarize.entity.Publication;
+import voluntarize.request.EventRequest;
 import voluntarize.request.OngRequest;
 import voluntarize.request.PublicationRequest;
 import voluntarize.service.OngService;
+import voluntarize.viewModel.EventViewModel;
 import voluntarize.viewModel.OngSearchViewModel;
 import voluntarize.viewModel.OngViewModel;
 import voluntarize.viewModel.PublicationViewModel;
 
+import java.sql.Time;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -72,10 +79,17 @@ public class OngController {
     }
 
     @Operation(summary = "Create publication", tags = "Ong")
-    @PostMapping("/post/publication")
+    @PostMapping("/posts/publications")
     public ResponseEntity<PublicationViewModel> createPublication(@RequestBody PublicationRequest request){
         PublicationDto res = _ongService.createPublication(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(this.publicationToViewModel(res));
+    }
+
+    @Operation(summary = "create event", tags = "Ong")
+    @PostMapping("/posts/events")
+    public ResponseEntity<EventViewModel> createEvent(@RequestBody EventRequest request){
+        EventDto res = _ongService.createEvent(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.getEventViewModel(res));
     }
 
     private OngSearchViewModel ongToSearchViewModel(OngDto ong){
@@ -109,6 +123,18 @@ public class OngController {
         res.setPhotos(publication.getPhotos());
         res.setDescription(publication.getDescription());
         res.setOngId(publication.getOngId());
+        return res;
+    }
+    private EventViewModel getEventViewModel(EventDto event){
+        EventViewModel res = new EventViewModel();
+        res.setDate(event.getDate());
+        res.setTime(event.getTime());
+        res.setAddress(event.getAddress());
+        res.setRequirements(event.getRequirements());
+        res.setDescription(event.getDescription());
+        res.setStatusId(event.getStatusId());
+        res.setPostId(event.getPostId());
+        res.setPhotos(event.getPhotos());
         return res;
     }
 

@@ -1,4 +1,4 @@
-package voluntarize.dto;
+package voluntarize.viewModel;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class EventDto {
+public class EventViewModel {
     private Long id;
     private LocalDate date;
     private Time time;
