@@ -5,22 +5,41 @@
             <h4>Imagem de perfil</h4>
             <!-- <p-fileUpload mode="basic" chooseLabel="Escolher imagem" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" maxFileSize="1000000" (onUpload)="onUpload()"></p-fileUpload> -->
         </div>
-        <p-floatLabel>
-            <!-- [(ngModel)]="value" -->
-            <input id="fullName" type="text" pInputText  />
-            <label for="fullName">Nome Completo</label>
-        </p-floatLabel>
-        <div></div>
-        <label for="userCPF">CPF</label>
-        <input name="userCPF" type="text" placeholder="Informe seu CPF">
-        <label for="userPhone">Telefone/Celular</label>
-        <input name="userPhone" type="tel" placeholder="Informe seu telefone">
-        <label for="userDesription">Descrição</label>
-        <textarea name="userDesription"></textarea>
-        <label for="userUsername">Nome de usuário</label>
-        <input name="userUsername" type="text" placeholder="Informe o nome de seu usuário">
-        <label for="userEmail">E-mail</label>
-        <input name="userEmail" type="email" placeholder="Informe seu e-mail">
+        <div class="register-user-input">
+            <span class="p-float-label">
+                <input id="fullName" type="text" pInputText/>
+                <label for="fullName">Nome Completo</label>
+            </span>
+            <p-floatLabel>
+                <input id="userCPF" type="text" pInputText>
+                <label for="userCPF">CPF</label>
+            </p-floatLabel>
+            <p-floatLabel>
+                <input id="userPhone" type="tel" pInputText>
+                <label for="userPhone">Telefone/Celular</label>
+            </p-floatLabel>
+            <p-floatLabel>
+                <textarea id="userDesription" pInputText></textarea>
+                <label for="userDesription">Descrição</label>
+            </p-floatLabel>
+            <p-floatLabel>
+                <input id="userUsername" type="text" pInputText  />
+                <label for="userUsername">Nome de usuário</label>
+            </p-floatLabel>
+            <p-floatLabel>
+                <input id="userEmail" type="email" pInputText  />
+                <label for="userEmail">E-mail</label>
+            </p-floatLabel>
+        </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        
         <div>
             <label for="userPassword">Senha</label>
             <input for="userPassword" type="password" placeholder="Informe sua senha">
@@ -50,4 +69,10 @@
         </div>
     </div>
     <p-button label="Cadastrar"></p-button>
+    <div>      
+        <p>
+            Já tem uma conta? Então 
+            <a href="">Voluntarize</a> 
+        </p>
+    </div>
 </form>

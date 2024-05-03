@@ -6,6 +6,9 @@ import { CardModule } from 'primeng/card';
 import { DividerModule } from 'primeng/divider';
 import { FileUploadModule } from 'primeng/fileupload';
 import { SelectButtonModule } from 'primeng/selectbutton';
+import { RouterModule, RouterOutlet } from "@angular/router";
+import { RegisterUserComponent } from "./register-user/register-user.component";
+import { RegisterNgoComponent } from "./register-ngo/register-ngo.component";
 
 
 @Component({
@@ -18,7 +21,11 @@ import { SelectButtonModule } from 'primeng/selectbutton';
         CardModule,
         DividerModule,
         FileUploadModule, 
-        SelectButtonModule
+        SelectButtonModule,
+        RouterOutlet,
+        RegisterUserComponent,
+        RouterModule,
+        RegisterNgoComponent
     ],
     templateUrl: './sign-up.component.html',
     styleUrl: './sign-up.component.scss'
@@ -31,7 +38,9 @@ export class SignUpComponent{
     stateOptions: any[] = [
         { 
             label: 'Cadastro de Perfil', 
-            value: './register-ngo-component.html' 
+            // value: 'registerUser',
+            value: "routerLink='/register-user'"
+
         },
         { 
             label: 'Cadastro de ONG', 

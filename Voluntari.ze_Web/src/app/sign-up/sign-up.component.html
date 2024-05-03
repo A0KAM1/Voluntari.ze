@@ -1,18 +1,15 @@
-<p-card header="Cadastro">
-    <div class="sign-up-background">
-        <div>
-            <p-selectButton [options]="stateOptions"  optionLabel="label" optionValue="value"></p-selectButton>
-            <!-- <p-button label="Cadastro de Perfil" [raised]="true"></p-button>
-            <p-button label="Cadastro de ONG" [raised]="true" [disabled]="true"></p-button> -->
+<div class="login-background">
+    <p-card class="login-card">
+        <div class="logo">
+            <img src="assets\images\Logo.jpg" width="350">
         </div>
-        <div>
+        <p-selectButton [options]="stateOptions"  optionLabel="label" optionValue="value">
             
-            <p>
-                Já tem uma conta? Então 
-                
-                <a href="">Voluntarize</a>
-                
-            </p>
-        </div>
-    </div>
-</p-card>
+            <!-- <router-outlet></router-outlet> -->
+        </p-selectButton>
+        <!-- <a [routerLink]="['app-register-ngo']">Teste</a> -->
+        
+        <app-register-ngo></app-register-ngo>
+        <!-- <register-user></register-user> -->
+    </p-card>
+</div>

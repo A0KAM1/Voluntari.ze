@@ -17,3 +17,29 @@
 .sign-up-form label{
     padding-top: 20px;
 }
+
+
+.login-background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 850px;
+    min-height: 700px;
+    background-color: #EEF6F4;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.login-card {
+    // width: 800px;
+    // height: 650px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid;
+    border-image: linear-gradient(to right, #08A3D3, #37AF91, #FFD602, #91C612) 10;
+}
