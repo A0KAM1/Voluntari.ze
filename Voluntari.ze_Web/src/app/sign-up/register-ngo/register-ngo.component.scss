@@ -1,0 +1,31 @@
+.input-style{
+    border-color: #08A3D3;
+    border-width: 2px;
+    // width: 500px;
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+
+.sign-up-form{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.sign-up-end{
+    display: block;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 auto;
+    align-content: center;
+}
+
+.voluntarizeText{
+    color: #08A3D3;
+}
+
+.voluntarizeLink{
+    color: #91C612;
+    text-decoration: none;
+}

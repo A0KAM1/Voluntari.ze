@@ -2,8 +2,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-width: 850px;
+    min-width: 1200px;
     min-height: 700px;
+    width: 1000;
     background-color: #EEF6F4;
 }
 
@@ -61,10 +62,38 @@
 
 .register-user-input{
     width: 100%;
-
+    
 }
 
-.register-user-input .p-float-label{
+
+.input-style{
+    border-color: #08A3D3;
+    border-width: 2px;
+    // width: 500px;
     width: 100%;
-    background-color: #91C612;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+
+.sign-up-form{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.sign-up-end{
+    display: block;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 auto;
+    align-content: center;
+}
+
+.voluntarizeText{
+    color: #08A3D3;
+}
+
+.voluntarizeLink{
+    color: #91C612;
+    text-decoration: none;
 }

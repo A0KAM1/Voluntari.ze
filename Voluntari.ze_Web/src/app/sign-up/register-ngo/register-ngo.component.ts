@@ -29,5 +29,7 @@ import { RouterOutlet } from "@angular/router";
   styleUrl: './register-ngo.component.scss'
 })
 export class RegisterNgoComponent {
-
+  onUpload(){
+    
+  }
 }

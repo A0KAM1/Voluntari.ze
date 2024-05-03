@@ -30,6 +30,10 @@ const routeConfig: Routes = [
         path: 'forgot-my-password',
         component: ForgotMyPasswordComponent
     },
+    {
+        path: 'register-user',
+        component: RegisterUserComponent
+    }
     
 ];
 

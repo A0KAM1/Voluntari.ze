@@ -1,78 +1,106 @@
-<form action="">
-    <div class="sign-up-form">
-        <h3>Informações Pessoais</h3>
-        <div>
-            <h4>Imagem de perfil</h4>
-            <!-- <p-fileUpload mode="basic" chooseLabel="Escolher imagem" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" maxFileSize="1000000" (onUpload)="onUpload()"></p-fileUpload> -->
+<div class="login-background">
+    <p-card class="login-card">
+        <div class="logo">
+            <img src="assets\images\Logo.jpg" width="350">
         </div>
-        <div class="register-user-input">
-            <span class="p-float-label">
-                <input id="fullName" type="text" pInputText/>
-                <label for="fullName">Nome Completo</label>
-            </span>
-            <p-floatLabel>
-                <input id="userCPF" type="text" pInputText>
-                <label for="userCPF">CPF</label>
-            </p-floatLabel>
-            <p-floatLabel>
-                <input id="userPhone" type="tel" pInputText>
-                <label for="userPhone">Telefone/Celular</label>
-            </p-floatLabel>
-            <p-floatLabel>
-                <textarea id="userDesription" pInputText></textarea>
-                <label for="userDesription">Descrição</label>
-            </p-floatLabel>
-            <p-floatLabel>
-                <input id="userUsername" type="text" pInputText  />
-                <label for="userUsername">Nome de usuário</label>
-            </p-floatLabel>
-            <p-floatLabel>
-                <input id="userEmail" type="email" pInputText  />
-                <label for="userEmail">E-mail</label>
-            </p-floatLabel>
-        </div>
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        <div>
-            <label for="userPassword">Senha</label>
-            <input for="userPassword" type="password" placeholder="Informe sua senha">
-            <label for="userPasswordConfirm">Confirme sua senha</label>
-            <input for="userPasswordConfirm" type="password" placeholder="Confirme sua senha">
-        </div>
-    </div>
-    <p-divider></p-divider>
-    <div>
-        <h3>Informações Regionais</h3>
-        <label for="userCEP">CEP</label>
-        <input type="text" placeholder="Informe seu CEP">
-        <div>
-            <label for="userCountry">País</label>
-            <input type="text" name="userCountry" placeholder="Informe seu país">
-            <label for="userCity">Cidade</label>
-            <input type="text" name="userCity" placeholder="Informe sua cidade">
+        <p-selectButton [options]="stateOptions"  optionLabel="label" optionValue="value" class="selectButton">
             
-            <p-dropdown formControlName="selectedCity" [options]="[]" optionLabel="name" placeholder="Escolha o estado"></p-dropdown>
+           
+        </p-selectButton>
+        <!-- <a [routerLink]="['app-register-ngo']">Teste</a> -->
+        <form action="">
+            <div class="sign-up-form">
+                <h3>Informações Pessoais</h3>
+                <div>
+                    <h4>Imagem de perfil</h4>
+                    <p-fileUpload mode="basic" chooseLabel="Escolher imagem" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" maxFileSize="1000000" (onUpload)="onUpload()"></p-fileUpload> 
+                </div>
+                <div class="register-user-input">
+                    <span class="p-float-label">
+                        <input class="input-style" id="fullName" type="text" pInputText/>
+                        <label for="fullName">Nome</label>
+                    </span>
+                    <span class="p-float-label">
+                        <input class="input-style" id="userCPF" type="text" pInputText>
+                        <label for="userCPF">CPF</label>
+                    </span>
+                    <span class="p-float-label">
+                        <input class="input-style" id="userPhone" type="tel" pInputText>
+                        <label for="userPhone">Telefone/Celular</label>
+                    </span>
+                    <span class="p-float-label">
+                        <textarea class="input-style" id="userDesription" pInputText></textarea>
+                        <label for="userDesription">Descrição</label>
+                    </span>
+                    <span class="p-float-label">
+                        <input class="input-style"  id="userUsername" type="text" pInputText  />
+                        <label for="userUsername">Nome de usuário</label>
+                    </span>
+                    <span class="p-float-label">
+                        <input class="input-style" id="userEmail" type="email" pInputText  />
+                        <label for="userEmail">E-mail</label>
+                    </span>
+                </div>
+                
+                <div>
+                    <span class="p-float-label">
+                        <input class="input-style"  id="userPassword" type="password" pInputPassword  />
+                        <label for="userPassword">Senha</label>
+                    </span>
+                    <span class="p-float-label">
+                        <input class="input-style"  id="userPasswordC" type="password" pInputPassword  />
+                        <label for="userPasswordC">Confirme sua senha</label>
+                    </span>
+                </div>
+            </div>
+            <p-divider></p-divider>
+            <div class="sign-up-form">
+                <h3>Informações Regionais</h3>
+                <span class="p-float-label">
+                    <input type="text" id="userCep" class="input-style" pInputText>
+                    <label for="userCEP">CEP</label>
+                </span>
+                
+                <div>
+                    <span class="p-float-label">
+                        <input class="input-style" type="text" nid="userCountry" pInputText>
+                        <label for="userCountry">País</label>
+                    </span>
+                    <span class="p-float-label">
+                        <input class="input-style" type="text" id="userCity" pInputText>
+                        <label for="userCity">Cidade</label>
+                    </span>
+                    <span class="p-float-label">
+
+                    </span>
+                    <p-dropdown formControlName="selectedCity" [options]="[]" optionLabel="name" placeholder="Estado"></p-dropdown>
+                    
+                </div>
+                <div>
+                    <span class="p-float-label">
+                        <input class="input-style" type="text" name="userLogradouro" pInputText>
+                        <label for="userLogradouro">Logradouro</label>
+                    </span>
+                    
+                    <span class="p-float-label">
+                        <input class="input-style" type="text" name="userLogradouroNumber" pInputText>
+                        <label for="userLogradouroNumber">Número</label>
+                    </span>
+                    
+                </div>
+            </div>
             
-        </div>
-        <div>
-            <label for="userLogradouro">Logradouro</label>
-            <input type="text" name="userLogradouro">
-            <label for="userLogradouroNumber">Número</label>
-            <input type="text" name="userLogradouroNumber" placeholder="Informe o número do logradouro">
-        </div>
-    </div>
-    <p-button label="Cadastrar"></p-button>
-    <div>      
-        <p>
-            Já tem uma conta? Então 
-            <a href="">Voluntarize</a> 
-        </p>
-    </div>
-</form>
+            <div class="sign-up-end">      
+                <p-button label="Cadastrar"></p-button>
+                <p class="voluntarizeText">
+                    Já tem uma conta? Então 
+                    <a class="voluntarizeLink" href="">Voluntarize</a> 
+                </p>
+            </div>
+        </form>
+        
+        <!-- <register-user></register-user> -->
+    </p-card>
+</div>
+
+

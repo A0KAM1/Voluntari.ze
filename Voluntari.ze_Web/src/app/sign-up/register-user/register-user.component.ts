@@ -28,4 +28,20 @@ import { CommonModule } from "@angular/common";
 })
 export class RegisterUserComponent {
     value: string | undefined;
+
+    stateOptions: any[] = [
+      { 
+          label: 'Cadastro de Perfil', 
+          // value: 'registerUser',
+          value: "routerLink='/register-user'"
+
+      },
+      { 
+          label: 'Cadastro de ONG', 
+          value: './register-user-component.html' 
+      }
+  ];
+  onUpload(){
+    
+  }
 }
