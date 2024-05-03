@@ -5,6 +5,7 @@ import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { RouterModule } from '@angular/router';
 import { ImageModule } from 'primeng/image';
+import { PasswordModule } from 'primeng/password';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ import { ImageModule } from 'primeng/image';
     ButtonModule,
     DialogModule,
     RouterModule,
-    ImageModule
+    ImageModule,
+    PasswordModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
@@ -23,7 +25,7 @@ import { ImageModule } from 'primeng/image';
 export class LoginComponent {
   makeDialogVisible: boolean = false;
 
-  constructor() {}
+  constructor() { }
 
   showDialog(): void {
     this.makeDialogVisible = true;

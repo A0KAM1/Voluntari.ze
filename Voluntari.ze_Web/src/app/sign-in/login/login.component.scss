@@ -23,17 +23,22 @@
     border-image: linear-gradient(to right, #08A3D3, #37AF91, #FFD602, #91C612) 10;
 }
 
-.input-email-label, .input-password-label {
+.input-email-label,
+.input-password-label {
     color: #08A3D3;
     font-weight: 600;
 }
 
-.input-email, .input-password {
+.input-email,
+.input-password {
     border-color: #08A3D3;
     border-width: 2px;
     width: 500px;
+}
+
+.p-float-label {
     margin-top: 15px;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
 }
 
 .forgot-password-link {
