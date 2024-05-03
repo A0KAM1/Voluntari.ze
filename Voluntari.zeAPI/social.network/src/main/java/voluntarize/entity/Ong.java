@@ -6,8 +6,6 @@ import lombok.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
 @Entity
 @Table(name = "ongs")
 public class Ong {
@@ -16,7 +14,8 @@ public class Ong {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ongs_sq")
     @SequenceGenerator(name = "ongs_sq", sequenceName = "ongs_sq", initialValue = 1, allocationSize = 1)
     private Long id;
-    private String cnpj;
+    @Column(name = "government_code")
+    private String governmentCode;
     private String address;
     @Column(name = "qr_code")
     private String qrCode;
