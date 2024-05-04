@@ -123,10 +123,12 @@ public class OngController {
         res.setPhotos(publication.getPhotos());
         res.setDescription(publication.getDescription());
         res.setOngId(publication.getOngId());
+        res.setPostId(publication.getPostId());
         return res;
     }
     private EventViewModel getEventViewModel(EventDto event){
         EventViewModel res = new EventViewModel();
+        res.setId(event.getId());
         res.setDate(event.getDate());
         res.setTime(event.getTime());
         res.setAddress(event.getAddress());

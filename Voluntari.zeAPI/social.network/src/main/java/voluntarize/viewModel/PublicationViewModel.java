@@ -3,7 +3,6 @@ package voluntarize.viewModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import voluntarize.entity.Picture;
 
 import java.util.List;
 
@@ -13,6 +12,7 @@ import java.util.List;
 public class PublicationViewModel {
     private Long id;
     private String description;
-    private List<Picture> photos;
+    private List<String> photos;
     private Long ongId;
+    private Long postId;
 }

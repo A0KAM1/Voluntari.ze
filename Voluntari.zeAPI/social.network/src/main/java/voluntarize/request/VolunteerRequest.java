@@ -1,6 +1,6 @@
 package voluntarize.request;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class VolunteerRequest {
     public String email;
@@ -15,5 +15,5 @@ public class VolunteerRequest {
     public String country;
     public String cpf;
     public String lasName;
-    public Date birthday;
+    public LocalDate birthday;
 }

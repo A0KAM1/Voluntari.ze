@@ -22,5 +22,6 @@ public class EventViewModel {
     private String description;
     private List<String> photos;
     private Long statusId;
+    private Long ongId;
     private Long postId;
 }

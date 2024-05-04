@@ -1,4 +1,4 @@
-package voluntarize.dto;
+package voluntarize.viewModel;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class VolunteerDto {
+public class VolunteerViewModel {
     private Long id;
     private String name;
     private String email;

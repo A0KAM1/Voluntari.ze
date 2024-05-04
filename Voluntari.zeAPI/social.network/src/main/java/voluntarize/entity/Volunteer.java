@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
@@ -21,7 +21,7 @@ public class Volunteer {
     private String cpf;
     @Column(name = "last_name")
     private String lastName;
-    private Date birthday;
+    private LocalDate birthday;
     private int level;
     @OneToOne
     @JoinColumn(name = "user_id")

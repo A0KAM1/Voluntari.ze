@@ -12,6 +12,7 @@ import voluntarize.request.OngRequest;
 import voluntarize.request.PublicationRequest;
 import voluntarize.service.interfaces.OngServiceInterface;
 
+import javax.swing.text.html.Option;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,9 +49,8 @@ public class OngService implements OngServiceInterface {
     }
 
     public OngDto findById(Long id){
-        Optional<Ong> ong = _ongRepository.findById(id);
-        //OngDto res = this.ongToDto(ong.get());
-        if(ong.isPresent()) return this.ongToDto(ong.get());
+        Optional<Ong> res = _ongRepository.findById(id);
+        if(res.isPresent()) return this.ongToDto(res.get());
         return null;
     }
 
@@ -64,9 +64,15 @@ public class OngService implements OngServiceInterface {
     }
 
     public OngDto updateOngById(Long id, OngRequest request){
+        Optional<Ong> test = _ongRepository.findById(id);
+        Optional<User> exsists = _userRepository.findById(test.get().getUser().getId());
+
         User user = this.getUserAttributes(request);
+        user.setId(exsists.get().getId());
         Ong ong = this.ongToEntity(request, user);
         ong.setId(id);
+
+        _userRepository.save(user);
         Ong res = _ongRepository.save(ong);
         return this.ongToDto(res);
     }
@@ -74,8 +80,8 @@ public class OngService implements OngServiceInterface {
     public PublicationDto createPublication (PublicationRequest request){
         Post post = _postRepository.save(this.getPostAttributesFromPublication(request));
         Publication res = _publicationRepository.save(this.toPublicationEntity(post));
-        List<Picture> pictures = _pictureRepository.saveAll(this.getListOfPhotos(request.photos, post));
-        return this.publicationToDto(res, pictures);
+        _pictureRepository.saveAll(this.getListOfPhotos(request.photos, post));
+        return this.publicationToDto(res, request.photos);
     }
 
     public boolean deletePublication(Long id){return false;};
@@ -83,8 +89,8 @@ public class OngService implements OngServiceInterface {
     public EventDto createEvent(EventRequest request){
         Post post = _postRepository.save(this.getPostAttributes(request));
         Event res = _eventRepository.save(this.getEventEntity(post, request));
-        List<Picture> pictures = _pictureRepository.saveAll(this.getListOfPhotos(request.photos, post));
-        return this.getEventDto(res, request.photos);
+        _pictureRepository.saveAll(this.getListOfPhotos(request.photos, post));
+        return this.eventToDto(res, request.photos);
     };
     public boolean deleteEvent(Long id){return false;};
     public boolean updateEvent(Long id, EventRequest request){return false;};
@@ -152,12 +158,13 @@ public class OngService implements OngServiceInterface {
         });
         return res;
     }
-    private PublicationDto publicationToDto(Publication publication, List<Picture> pictures){
+    private PublicationDto publicationToDto(Publication publication, List<String> pictures){
         PublicationDto res = new PublicationDto();
         res.setId(publication.getId());
         res.setPhotos(pictures);
         res.setDescription(publication.getPost().getContent());
         res.setOngId(publication.getPost().getOng().getId());
+        res.setPostId(publication.getPost().getId());
         return res;
     }
     private Post getPostAttributes(EventRequest request){
@@ -179,8 +186,9 @@ public class OngService implements OngServiceInterface {
         res.setPost(post);
         return res;
     }
-    private EventDto getEventDto(Event event, List<String> pictures){
+    private EventDto eventToDto(Event event, List<String> pictures){
         EventDto res = new EventDto();
+        res.setId(event.getId());
         res.setDate(event.getDate());
         res.setTime(event.getTime());
         res.setAddress(event.getAddress());
