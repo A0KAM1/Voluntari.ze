@@ -63,18 +63,19 @@ public class OngService implements OngServiceInterface {
         return false;
     }
 
-    public OngDto updateOngById(Long id, OngRequest request){
-        Optional<Ong> test = _ongRepository.findById(id);
-        Optional<User> exsists = _userRepository.findById(test.get().getUser().getId());
+    public boolean updateOngById(Long id, OngRequest request){
+        Optional<Ong> oldOng = _ongRepository.findById(id);
+        if(oldOng.isPresent()){
+            User newUser = this.getUserAttributes(request);
+            newUser.setId(oldOng.get().getUser().getId());
+            Ong res = this.ongToEntity(request, newUser);
+            res.setId(id);
 
-        User user = this.getUserAttributes(request);
-        user.setId(exsists.get().getId());
-        Ong ong = this.ongToEntity(request, user);
-        ong.setId(id);
-
-        _userRepository.save(user);
-        Ong res = _ongRepository.save(ong);
-        return this.ongToDto(res);
+            _userRepository.save(newUser);
+            _ongRepository.save(res);
+            return true;
+        }
+        return false;
     }
 
     public PublicationDto createPublication (PublicationRequest request){
@@ -84,16 +85,72 @@ public class OngService implements OngServiceInterface {
         return this.publicationToDto(res, request.photos);
     }
 
-    public boolean deletePublication(Long id){return false;};
-    public boolean updatePublication(Long id, PublicationRequest request){return false;};
+    public boolean deletePublication(Long id){
+        Optional<Publication> publication = _publicationRepository.findById(id);
+        if(publication.isPresent()){
+            _publicationRepository.delete(publication.get());
+            List<Picture> pictures = _pictureRepository.findByPost(publication.get().getPost());
+            _pictureRepository.deleteAll(pictures);
+            _postRepository.delete(publication.get().getPost());
+            return true;
+        }
+        return false;
+    };
+
+    public boolean updatePublication(Long id, PublicationRequest request){
+        Optional<Publication> oldPublication = _publicationRepository.findById(id);
+        if(oldPublication.isPresent()){
+            Post newPost = this.getPostAttributesFromPublication(request);
+            newPost.setId(oldPublication.get().getPost().getId());
+            Publication res = this.toPublicationEntity(newPost);
+            res.setId(id);
+            List<Picture> oldPictures = _pictureRepository.findByPost(oldPublication.get().getPost());
+            _pictureRepository.deleteAll(oldPictures);
+
+            _pictureRepository.saveAll(this.getListOfPhotos(request.photos, newPost));
+            _postRepository.save(newPost);
+            _publicationRepository.save(res);
+            return true;
+        }
+        return false;
+    };
+
     public EventDto createEvent(EventRequest request){
         Post post = _postRepository.save(this.getPostAttributes(request));
         Event res = _eventRepository.save(this.getEventEntity(post, request));
         _pictureRepository.saveAll(this.getListOfPhotos(request.photos, post));
         return this.eventToDto(res, request.photos);
     };
-    public boolean deleteEvent(Long id){return false;};
-    public boolean updateEvent(Long id, EventRequest request){return false;};
+
+    public boolean deleteEvent(Long id){
+        Optional<Event> event = _eventRepository.findById(id);
+        if(event.isPresent()){
+            _eventRepository.delete(event.get());
+            List<Picture> pictures = _pictureRepository.findByPost(event.get().getPost());
+            _pictureRepository.deleteAll(pictures);
+            _postRepository.delete(event.get().getPost());
+            return true;
+        }
+        return false;
+    };
+
+    public boolean updateEvent(Long id, EventRequest request){
+        Optional<Event> oldEvent = _eventRepository.findById(id);
+        if(oldEvent.isPresent()){
+            Post newPost = this.getPostAttributes(request);
+            newPost.setId(oldEvent.get().getPost().getId());
+            Event res = this.getEventEntity(newPost, request);
+            res.setId(id);
+            List<Picture> oldPictures = _pictureRepository.findByPost(oldEvent.get().getPost());
+            _pictureRepository.deleteAll(oldPictures);
+
+            _pictureRepository.saveAll(this.getListOfPhotos(request.photos, newPost));
+            _postRepository.save(newPost);
+            _eventRepository.save(res);
+            return true;
+        }
+        return false;
+    };
 
     private User getUserAttributes(OngRequest request){
         User res = new User();

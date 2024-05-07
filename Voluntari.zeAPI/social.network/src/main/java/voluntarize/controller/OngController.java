@@ -64,11 +64,9 @@ public class OngController {
 
     @Operation(summary = "Update ong by id", tags = "Ong")
     @PutMapping("/{id}")
-    public ResponseEntity<OngViewModel> updateOng(@PathVariable Long id, @RequestBody OngRequest ong){
-        OngDto exists = _ongService.findById(id);
-        if(exists == null) return ResponseEntity.notFound().build();
-        OngDto res = _ongService.updateOngById(id, ong);
-        return ResponseEntity.ok(this.ongToViewModel(res));
+    public ResponseEntity<Void> updateOng(@PathVariable Long id, @RequestBody OngRequest ong){
+        boolean res = _ongService.updateOngById(id, ong);
+        return res ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
 
     @Operation(summary = "Delete ong by id", tags = "Ong")
@@ -85,11 +83,39 @@ public class OngController {
         return ResponseEntity.status(HttpStatus.CREATED).body(this.publicationToViewModel(res));
     }
 
+    @Operation(summary = "delete publication by id", tags = "Ong")
+    @DeleteMapping("/posts/publications/{id}")
+    public ResponseEntity<Void> deletePublication(@PathVariable Long id){
+        boolean res = _ongService.deletePublication(id);
+        return res ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+    }
+
+    @Operation(summary = "update publication by id", tags = "Ong")
+    @PutMapping("/posts/publications/{id}")
+    public ResponseEntity<Void> updatePublication(@PathVariable Long id, @RequestBody PublicationRequest request){
+        boolean res = _ongService.updatePublication(id, request);
+        return res ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+    }
+
     @Operation(summary = "create event", tags = "Ong")
     @PostMapping("/posts/events")
     public ResponseEntity<EventViewModel> createEvent(@RequestBody EventRequest request){
         EventDto res = _ongService.createEvent(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(this.getEventViewModel(res));
+    }
+
+    @Operation(summary = "delete event by id", tags = "Ong")
+    @DeleteMapping("/posts/events/{id}")
+    public ResponseEntity<Void> deleteEvent(@PathVariable Long id){
+        boolean res = _ongService.deleteEvent(id);
+        return res ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+    }
+
+    @Operation(summary = "update event by id", tags = "Ong")
+    @PutMapping("/posts/events/{id}")
+    public ResponseEntity<Void> updateEvent(@PathVariable Long id, @RequestBody EventRequest request){
+        boolean res = _ongService.updateEvent(id, request);
+        return res ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
 
     private OngSearchViewModel ongToSearchViewModel(OngDto ong){

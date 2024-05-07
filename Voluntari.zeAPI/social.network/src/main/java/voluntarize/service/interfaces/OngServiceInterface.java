@@ -14,11 +14,12 @@ public interface OngServiceInterface {
     List<OngDto> searchOngs(String keyword, List<Long> category);
     OngDto findById(Long id);
     boolean deleteOngById(Long id);
-    OngDto updateOngById(Long id, OngRequest request);
+    boolean updateOngById(Long id, OngRequest request);
     PublicationDto createPublication(PublicationRequest request);
     boolean deletePublication(Long id);
     boolean updatePublication(Long id, PublicationRequest request);
     EventDto createEvent(EventRequest request);
     boolean deleteEvent(Long id);
     boolean updateEvent(Long id, EventRequest request);
+
 }
