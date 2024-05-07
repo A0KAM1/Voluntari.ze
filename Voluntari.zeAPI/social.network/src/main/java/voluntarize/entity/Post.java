@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.sql.Time;
 import java.util.Date;
 
 @Data
@@ -26,7 +27,7 @@ public class Post {
     private Date createdAt;
     @UpdateTimestamp
     @Column(name = "updated_at")
-    private Date updatedAt;
+    private Time updatedAt;
     @ManyToOne
     @JoinColumn(name = "ong_id")
     private Ong ong;

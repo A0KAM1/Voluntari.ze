@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import voluntarize.dto.EventDto;
 import voluntarize.dto.OngDto;
+import voluntarize.dto.PostDto;
 import voluntarize.dto.PublicationDto;
 import voluntarize.entity.Ong;
 import voluntarize.entity.Publication;
@@ -16,10 +17,7 @@ import voluntarize.request.EventRequest;
 import voluntarize.request.OngRequest;
 import voluntarize.request.PublicationRequest;
 import voluntarize.service.OngService;
-import voluntarize.viewModel.EventViewModel;
-import voluntarize.viewModel.OngSearchViewModel;
-import voluntarize.viewModel.OngViewModel;
-import voluntarize.viewModel.PublicationViewModel;
+import voluntarize.viewModel.*;
 
 import java.sql.Time;
 import java.time.LocalTime;
@@ -118,51 +116,76 @@ public class OngController {
         return res ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
 
-    private OngSearchViewModel ongToSearchViewModel(OngDto ong){
+    @Operation(summary = "get posts by ong", tags = "Ong")
+    @GetMapping("/{id}/posts")
+    public ResponseEntity<List<PostViewModel>> getPosts(@PathVariable Long id){
+        List<PostDto> posts = _ongService.getPosts(id);
+        if(posts != null){
+            List<PostViewModel> res = posts.stream().map(this::getPostViewModel)
+                                        .collect(Collectors.toList());
+            return ResponseEntity.ok(res);
+        }
+        return ResponseEntity.noContent().build();
+    }
+
+    private OngSearchViewModel ongToSearchViewModel(OngDto dto){
         OngSearchViewModel res = new OngSearchViewModel();
-        res.setId(ong.getId());
-        res.setName(ong.getName());
-        res.setUsername(ong.getUsername());
-        res.setProfilePicture(ong.getProfilePicture());
+        res.setId(dto.getId());
+        res.setName(dto.getName());
+        res.setUsername(dto.getUsername());
+        res.setProfilePicture(dto.getProfilePicture());
         return res;
     }
-    private OngViewModel ongToViewModel(OngDto ong){
+    private OngViewModel ongToViewModel(OngDto dto){
         OngViewModel res = new OngViewModel();
-        res.setId(ong.getId());
-        res.setGovernmentCode(ong.getGovernmentCode());
-        res.setAddress(ong.getAddress());
-        res.setQrCode(ong.getQrCode());
-        res.setName(ong.getName());
-        res.setUsername(ong.getUsername());
-        res.setEmail(ong.getEmail());
-        res.setDescription(ong.getDescription());
-        res.setPhoneNumber(ong.getPhoneNumber());
-        res.setProfilePicture(ong.getProfilePicture());
-        res.setCity(ong.getCity());
-        res.setState(ong.getState());
-        res.setCountry(ong.getCountry());
+        res.setId(dto.getId());
+        res.setGovernmentCode(dto.getGovernmentCode());
+        res.setAddress(dto.getAddress());
+        res.setQrCode(dto.getQrCode());
+        res.setName(dto.getName());
+        res.setUsername(dto.getUsername());
+        res.setEmail(dto.getEmail());
+        res.setDescription(dto.getDescription());
+        res.setPhoneNumber(dto.getPhoneNumber());
+        res.setProfilePicture(dto.getProfilePicture());
+        res.setCity(dto.getCity());
+        res.setState(dto.getState());
+        res.setCountry(dto.getCountry());
         return res;
     }
-    private PublicationViewModel publicationToViewModel(PublicationDto publication){
+    private PublicationViewModel publicationToViewModel(PublicationDto dto){
         PublicationViewModel res = new PublicationViewModel();
-        res.setId(publication.getId());
-        res.setPhotos(publication.getPhotos());
-        res.setDescription(publication.getDescription());
-        res.setOngId(publication.getOngId());
-        res.setPostId(publication.getPostId());
+        res.setId(dto.getId());
+        res.setPhotos(dto.getPhotos());
+        res.setDescription(dto.getDescription());
+        res.setOngId(dto.getOngId());
+        res.setPostId(dto.getPostId());
         return res;
     }
-    private EventViewModel getEventViewModel(EventDto event){
+    private EventViewModel getEventViewModel(EventDto dto){
         EventViewModel res = new EventViewModel();
-        res.setId(event.getId());
-        res.setDate(event.getDate());
-        res.setTime(event.getTime());
-        res.setAddress(event.getAddress());
-        res.setRequirements(event.getRequirements());
-        res.setDescription(event.getDescription());
-        res.setStatusId(event.getStatusId());
-        res.setPostId(event.getPostId());
-        res.setPhotos(event.getPhotos());
+        res.setId(dto.getId());
+        res.setDate(dto.getDate());
+        res.setTime(dto.getTime());
+        res.setAddress(dto.getAddress());
+        res.setRequirements(dto.getRequirements());
+        res.setDescription(dto.getDescription());
+        res.setStatusId(dto.getStatusId());
+        res.setPostId(dto.getPostId());
+        res.setPhotos(dto.getPhotos());
+        return res;
+    }
+    private PostViewModel getPostViewModel(PostDto dto){
+        PostViewModel res = new PostViewModel();
+        res.setId(dto.getId());
+        res.setContent(dto.getContent());
+        res.setOngId(dto.getOngId());
+        res.setCreatedAt(dto.getCreatedAt());
+        res.setUpdatedAt(dto.getUpdatedAt());
+        res.setPublication(dto.getPublication());
+        res.setEvent(dto.getEvent());
+        res.setPictures(dto.getPictures());
+        res.setLikes(dto.getLikes());
         return res;
     }
 

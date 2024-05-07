@@ -1,4 +1,4 @@
-package voluntarize.dto;
+package voluntarize.viewModel;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostDto {
+public class PostViewModel {
     private Long id;
     private String content;
     private Long ongId;

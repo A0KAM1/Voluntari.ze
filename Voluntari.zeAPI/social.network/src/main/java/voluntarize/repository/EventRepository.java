@@ -4,8 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import voluntarize.entity.Event;
 import voluntarize.entity.Post;
 
-import java.util.List;
+import java.util.Optional;
 
 public interface EventRepository extends JpaRepository<Event, Long> {
-    public List<Event> findByPost(Post post);
+    public Optional<Event> findByPost(Post post);
 }

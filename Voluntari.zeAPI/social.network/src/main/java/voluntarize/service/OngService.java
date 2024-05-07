@@ -42,19 +42,18 @@ public class OngService implements OngServiceInterface {
 
     public OngDto createOng(OngRequest ong){
         User user = _userRepository.save(this.getUserAttributes(ong));
-        Ong res = _ongRepository.save(this.ongToEntity(ong, user));
-        return this.ongToDto(res);
+        Ong res = _ongRepository.save(this.getOngEntity(ong, user));
+        return this.getOngDto(res);
     }
 
     public List<OngDto> searchOngs(String keyword, List<Long> category){
         List<Ong> res = _ongRepository.findByFilter(keyword, category);
-        return res.stream().map(this::ongToDto).collect(Collectors.toList());
+        return res.stream().map(this::getOngDto).collect(Collectors.toList());
     }
 
     public OngDto findById(Long id){
         Optional<Ong> res = _ongRepository.findById(id);
-        if(res.isPresent()) return this.ongToDto(res.get());
-        return null;
+        return res.map(this::getOngDto).orElse(null);
     }
 
     public boolean deleteOngById(Long id){
@@ -71,7 +70,7 @@ public class OngService implements OngServiceInterface {
         if(oldOng.isPresent()){
             User newUser = this.getUserAttributes(request);
             newUser.setId(oldOng.get().getUser().getId());
-            Ong res = this.ongToEntity(request, newUser);
+            Ong res = this.getOngEntity(request, newUser);
             res.setId(id);
 
             _userRepository.save(newUser);
@@ -83,15 +82,16 @@ public class OngService implements OngServiceInterface {
 
     public List<PostDto> getPosts(Long id){
         Optional<Ong> ong = _ongRepository.findById(id);
-        List<Post> posts = _postRepository.findByOng(ong.get());
+        List<Post> res = _postRepository.findByOng(ong.orElse(null));
 
+        return res.stream().map(this::getPostDto).collect(Collectors.toList());
     }
 
     public PublicationDto createPublication (PublicationRequest request){
         Post post = _postRepository.save(this.getPostAttributesFromPublication(request));
-        Publication res = _publicationRepository.save(this.toPublicationEntity(post));
+        Publication res = _publicationRepository.save(this.getPublicationEntity(post));
         _pictureRepository.saveAll(this.getListOfPhotos(request.photos, post));
-        return this.publicationToDto(res, request.photos);
+        return this.getPublicationDto(res, request.photos);
     }
 
     public boolean deletePublication(Long id){
@@ -113,7 +113,7 @@ public class OngService implements OngServiceInterface {
         if(oldPublication.isPresent()){
             Post newPost = this.getPostAttributesFromPublication(request);
             newPost.setId(oldPublication.get().getPost().getId());
-            Publication res = this.toPublicationEntity(newPost);
+            Publication res = this.getPublicationEntity(newPost);
             res.setId(id);
             List<Picture> oldPictures = _pictureRepository.findByPost(oldPublication.get().getPost());
             _pictureRepository.deleteAll(oldPictures);
@@ -130,7 +130,7 @@ public class OngService implements OngServiceInterface {
         Post post = _postRepository.save(this.getPostAttributes(request));
         Event res = _eventRepository.save(this.getEventEntity(post, request));
         _pictureRepository.saveAll(this.getListOfPhotos(request.photos, post));
-        return this.eventToDto(res, request.photos);
+        return this.getEventDto(res, request.photos);
     };
 
     public boolean deleteEvent(Long id){
@@ -179,7 +179,7 @@ public class OngService implements OngServiceInterface {
         res.setCountry(request.country);
         return res;
     }
-    private Ong ongToEntity(OngRequest request, User user){
+    private Ong getOngEntity(OngRequest request, User user){
         Ong res = new Ong();
         res.setAddress(request.address);
         res.setGovernmentCode(request.cnpj);
@@ -187,7 +187,7 @@ public class OngService implements OngServiceInterface {
         res.setQrCode(request.qrCode);
         return res;
     }
-    private OngDto ongToDto(Ong ong){
+    private OngDto getOngDto(Ong ong){
         OngDto res = new OngDto();
         res.setId(ong.getId());
         res.setGovernmentCode(ong.getGovernmentCode());
@@ -213,7 +213,7 @@ public class OngService implements OngServiceInterface {
         res.setContent(request.description);
         return res;
     }
-    private Publication toPublicationEntity(Post post){
+    private Publication getPublicationEntity(Post post){
         Publication res = new Publication();
         res.setPost(post);
         return res;
@@ -228,7 +228,7 @@ public class OngService implements OngServiceInterface {
         });
         return res;
     }
-    private PublicationDto publicationToDto(Publication publication, List<String> pictures){
+    private PublicationDto getPublicationDto(Publication publication, List<String> pictures){
         PublicationDto res = new PublicationDto();
         res.setId(publication.getId());
         res.setPhotos(pictures);
@@ -256,7 +256,7 @@ public class OngService implements OngServiceInterface {
         res.setPost(post);
         return res;
     }
-    private EventDto eventToDto(Event event, List<String> pictures){
+    private EventDto getEventDto(Event event, List<String> pictures){
         EventDto res = new EventDto();
         res.setId(event.getId());
         res.setDate(event.getDate());
@@ -268,6 +268,24 @@ public class OngService implements OngServiceInterface {
         res.setPostId(event.getPost().getId());
         res.setPhotos(pictures);
         return res;
+    }
+    private PostDto getPostDto(Post post){
+        List<Picture> pictures = _pictureRepository.findByPost(post);
+        Optional<Event> event = _eventRepository.findByPost(post);
+        Optional<Publication> publication = _publicationRepository.findByPost(post);
+        int likes = _likeRepository.findByPost(post).size();
+
+        PostDto dto = new PostDto();
+        dto.setId(post.getId());
+        dto.setContent(post.getContent());
+        dto.setOngId(post.getOng().getId());
+        dto.setCreatedAt(post.getCreatedAt());
+        dto.setUpdatedAt(post.getUpdatedAt());
+        publication.ifPresentOrElse(p -> dto.setPublication(p.getId()), () -> dto.setPublication(null));
+        event.ifPresent(dto::setEvent);
+        dto.setPictures(pictures.stream().map(Picture::getUrl).collect(Collectors.toList()));
+        dto.setLikes(likes);
+        return dto;
     }
 
 }
