@@ -15,4 +15,5 @@ public class PublicationViewModel {
     private List<String> photos;
     private Long ongId;
     private Long postId;
+    private int likes;
 }

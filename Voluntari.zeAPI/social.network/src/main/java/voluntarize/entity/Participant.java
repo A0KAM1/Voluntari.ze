@@ -17,6 +17,9 @@ public class Participant {
     @SequenceGenerator(name = "participants_sq", sequenceName = "participants_sq", initialValue = 1, allocationSize = 1)
     private Long id;
     @ManyToOne
+    @JoinColumn(name = "presence_check")
+    private Presence presence;
+    @ManyToOne
     @JoinColumn(name = "volunteer_id")
     private Volunteer volunteer;
     @ManyToOne

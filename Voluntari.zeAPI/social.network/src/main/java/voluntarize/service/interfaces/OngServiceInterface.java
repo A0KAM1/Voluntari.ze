@@ -2,6 +2,7 @@ package voluntarize.service.interfaces;
 
 import voluntarize.dto.EventDto;
 import voluntarize.dto.OngDto;
+import voluntarize.dto.PostDto;
 import voluntarize.dto.PublicationDto;
 import voluntarize.request.EventRequest;
 import voluntarize.request.OngRequest;
@@ -21,5 +22,6 @@ public interface OngServiceInterface {
     EventDto createEvent(EventRequest request);
     boolean deleteEvent(Long id);
     boolean updateEvent(Long id, EventRequest request);
+    List<PostDto> getPosts(Long id);
 
 }

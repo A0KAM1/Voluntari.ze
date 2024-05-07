@@ -3,9 +3,12 @@ package voluntarize.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import voluntarize.dto.VolunteerDto;
+import voluntarize.entity.Like;
 import voluntarize.entity.Ong;
 import voluntarize.entity.User;
 import voluntarize.entity.Volunteer;
+import voluntarize.repository.LikeRepository;
+import voluntarize.repository.PostRepository;
 import voluntarize.repository.UserRepository;
 import voluntarize.repository.VolunteerRepository;
 import voluntarize.request.OngRequest;
@@ -23,6 +26,10 @@ public class VolunteerService {
     private VolunteerRepository _volunteerRepository;
     @Autowired
     private UserRepository _userRepository;
+    @Autowired
+    private LikeRepository _likeRepository;
+    @Autowired
+    private PostRepository _postRepository;
 
     public VolunteerDto create(VolunteerRequest request){
         User user = _userRepository.save(this.getUserAttributes(request));
@@ -50,19 +57,29 @@ public class VolunteerService {
         return false;
     }
 
-    public VolunteerDto update(Long id, VolunteerRequest request){
-        Optional<Volunteer> test = _volunteerRepository.findById(id);
-        Optional<User> exists = _userRepository.findById(test.get().getUser().getId());
+    public boolean update(Long id, VolunteerRequest request){
+        Optional<Volunteer> oldVolunteer = _volunteerRepository.findById(id);
+        if(oldVolunteer.isPresent()){
+            Optional<User> oldUser = _userRepository.findById(oldVolunteer.get().getUser().getId());
 
-        User user = this.getUserAttributes(request);
-        user.setId(exists.get().getId());
-        Volunteer volunteer = this.volunteerEntity(request, user);
-        volunteer.setId(id);
+            User newUser = this.getUserAttributes(request);
+            newUser.setId(oldUser.get().getId());
+            Volunteer res = this.volunteerEntity(request, newUser);
+            res.setId(id);
 
-        _userRepository.save(user);
-        Volunteer res = _volunteerRepository.save(volunteer);
+            _userRepository.save(newUser);
+            _volunteerRepository.save(res);
+            return true;
+        }
+        return false;
+    }
 
-        return this.volunteerToDto(res);
+    public void likePost(Long id, Long post){
+        Like like = new Like();
+        like.setVolunteer(_volunteerRepository.findById(id).get());
+        like.setPost(_postRepository.findById(post).get());
+
+        _likeRepository.save(like);
     }
 
     private User getUserAttributes(VolunteerRequest request){

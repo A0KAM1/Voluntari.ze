@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import voluntarize.dto.EventDto;
 import voluntarize.dto.OngDto;
+import voluntarize.dto.PostDto;
 import voluntarize.dto.PublicationDto;
 import voluntarize.entity.*;
 import voluntarize.repository.*;
@@ -36,6 +37,8 @@ public class OngService implements OngServiceInterface {
     private PictureRepository _pictureRepository;
     @Autowired
     private StatusRepository _statusRepository;
+    @Autowired
+    private LikeRepository _likeRepository;
 
     public OngDto createOng(OngRequest ong){
         User user = _userRepository.save(this.getUserAttributes(ong));
@@ -78,6 +81,12 @@ public class OngService implements OngServiceInterface {
         return false;
     }
 
+    public List<PostDto> getPosts(Long id){
+        Optional<Ong> ong = _ongRepository.findById(id);
+        List<Post> posts = _postRepository.findByOng(ong.get());
+
+    }
+
     public PublicationDto createPublication (PublicationRequest request){
         Post post = _postRepository.save(this.getPostAttributesFromPublication(request));
         Publication res = _publicationRepository.save(this.toPublicationEntity(post));
@@ -90,7 +99,9 @@ public class OngService implements OngServiceInterface {
         if(publication.isPresent()){
             _publicationRepository.delete(publication.get());
             List<Picture> pictures = _pictureRepository.findByPost(publication.get().getPost());
+            List<Like> likes = _likeRepository.findByPost(publication.get().getPost());
             _pictureRepository.deleteAll(pictures);
+            _likeRepository.deleteAll(likes);
             _postRepository.delete(publication.get().getPost());
             return true;
         }
@@ -127,7 +138,9 @@ public class OngService implements OngServiceInterface {
         if(event.isPresent()){
             _eventRepository.delete(event.get());
             List<Picture> pictures = _pictureRepository.findByPost(event.get().getPost());
+            List<Like> likes = _likeRepository.findByPost(event.get().getPost());
             _pictureRepository.deleteAll(pictures);
+            _likeRepository.deleteAll(likes);
             _postRepository.delete(event.get().getPost());
             return true;
         }

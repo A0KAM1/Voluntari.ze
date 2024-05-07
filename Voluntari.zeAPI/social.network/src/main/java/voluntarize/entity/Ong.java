@@ -11,8 +11,7 @@ import lombok.*;
 public class Ong {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ongs_sq")
-    @SequenceGenerator(name = "ongs_sq", sequenceName = "ongs_sq", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "government_code")
     private String governmentCode;

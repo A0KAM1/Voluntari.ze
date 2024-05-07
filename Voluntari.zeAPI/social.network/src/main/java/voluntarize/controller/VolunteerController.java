@@ -28,11 +28,25 @@ public class VolunteerController {
         return ResponseEntity.status(HttpStatus.CREATED).body(this.volunteerToViewModel(res));
     }
 
-    @Operation(summary = "Find all volunteers", tags = "Volunteer")
+    @Operation(summary = "find all volunteers", tags = "Volunteer")
     @GetMapping
     public ResponseEntity<List<VolunteerViewModel>> findAll(){
         List<VolunteerDto> res = _volunteerService.findAll();
         return res != null ? ResponseEntity.ok(res.stream().map(this::volunteerToViewModel).collect(Collectors.toList())) : ResponseEntity.noContent().build();
+    }
+
+    @Operation(summary = "update volunteer by id", tags = "Volunteer")
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody VolunteerRequest request){
+        boolean res = _volunteerService.update(id, request);
+        return  res ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+    }
+
+    @Operation(summary = "like publication", tags = "Volunteer")
+    @PostMapping("/{id}/{post}")
+    public ResponseEntity<Void> likePublication(@PathVariable Long id, @PathVariable Long post){
+        _volunteerService.likePost(id, post);
+        return ResponseEntity.ok().build();
     }
 
     private VolunteerViewModel volunteerToViewModel(VolunteerDto volunteer){

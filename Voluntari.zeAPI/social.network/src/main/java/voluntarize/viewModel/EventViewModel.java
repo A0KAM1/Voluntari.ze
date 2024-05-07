@@ -24,4 +24,5 @@ public class EventViewModel {
     private Long statusId;
     private Long ongId;
     private Long postId;
+    private int likes;
 }

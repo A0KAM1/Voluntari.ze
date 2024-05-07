@@ -15,8 +15,7 @@ import java.time.LocalDate;
 public class Volunteer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "volunteers_sq")
-    @SequenceGenerator(name = "volunteers_sq", sequenceName = "volunteers_sq", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String cpf;
     @Column(name = "last_name")

@@ -8,4 +8,5 @@ public interface VolunteerServiceInterface {
     boolean updateVolunteer(Long id, VolunteerRequest request);
     boolean deleteVolunteer(Long id);
     VolunteerDto getById(Long id);
+    void likePost(Long volunteerId, Long postId);
 }
