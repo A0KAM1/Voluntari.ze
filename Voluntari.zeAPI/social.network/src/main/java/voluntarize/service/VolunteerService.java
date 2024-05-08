@@ -76,8 +76,8 @@ public class VolunteerService {
 
     public void likePost(Long id, Long post){
         Like like = new Like();
-        like.setVolunteer(_volunteerRepository.findById(id).get());
-        like.setPost(_postRepository.findById(post).get());
+        _volunteerRepository.findById(id).ifPresent(like::setVolunteer);
+        _postRepository.findById(post).ifPresent(like::setPost);
 
         _likeRepository.save(like);
     }

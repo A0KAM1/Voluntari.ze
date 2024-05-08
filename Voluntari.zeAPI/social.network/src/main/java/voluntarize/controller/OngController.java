@@ -168,10 +168,8 @@ public class OngController {
         PostViewModel res = new PostViewModel();
         res.setId(dto.getId());
         res.setOngId(dto.getOngId());
-        if(dto.getPublication() == null) res.setPublication(null);
-        res.setPublication(getPublicationViewModel(dto));
-        if(dto.getEvent() == null) res.setEvent(null);
-        res.setEvent(getEventViewModel(dto));
+        if(dto.getPublication() != null) res.setPublication(getPublicationViewModel(dto));
+        if(dto.getEvent() != null) res.setEvent(getEventViewModel(dto));
         res.setCreatedAt(dto.getCreatedAt());
         res.setUpdatedAt(dto.getUpdatedAt());
         res.setLikes(dto.getLikes());
