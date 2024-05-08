@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import voluntarize.dto.EventDto;
 import voluntarize.dto.OngDto;
 import voluntarize.dto.PostDto;
-import voluntarize.dto.PublicationDto;
 import voluntarize.entity.*;
 import voluntarize.repository.*;
 import voluntarize.request.EventRequest;
@@ -13,7 +12,6 @@ import voluntarize.request.OngRequest;
 import voluntarize.request.PublicationRequest;
 import voluntarize.service.interfaces.OngServiceInterface;
 
-import javax.swing.text.html.Option;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
@@ -87,11 +85,11 @@ public class OngService implements OngServiceInterface {
         return res.stream().map(this::getPostDto).collect(Collectors.toList());
     }
 
-    public PublicationDto createPublication (PublicationRequest request){
+    public PostDto createPublication (PublicationRequest request){
         Post post = _postRepository.save(this.getPostAttributesFromPublication(request));
-        Publication res = _publicationRepository.save(this.getPublicationEntity(post));
+        _publicationRepository.save(this.getPublicationEntity(post));
         _pictureRepository.saveAll(this.getListOfPhotos(request.photos, post));
-        return this.getPublicationDto(res, request.photos);
+        return this.getPostDto(post);
     }
 
     public boolean deletePublication(Long id){
@@ -126,11 +124,11 @@ public class OngService implements OngServiceInterface {
         return false;
     };
 
-    public EventDto createEvent(EventRequest request){
+    public PostDto createEvent(EventRequest request){
         Post post = _postRepository.save(this.getPostAttributes(request));
-        Event res = _eventRepository.save(this.getEventEntity(post, request));
+        _eventRepository.save(this.getEventEntity(post, request));
         _pictureRepository.saveAll(this.getListOfPhotos(request.photos, post));
-        return this.getEventDto(res, request.photos);
+        return this.getPostDto(post);
     };
 
     public boolean deleteEvent(Long id){
@@ -228,15 +226,6 @@ public class OngService implements OngServiceInterface {
         });
         return res;
     }
-    private PublicationDto getPublicationDto(Publication publication, List<String> pictures){
-        PublicationDto res = new PublicationDto();
-        res.setId(publication.getId());
-        res.setPhotos(pictures);
-        res.setDescription(publication.getPost().getContent());
-        res.setOngId(publication.getPost().getOng().getId());
-        res.setPostId(publication.getPost().getId());
-        return res;
-    }
     private Post getPostAttributes(EventRequest request){
         Optional<Ong> ong = this._ongRepository.findById(request.ongId);
         Post res = new Post();
@@ -256,17 +245,14 @@ public class OngService implements OngServiceInterface {
         res.setPost(post);
         return res;
     }
-    private EventDto getEventDto(Event event, List<String> pictures){
+    private EventDto getEventDto(Event event){
         EventDto res = new EventDto();
         res.setId(event.getId());
         res.setDate(event.getDate());
         res.setTime(event.getTime());
         res.setAddress(event.getAddress());
         res.setRequirements(event.getRequirements());
-        res.setDescription(event.getPost().getContent());
         res.setStatusId(event.getStatus().getId());
-        res.setPostId(event.getPost().getId());
-        res.setPhotos(pictures);
         return res;
     }
     private PostDto getPostDto(Post post){
@@ -282,7 +268,7 @@ public class OngService implements OngServiceInterface {
         dto.setCreatedAt(post.getCreatedAt());
         dto.setUpdatedAt(post.getUpdatedAt());
         publication.ifPresentOrElse(p -> dto.setPublication(p.getId()), () -> dto.setPublication(null));
-        event.ifPresent(dto::setEvent);
+        event.ifPresentOrElse(p -> dto.setEvent(getEventDto(p)), () -> dto.setEvent(null));
         dto.setPictures(pictures.stream().map(Picture::getUrl).collect(Collectors.toList()));
         dto.setLikes(likes);
         return dto;

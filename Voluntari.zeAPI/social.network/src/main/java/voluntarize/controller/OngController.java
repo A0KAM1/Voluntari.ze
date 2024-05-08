@@ -2,25 +2,18 @@ package voluntarize.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import voluntarize.dto.EventDto;
 import voluntarize.dto.OngDto;
 import voluntarize.dto.PostDto;
-import voluntarize.dto.PublicationDto;
-import voluntarize.entity.Ong;
-import voluntarize.entity.Publication;
 import voluntarize.request.EventRequest;
 import voluntarize.request.OngRequest;
 import voluntarize.request.PublicationRequest;
 import voluntarize.service.OngService;
 import voluntarize.viewModel.*;
 
-import java.sql.Time;
-import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -76,9 +69,9 @@ public class OngController {
 
     @Operation(summary = "Create publication", tags = "Ong")
     @PostMapping("/posts/publications")
-    public ResponseEntity<PublicationViewModel> createPublication(@RequestBody PublicationRequest request){
-        PublicationDto res = _ongService.createPublication(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(this.publicationToViewModel(res));
+    public ResponseEntity<PostViewModel> createPublication(@RequestBody PublicationRequest request){
+        PostDto res = _ongService.createPublication(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.getPostViewModel(res));
     }
 
     @Operation(summary = "delete publication by id", tags = "Ong")
@@ -97,9 +90,9 @@ public class OngController {
 
     @Operation(summary = "create event", tags = "Ong")
     @PostMapping("/posts/events")
-    public ResponseEntity<EventViewModel> createEvent(@RequestBody EventRequest request){
-        EventDto res = _ongService.createEvent(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(this.getEventViewModel(res));
+    public ResponseEntity<PostViewModel> createEvent(@RequestBody EventRequest request){
+        PostDto res = _ongService.createEvent(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.getPostViewModel(res));
     }
 
     @Operation(summary = "delete event by id", tags = "Ong")
@@ -153,15 +146,6 @@ public class OngController {
         res.setCountry(dto.getCountry());
         return res;
     }
-    private PublicationViewModel publicationToViewModel(PublicationDto dto){
-        PublicationViewModel res = new PublicationViewModel();
-        res.setId(dto.getId());
-        res.setPhotos(dto.getPhotos());
-        res.setDescription(dto.getDescription());
-        res.setOngId(dto.getOngId());
-        res.setPostId(dto.getPostId());
-        return res;
-    }
     private EventViewModel getEventViewModel(EventDto dto){
         EventViewModel res = new EventViewModel();
         res.setId(dto.getId());
@@ -169,10 +153,7 @@ public class OngController {
         res.setTime(dto.getTime());
         res.setAddress(dto.getAddress());
         res.setRequirements(dto.getRequirements());
-        res.setDescription(dto.getDescription());
         res.setStatusId(dto.getStatusId());
-        res.setPostId(dto.getPostId());
-        res.setPhotos(dto.getPhotos());
         return res;
     }
     private PostViewModel getPostViewModel(PostDto dto){
@@ -183,7 +164,7 @@ public class OngController {
         res.setCreatedAt(dto.getCreatedAt());
         res.setUpdatedAt(dto.getUpdatedAt());
         res.setPublication(dto.getPublication());
-        res.setEvent(dto.getEvent());
+        res.setEvent(this.getEventViewModel(dto.getEvent()));
         res.setPictures(dto.getPictures());
         res.setLikes(dto.getLikes());
         return res;

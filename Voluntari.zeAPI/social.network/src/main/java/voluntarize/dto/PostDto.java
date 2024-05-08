@@ -3,10 +3,7 @@ package voluntarize.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import voluntarize.entity.Event;
-import voluntarize.entity.Picture;
 
-import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 
@@ -18,9 +15,9 @@ public class PostDto {
     private String content;
     private Long ongId;
     private Date createdAt;
-    private Time updatedAt;
+    private Date updatedAt;
     private Long publication;
-    private Event event;
+    private EventDto event;
     private List<String> pictures;
     private int likes;
 }

@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import voluntarize.dto.VolunteerDto;
-import voluntarize.entity.Volunteer;
 import voluntarize.request.VolunteerRequest;
 import voluntarize.service.VolunteerService;
 import voluntarize.viewModel.VolunteerViewModel;
