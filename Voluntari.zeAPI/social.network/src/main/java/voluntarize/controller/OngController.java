@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import voluntarize.dto.EventDto;
 import voluntarize.dto.OngDto;
 import voluntarize.dto.PostDto;
 import voluntarize.request.EventRequest;
@@ -69,9 +68,9 @@ public class OngController {
 
     @Operation(summary = "Create publication", tags = "Ong")
     @PostMapping("/posts/publications")
-    public ResponseEntity<PostViewModel> createPublication(@RequestBody PublicationRequest request){
+    public ResponseEntity<PublicationViewModel> createPublication(@RequestBody PublicationRequest request){
         PostDto res = _ongService.createPublication(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(this.getPostViewModel(res));
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.getPublicationViewModel(res));
     }
 
     @Operation(summary = "delete publication by id", tags = "Ong")
@@ -90,9 +89,9 @@ public class OngController {
 
     @Operation(summary = "create event", tags = "Ong")
     @PostMapping("/posts/events")
-    public ResponseEntity<PostViewModel> createEvent(@RequestBody EventRequest request){
+    public ResponseEntity<EventViewModel> createEvent(@RequestBody EventRequest request){
         PostDto res = _ongService.createEvent(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(this.getPostViewModel(res));
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.getEventViewModel(res));
     }
 
     @Operation(summary = "delete event by id", tags = "Ong")
@@ -146,26 +145,35 @@ public class OngController {
         res.setCountry(dto.getCountry());
         return res;
     }
-    private EventViewModel getEventViewModel(EventDto dto){
+    private PublicationViewModel getPublicationViewModel(PostDto dto){
+        PublicationViewModel res = new PublicationViewModel();
+        res.setId(dto.getPublication());
+        res.setDescription(dto.getContent());
+        res.setPictures(dto.getPictures());
+        return res;
+    }
+    private EventViewModel getEventViewModel(PostDto dto){
         EventViewModel res = new EventViewModel();
-        res.setId(dto.getId());
-        res.setDate(dto.getDate());
-        res.setTime(dto.getTime());
-        res.setAddress(dto.getAddress());
-        res.setRequirements(dto.getRequirements());
-        res.setStatusId(dto.getStatusId());
+        res.setId(dto.getEvent().getId());
+        res.setDescription(dto.getContent());
+        res.setPictures(dto.getPictures());
+        res.setDate(dto.getEvent().getDate());
+        res.setTime(dto.getEvent().getTime());
+        res.setAddress(dto.getEvent().getAddress());
+        res.setRequirements(dto.getEvent().getRequirements());
+        res.setStatusId(dto.getEvent().getStatusId());
         return res;
     }
     private PostViewModel getPostViewModel(PostDto dto){
         PostViewModel res = new PostViewModel();
         res.setId(dto.getId());
-        res.setContent(dto.getContent());
         res.setOngId(dto.getOngId());
+        if(dto.getPublication() == null) res.setPublication(null);
+        res.setPublication(getPublicationViewModel(dto));
+        if(dto.getEvent() == null) res.setEvent(null);
+        res.setEvent(getEventViewModel(dto));
         res.setCreatedAt(dto.getCreatedAt());
         res.setUpdatedAt(dto.getUpdatedAt());
-        res.setPublication(dto.getPublication());
-        res.setEvent(this.getEventViewModel(dto.getEvent()));
-        res.setPictures(dto.getPictures());
         res.setLikes(dto.getLikes());
         return res;
     }

@@ -4,20 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Time;
-import java.time.LocalDate;
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class EventViewModel {
+public class PublicationViewModel {
     private Long id;
     private String description;
     private List<String> pictures;
-    private LocalDate date;
-    private Time time;
-    private String address;
-    private String requirements;
-    private Long statusId;
 }
