@@ -48,6 +48,27 @@ public class VolunteerController {
         return ResponseEntity.ok().build();
     }
 
+    @Operation(summary = "follow an ong", tags = "Volunteer")
+    @PostMapping("/{me}/{ong}")
+    public ResponseEntity<Void> followAnOng(@PathVariable Long me, @PathVariable Long ong){
+        _volunteerService.followOng(me, ong);
+        return ResponseEntity.ok().build();
+    }
+
+    @Operation(summary = "subscribe to event", tags = "Volunteer")
+    @PostMapping("/{me}/{event}/subscribe")
+    public ResponseEntity<Void> subscribeToEvent(@PathVariable Long me, @PathVariable Long event){
+        _volunteerService.subscribeToEvent(me, event);
+        return ResponseEntity.ok().build();
+    }
+
+    @Operation(summary = "abandon event", tags = "Volunteer")
+    @PostMapping("/{me}/{event}/abandon")
+    public ResponseEntity<Void> abandonEvent(@PathVariable Long me, @PathVariable Long event){
+        _volunteerService.abandonEvent(me, event);
+        return ResponseEntity.ok().build();
+    }
+
     private VolunteerViewModel volunteerToViewModel(VolunteerDto volunteer){
         VolunteerViewModel res = new VolunteerViewModel();
         res.setId(volunteer.getId());

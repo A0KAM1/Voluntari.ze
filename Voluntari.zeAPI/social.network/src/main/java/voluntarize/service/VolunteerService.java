@@ -3,15 +3,8 @@ package voluntarize.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import voluntarize.dto.VolunteerDto;
-import voluntarize.entity.Like;
-import voluntarize.entity.Ong;
-import voluntarize.entity.User;
-import voluntarize.entity.Volunteer;
-import voluntarize.repository.LikeRepository;
-import voluntarize.repository.PostRepository;
-import voluntarize.repository.UserRepository;
-import voluntarize.repository.VolunteerRepository;
-import voluntarize.request.OngRequest;
+import voluntarize.entity.*;
+import voluntarize.repository.*;
 import voluntarize.request.VolunteerRequest;
 
 import javax.swing.text.html.Option;
@@ -30,6 +23,16 @@ public class VolunteerService {
     private LikeRepository _likeRepository;
     @Autowired
     private PostRepository _postRepository;
+    @Autowired
+    private OngRepository _ongRepository;
+    @Autowired
+    private FollowerRepository _followerRepository;
+    @Autowired
+    private EventRepository _eventRepository;
+    @Autowired
+    private ParticipantRepository _participantRepository;
+    @Autowired
+    private PresenceRepository _presenceRepository;
 
     public VolunteerDto create(VolunteerRequest request){
         User user = _userRepository.save(this.getUserAttributes(request));
@@ -80,6 +83,27 @@ public class VolunteerService {
         _postRepository.findById(post).ifPresent(like::setPost);
 
         _likeRepository.save(like);
+    }
+
+    public void followOng(Long id, Long ongId){
+        Follower follower = new Follower();
+        _volunteerRepository.findById(id).ifPresent(follower::setVolunteer);
+        _ongRepository.findById(ongId).ifPresent(follower::setOng);
+        _followerRepository.save(follower);
+    }
+
+    public void subscribeToEvent(Long id, Long event){
+        Participant participate = new Participant();
+        participate.setVolunteer(_volunteerRepository.findById(id).orElseThrow());
+        participate.setEvent(_eventRepository.findById(event).orElseThrow());
+        participate.setPresence(_presenceRepository.findById(1L).orElseThrow());
+        _participantRepository.save(participate);
+    }
+
+    public void abandonEvent(Long id, Long event){
+        Participant participant = _participantRepository.findByEvent(_eventRepository.findById(event).orElseThrow());
+        participant.setPresence(_presenceRepository.findById(4L).orElseThrow());
+        _participantRepository.save(participant);
     }
 
     private User getUserAttributes(VolunteerRequest request){

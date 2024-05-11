@@ -109,15 +109,50 @@ public class OngController {
     }
 
     @Operation(summary = "get posts by ong", tags = "Ong")
-    @GetMapping("/{id}/posts")
-    public ResponseEntity<List<PostViewModel>> getPosts(@PathVariable Long id){
-        List<PostDto> posts = _ongService.getPosts(id);
+    @GetMapping("/{me}/posts")
+    public ResponseEntity<List<PostViewModel>> getPosts(@PathVariable Long me){
+        List<PostDto> posts = _ongService.getPosts(me);
         if(posts != null){
             List<PostViewModel> res = posts.stream().map(this::getPostViewModel)
                                         .collect(Collectors.toList());
             return ResponseEntity.ok(res);
         }
         return ResponseEntity.noContent().build();
+    }
+
+    @Operation(summary = "complete event", tags = "Ong")
+    @PostMapping("/me/posts/events/{id}/cancel")
+    public ResponseEntity<Void> completeEvent(@PathVariable Long id){
+        _ongService.completeEvent(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @Operation(summary = "cancel event", tags = "Ong")
+    @PostMapping("/me/posts/events/{id}/complete")
+    public ResponseEntity<Void> cancelEvent(@PathVariable Long id){
+        _ongService.cancelEvent(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @Operation(summary = "confirm volunteer participation", tags = "Ong")
+    @PostMapping("/me/posts/events/{id}/participants/{volunteer}/present")
+    public ResponseEntity<Void> confirmParticipation(@PathVariable Long id, @PathVariable Long volunteer){
+        _ongService.confirmParticipation(id, volunteer);
+        return ResponseEntity.ok().build();
+    }
+
+    @Operation(summary = "confirm volunteer absence", tags = "Ong")
+    @PostMapping("/me/posts/events/{id}/participants/{volunteer}/absent")
+    public ResponseEntity<Void> confirmAbsence(@PathVariable Long id, @PathVariable Long volunteer){
+        _ongService.confirmAbsence(id, volunteer);
+        return ResponseEntity.ok().build();
+    }
+
+    @Operation(summary = "add categories to Ong", tags = "Ong")
+    @PostMapping("{id}/categories")
+    public ResponseEntity<Void> addCategories(@PathVariable Long id, @RequestBody Long category){
+        _ongService.addCategories(id, category);
+        return ResponseEntity.ok().build();
     }
 
     private OngSearchViewModel ongToSearchViewModel(OngDto dto){

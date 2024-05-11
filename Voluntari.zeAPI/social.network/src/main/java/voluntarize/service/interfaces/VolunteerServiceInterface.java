@@ -9,4 +9,7 @@ public interface VolunteerServiceInterface {
     boolean deleteVolunteer(Long id);
     VolunteerDto getById(Long id);
     void likePost(Long volunteerId, Long postId);
+    void followOng(Long volunteerId, Long ongId);
+    void subscribeToEvent(Long id, Long event);
+    void abandonEvent(Long id, Long event);
 }

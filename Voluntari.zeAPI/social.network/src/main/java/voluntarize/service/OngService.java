@@ -1,6 +1,7 @@
 package voluntarize.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 import voluntarize.dto.EventDto;
 import voluntarize.dto.OngDto;
@@ -37,6 +38,16 @@ public class OngService implements OngServiceInterface {
     private StatusRepository _statusRepository;
     @Autowired
     private LikeRepository _likeRepository;
+    @Autowired
+    private ParticipantRepository _participantRepository;
+    @Autowired
+    private PresenceRepository _presenceRepository;
+    @Autowired
+    private VolunteerRepository _volunteerRepository;
+    @Autowired
+    private TagRepository _tagRepository;
+    @Autowired
+    private CategoryRepository _categoryRepository;
 
     public OngDto createOng(OngRequest ong){
         User user = _userRepository.save(this.getUserAttributes(ong));
@@ -160,8 +171,41 @@ public class OngService implements OngServiceInterface {
             _eventRepository.save(res);
             return true;
         }
+
+
         return false;
     };
+
+    public void completeEvent(Long id){
+        Event event = _eventRepository.findById(id).orElseThrow();
+        event.setStatus(_statusRepository.findById(2L).orElseThrow());
+        _eventRepository.save(event);
+    }
+
+    public void cancelEvent(Long id){
+        Event event = _eventRepository.findById(id).orElseThrow();
+        event.setStatus(_statusRepository.findById(3L).orElseThrow());
+        _eventRepository.save(event);
+    }
+
+    public void confirmParticipation(Long id, Long volunteer){
+        Participant participant = _participantRepository.findByVolunteer(_volunteerRepository.findById(volunteer).orElseThrow());
+        participant.setPresence(_presenceRepository.findById(2L).orElseThrow());
+        _participantRepository.save(participant);
+    }
+
+    public void confirmAbsence(Long id, Long volunteer){
+        Participant participant = _participantRepository.findByVolunteer(_volunteerRepository.findById(volunteer).orElseThrow());
+        participant.setPresence(_presenceRepository.findById(3L).orElseThrow());
+        _participantRepository.save(participant);
+    }
+
+    public void addCategories(Long id, Long category){
+        Tag tag = new Tag();
+        tag.setOng(_ongRepository.findById(id).orElseThrow());
+        tag.setCategory(_categoryRepository.findById(category).orElseThrow());
+        _tagRepository.save(tag);
+    }
 
     private User getUserAttributes(OngRequest request){
         User res = new User();

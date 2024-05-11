@@ -21,5 +21,10 @@ public interface OngServiceInterface {
     boolean deleteEvent(Long id);
     boolean updateEvent(Long id, EventRequest request);
     List<PostDto> getPosts(Long id);
+    void completeEvent(Long id);
+    void cancelEvent(Long id);
+    void confirmParticipation(Long event, Long volunteer);
+    void confirmAbsence(Long event, Long volunteer);
+    void addCategories(Long id, Long category);
 
 }
