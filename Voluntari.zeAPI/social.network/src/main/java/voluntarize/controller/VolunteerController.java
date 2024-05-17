@@ -69,6 +69,13 @@ public class VolunteerController {
         return ResponseEntity.ok().build();
     }
 
+    @Operation(summary = "make a donation", tags = "Volunteer")
+    @PostMapping("{id}/donations")
+    public ResponseEntity<Void> makeADonation(@PathVariable Long id, @RequestBody float amount){
+        _volunteerService.donate(id, amount);
+        return ResponseEntity.ok().build();
+    }
+
     private VolunteerViewModel volunteerToViewModel(VolunteerDto volunteer){
         VolunteerViewModel res = new VolunteerViewModel();
         res.setId(volunteer.getId());

@@ -23,9 +23,6 @@ public class Donation {
     @CreationTimestamp
     @Column(name = "created_at")
     private Date createdAt;
-    @UpdateTimestamp
-    @Column(name = "updated_at")
-    private Date updatedAt;
     @ManyToOne
     @JoinColumn(name = "volunteer_id")
     private Volunteer volunteer;

@@ -12,4 +12,5 @@ public interface VolunteerServiceInterface {
     void followOng(Long volunteerId, Long ongId);
     void subscribeToEvent(Long id, Long event);
     void abandonEvent(Long id, Long event);
+    void donate(Long id, float amount);
 }

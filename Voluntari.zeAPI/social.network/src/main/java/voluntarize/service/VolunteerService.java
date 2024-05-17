@@ -33,6 +33,8 @@ public class VolunteerService {
     private ParticipantRepository _participantRepository;
     @Autowired
     private PresenceRepository _presenceRepository;
+    @Autowired
+    private DonationRepository _donationRepository;
 
     public VolunteerDto create(VolunteerRequest request){
         User user = _userRepository.save(this.getUserAttributes(request));
@@ -104,6 +106,14 @@ public class VolunteerService {
         Participant participant = _participantRepository.findByEvent(_eventRepository.findById(event).orElseThrow());
         participant.setPresence(_presenceRepository.findById(4L).orElseThrow());
         _participantRepository.save(participant);
+    }
+
+    public void donate(Long id, float amount){
+        Volunteer volunteer = _volunteerRepository.findById(id).orElseThrow();
+        Donation res = new Donation();
+        res.setVolunteer(volunteer);
+        res.setAmount(amount);
+        _donationRepository.save(res);
     }
 
     private User getUserAttributes(VolunteerRequest request){
