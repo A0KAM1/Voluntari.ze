@@ -13,8 +13,7 @@ import lombok.NoArgsConstructor;
 public class Publication {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "publications_sq")
-    @SequenceGenerator(name = "publications_sq", sequenceName = "publications_sq", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToOne
     @JoinColumn(name = "post_id")

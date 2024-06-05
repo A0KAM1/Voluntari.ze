@@ -17,10 +17,13 @@ import java.util.Date;
 public class Post {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "posts_sq")
-    @SequenceGenerator(name = "posts_sq", sequenceName = "posts_sq", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(length = 400)
     private String content;
+    @OneToOne(optional = true)
+    @JoinColumn(name = "isEvent")
+    private Event event;
     @CreationTimestamp
     @Column(name = "created_at")
     private Date createdAt;

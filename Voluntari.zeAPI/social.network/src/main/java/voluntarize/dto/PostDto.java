@@ -16,7 +16,6 @@ public class PostDto {
     private Long ongId;
     private Date createdAt;
     private Date updatedAt;
-    private Long publication;
     private EventDto event;
     private List<String> pictures;
     private int likes;

@@ -56,20 +56,6 @@ public class VolunteerController {
         return ResponseEntity.ok().build();
     }
 
-    @Operation(summary = "subscribe to event", tags = "Volunteer")
-    @PostMapping("/{me}/{event}/subscribe")
-    public ResponseEntity<Void> subscribeToEvent(@PathVariable Long me, @PathVariable Long event){
-        _volunteerService.subscribeToEvent(me, event);
-        return ResponseEntity.ok().build();
-    }
-
-    @Operation(summary = "abandon event", tags = "Volunteer")
-    @PostMapping("/{me}/{event}/abandon")
-    public ResponseEntity<Void> abandonEvent(@PathVariable Long me, @PathVariable Long event){
-        _volunteerService.abandonEvent(me, event);
-        return ResponseEntity.ok().build();
-    }
-
     @Operation(summary = "make a donation", tags = "Volunteer")
     @PostMapping("{id}/donations")
     public ResponseEntity<Void> makeADonation(@PathVariable Long id, @RequestBody float amount){

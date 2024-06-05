@@ -1,6 +1,5 @@
 package voluntarize.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import java.sql.Time;
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 @Data
 @AllArgsConstructor
@@ -18,8 +16,7 @@ import java.time.LocalTime;
 public class Event {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "events_sq")
-    @SequenceGenerator(name = "events_sq", sequenceName = "events_sq", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDate date;
     private Time time;
@@ -28,8 +25,5 @@ public class Event {
     @ManyToOne
     @JoinColumn(name = "status_id")
     private Status status;
-    @OneToOne
-    @JoinColumn(name = "post_id")
-    private Post post;
 
 }

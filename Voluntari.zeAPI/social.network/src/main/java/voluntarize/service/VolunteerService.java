@@ -94,20 +94,6 @@ public class VolunteerService {
         _followerRepository.save(follower);
     }
 
-    public void subscribeToEvent(Long id, Long event){
-        Participant participate = new Participant();
-        participate.setVolunteer(_volunteerRepository.findById(id).orElseThrow());
-        participate.setEvent(_eventRepository.findById(event).orElseThrow());
-        participate.setPresence(_presenceRepository.findById(1L).orElseThrow());
-        _participantRepository.save(participate);
-    }
-
-    public void abandonEvent(Long id, Long event){
-        Participant participant = _participantRepository.findByEvent(_eventRepository.findById(event).orElseThrow());
-        participant.setPresence(_presenceRepository.findById(4L).orElseThrow());
-        _participantRepository.save(participant);
-    }
-
     public void donate(Long id, float amount){
         Volunteer volunteer = _volunteerRepository.findById(id).orElseThrow();
         Donation res = new Donation();
