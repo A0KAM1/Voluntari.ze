@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/volunteers")
+@CrossOrigin
 public class VolunteerController {
 
     @Autowired

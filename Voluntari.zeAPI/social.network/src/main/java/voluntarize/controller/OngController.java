@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/ongs")
+@CrossOrigin
 public class OngController {
 
     @Autowired
