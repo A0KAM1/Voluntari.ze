@@ -6,7 +6,7 @@ import voluntarize.dto.EventDto;
 import voluntarize.dto.PostDto;
 import voluntarize.entity.*;
 import voluntarize.repository.*;
-import voluntarize.request.PublicationRequest;
+import voluntarize.request.PostRequest;
 import voluntarize.service.interfaces.IPostService;
 
 import java.util.ArrayList;
@@ -26,66 +26,61 @@ public class PostService implements IPostService {
     private LikeRepository _likeRepository;
     @Autowired
     private OngRepository _ongRepository;
-    @Autowired
-    private EventRepository _eventRepository;
 
-    public PostDto createPublication (PublicationRequest request){
-        Post post = _postRepository.save(this.getPostAttributesFromPublication(request));
-        _publicationRepository.save(this.getPublicationEntity(post));
+    public PostDto createPost (PostRequest request){
+        Post post = _postRepository.save(this.getPostEntity(request));
         _pictureRepository.saveAll(this.getListOfPhotos(request.photos, post));
         return this.getPostDto(post);
     }
 
-    public boolean deletePublication(Long id){
-        Optional<Publication> publication = _publicationRepository.findById(id);
-        if(publication.isPresent()){
-            _publicationRepository.delete(publication.get());
-            List<Picture> pictures = _pictureRepository.findByPost(publication.get().getPost());
-            List<Like> likes = _likeRepository.findByPost(publication.get().getPost());
-            _pictureRepository.deleteAll(pictures);
+    public boolean deletePost(Long id){
+        Optional<Post> post = _postRepository.findById(id);
+        if(post.isPresent()){
+            List<Picture> pics = _pictureRepository.findByPost(post.get());
+            List<Like> likes = _likeRepository.findByPost(post.get());
+            _pictureRepository.deleteAll(pics);
             _likeRepository.deleteAll(likes);
-            _postRepository.delete(publication.get().getPost());
+            _postRepository.delete(post.get());
             return true;
         }
         return false;
     };
 
-    public boolean updatePublication(Long id, PublicationRequest request){
-        Optional<Publication> oldPublication = _publicationRepository.findById(id);
-        if(oldPublication.isPresent()){
-            Post newPost = this.getPostAttributesFromPublication(request);
-            newPost.setId(oldPublication.get().getPost().getId());
-            Publication res = this.getPublicationEntity(newPost);
-            res.setId(id);
-            List<Picture> oldPictures = _pictureRepository.findByPost(oldPublication.get().getPost());
+    public boolean updatePost(Long id, PostRequest request){
+        Optional<Post> oldPost = _postRepository.findById(id);
+        if(oldPost.isPresent()){
+            List<Picture> oldPictures = _pictureRepository.findByPost(oldPost.get());
             _pictureRepository.deleteAll(oldPictures);
+
+            Post newPost = this.getPostEntity(request);
+            newPost.setId(id);
 
             _pictureRepository.saveAll(this.getListOfPhotos(request.photos, newPost));
             _postRepository.save(newPost);
-            _publicationRepository.save(res);
             return true;
         }
         return false;
     };
 
-    public List<PostDto> getPosts(Long id){
+    public List<PostDto> getPostsByUser(Long id){
         Ong ong = _ongRepository.findById(id).orElseThrow();
         List<Post> res = _postRepository.findByOng(ong);
 
         return res.stream().map(this::getPostDto).collect(Collectors.toList());
+    };
+
+    public List<PostDto> getPosts(){
+        List<Post> res = _postRepository.getFeed();
+        return res.stream().map(this::getPostDto).collect(Collectors.toList());
     }
 
-    private Post getPostAttributesFromPublication(PublicationRequest request){
-        Optional<Ong> ong = this._ongRepository.findById(request.ongId);
+
+    private Post getPostEntity(PostRequest request){
+        Ong ong = this._ongRepository.findById(request.ongId).orElseThrow();
         Post res = new Post();
 
-        res.setOng(ong.get());
+        res.setOng(ong);
         res.setContent(request.description);
-        return res;
-    }
-    private Publication getPublicationEntity(Post post){
-        Publication res = new Publication();
-        res.setPost(post);
         return res;
     }
     private List<Picture> getListOfPhotos(List<String> photos, Post post){
@@ -111,7 +106,6 @@ public class PostService implements IPostService {
     private PostDto getPostDto(Post post){
         List<Picture> pictures = _pictureRepository.findByPost(post);
         int likes = _likeRepository.findByPost(post).size();
-        EventDto event = getEventDto(post.getEvent());
 
         PostDto dto = new PostDto();
         dto.setId(post.getId());
@@ -119,7 +113,7 @@ public class PostService implements IPostService {
         dto.setOngId(post.getOng().getId());
         dto.setCreatedAt(post.getCreatedAt());
         dto.setUpdatedAt(post.getUpdatedAt());
-        dto.setEvent(event);
+        if(post.getEvent() != null) dto.setEvent(getEventDto(post.getEvent()));
         dto.setPictures(pictures.stream().map(Picture::getUrl).collect(Collectors.toList()));
         dto.setLikes(likes);
         return dto;

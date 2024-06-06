@@ -13,8 +13,6 @@ import java.util.List;
 @AllArgsConstructor
 public class EventViewModel {
     private Long id;
-    private String description;
-    private List<String> pictures;
     private LocalDate date;
     private Time time;
     private String address;

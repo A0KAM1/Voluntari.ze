@@ -131,6 +131,7 @@ public class VolunteerService {
         VolunteerDto res = new VolunteerDto();
         res.setId(volunteer.getId());
         res.setName(volunteer.getUser().getName());
+        res.setLastName(volunteer.getLastName());
         res.setEmail(volunteer.getUser().getEmail());
         res.setUsername(volunteer.getUser().getUsername());
         res.setDescription(volunteer.getUser().getDescription());

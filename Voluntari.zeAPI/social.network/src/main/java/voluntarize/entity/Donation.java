@@ -16,8 +16,7 @@ import java.util.Date;
 @Table(name="donations")
 public class Donation {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "donations_sq")
-    @SequenceGenerator(name = "donations_sq", sequenceName = "donations_sq", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private double amount;
     @CreationTimestamp

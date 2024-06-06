@@ -22,7 +22,7 @@ public class Post {
     @Column(length = 400)
     private String content;
     @OneToOne(optional = true)
-    @JoinColumn(name = "isEvent")
+    @JoinColumn(name = "is_event")
     private Event event;
     @CreationTimestamp
     @Column(name = "created_at")

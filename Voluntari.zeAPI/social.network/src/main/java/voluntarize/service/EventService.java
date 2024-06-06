@@ -3,6 +3,7 @@ package voluntarize.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import voluntarize.dto.EventDto;
+import voluntarize.dto.ParticipantsDto;
 import voluntarize.dto.PostDto;
 import voluntarize.entity.*;
 import voluntarize.repository.*;
@@ -39,8 +40,8 @@ public class EventService implements IEventService {
     private PresenceRepository _presenceRepository;
 
     public PostDto createEvent(EventRequest request){
+        _eventRepository.save(this.getEventEntity(request));
         Post post = _postRepository.save(this.getPostAttributes(request));
-        _eventRepository.save(this.getEventEntity(post, request));
         _pictureRepository.saveAll(this.getListOfPhotos(request.photos, post));
         return this.getPostDto(post);
     };
@@ -48,20 +49,11 @@ public class EventService implements IEventService {
     public boolean deleteEvent(Long id){
         Optional<Event> event = _eventRepository.findById(id);
         if(event.isPresent()){
+            Post post = _postRepository.findByEvent(event.get());
             _eventRepository.delete(event.get());
-
-
-
-
-
-
-
-
-            List<Picture> pictures = _pictureRepository.findByPost(event.get().getPost());
-            List<Like> likes = _likeRepository.findByPost(event.get().getPost());
-            _pictureRepository.deleteAll(pictures);
-            _likeRepository.deleteAll(likes);
-            _postRepository.delete(event.get().getPost());
+            _pictureRepository.deleteAll(_pictureRepository.findByPost(post));
+            _likeRepository.deleteAll(_likeRepository.findByPost(post));
+            _postRepository.delete(post);
             return true;
         }
         return false;
@@ -70,20 +62,20 @@ public class EventService implements IEventService {
     public boolean updateEvent(Long id, EventRequest request){
         Optional<Event> oldEvent = _eventRepository.findById(id);
         if(oldEvent.isPresent()){
-            Post newPost = this.getPostAttributes(request);
-            newPost.setId(oldEvent.get().getPost().getId());
-            Event res = this.getEventEntity(newPost, request);
+            Event res = getEventEntity(request);
             res.setId(id);
-            List<Picture> oldPictures = _pictureRepository.findByPost(oldEvent.get().getPost());
-            _pictureRepository.deleteAll(oldPictures);
-
-            _pictureRepository.saveAll(this.getListOfPhotos(request.photos, newPost));
-            _postRepository.save(newPost);
             _eventRepository.save(res);
+
+            Post post = _postRepository.findByEvent(oldEvent.get());
+            List<Picture> pics = _pictureRepository.findByPost(post);
+            _pictureRepository.deleteAll(pics);
+            _pictureRepository.saveAll(getListOfPhotos(request.photos, post));
+
+            post.setContent(request.description);
+            post.setEvent(res);
+            _postRepository.save(post);
             return true;
         }
-
-
         return false;
     };
 
@@ -100,48 +92,67 @@ public class EventService implements IEventService {
     }
 
     public void confirmParticipation(Long id, Long volunteer){
-        Participant participant = _participantRepository.findByVolunteer(_volunteerRepository.findById(volunteer).orElseThrow());
+        Participant participant = _participantRepository.findParticipation(
+                _volunteerRepository.findById(volunteer).orElseThrow(),
+                _eventRepository.findById(id).orElseThrow()
+        );
         participant.setPresence(_presenceRepository.findById(2L).orElseThrow());
         _participantRepository.save(participant);
     }
 
     public void confirmAbsence(Long id, Long volunteer){
-        Participant participant = _participantRepository.findByVolunteer(_volunteerRepository.findById(volunteer).orElseThrow());
+        Participant participant = _participantRepository.findParticipation(
+                _volunteerRepository.findById(volunteer).orElseThrow(),
+                _eventRepository.findById(id).orElseThrow()
+        );
         participant.setPresence(_presenceRepository.findById(3L).orElseThrow());
         _participantRepository.save(participant);
     }
 
-    public void subscribeToEvent(Long id, Long event){
+    public void subscribeToEvent(Long id, Long volunteer){
         Participant participate = new Participant();
-        participate.setVolunteer(_volunteerRepository.findById(id).orElseThrow());
-        participate.setEvent(_eventRepository.findById(event).orElseThrow());
+        participate.setVolunteer(_volunteerRepository.findById(volunteer).orElseThrow());
+        participate.setEvent(_eventRepository.findById(id).orElseThrow());
         participate.setPresence(_presenceRepository.findById(1L).orElseThrow());
         _participantRepository.save(participate);
     }
 
-    public void abandonEvent(Long id, Long event){
-        Participant participant = _participantRepository.findByEvent(_eventRepository.findById(event).orElseThrow());
+    public void abandonEvent(Long id, Long volunteer){
+        Participant participant = _participantRepository.findParticipation(
+                _volunteerRepository.findById(volunteer).orElseThrow(),
+                _eventRepository.findById(id).orElseThrow()
+        );
         participant.setPresence(_presenceRepository.findById(4L).orElseThrow());
         _participantRepository.save(participant);
+    }
+
+    public List<ParticipantsDto> getListOfParticipants(Long id){
+        Event event = _eventRepository.findById(id).orElseThrow();
+        List<Participant> res = _participantRepository.findByEvent(event);
+
+        return res.stream().map(this::getParticipantsListDto).collect(Collectors.toList());
+    }
+
+    public List<EventDto> getMyEvents(Long id){
+        List<Event> res = _eventRepository.findByOng(_ongRepository.findById(id).orElseThrow());
+        return res.stream().map(this::getEventDto).collect(Collectors.toList());
     }
 
     private Post getPostAttributes(EventRequest request){
         Optional<Ong> ong = this._ongRepository.findById(request.ongId);
         Post res = new Post();
 
-        res.setOng(ong.get());
+        res.setOng(ong.orElseThrow());
         res.setContent(request.description);
         return res;
     }
-    private Event getEventEntity(Post post, EventRequest request){
-        Optional<Status> status = _statusRepository.findById(1L);
+    private Event getEventEntity(EventRequest request){
         Event res = new Event();
         res.setDate(request.date);
         res.setTime(Time.valueOf(request.time));
         res.setAddress(request.address);
         res.setRequirements(request.requirements);
-        res.setStatus(status.get());
-        res.setPost(post);
+        res.setStatus(_statusRepository.findById(1L).orElseThrow());
         return res;
     }
     private List<Picture> getListOfPhotos(List<String> photos, Post post){
@@ -166,8 +177,6 @@ public class EventService implements IEventService {
     }
     private PostDto getPostDto(Post post){
         List<Picture> pictures = _pictureRepository.findByPost(post);
-        Optional<Event> event = _eventRepository.findByPost(post);
-        Optional<Publication> publication = _publicationRepository.findByPost(post);
         int likes = _likeRepository.findByPost(post).size();
 
         PostDto dto = new PostDto();
@@ -176,10 +185,16 @@ public class EventService implements IEventService {
         dto.setOngId(post.getOng().getId());
         dto.setCreatedAt(post.getCreatedAt());
         dto.setUpdatedAt(post.getUpdatedAt());
-        publication.ifPresentOrElse(p -> dto.setPublication(p.getId()), () -> dto.setPublication(null));
-        event.ifPresentOrElse(p -> dto.setEvent(getEventDto(p)), () -> dto.setEvent(null));
+        if(post.getEvent() != null) dto.setEvent(getEventDto(post.getEvent()));
         dto.setPictures(pictures.stream().map(Picture::getUrl).collect(Collectors.toList()));
         dto.setLikes(likes);
+        return dto;
+    }
+    private ParticipantsDto getParticipantsListDto(Participant participant){
+        ParticipantsDto dto = new ParticipantsDto();
+        dto.setName(participant.getVolunteer().getUser().getName());
+        dto.setLastName(participant.getVolunteer().getLastName());
+        dto.setPresence(participant.getPresence().getName());
         return dto;
     }
 }

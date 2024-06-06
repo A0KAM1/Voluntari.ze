@@ -67,6 +67,7 @@ public class VolunteerController {
         VolunteerViewModel res = new VolunteerViewModel();
         res.setId(volunteer.getId());
         res.setName(volunteer.getName());
+        res.setLastName(volunteer.getLastName());
         res.setEmail(volunteer.getEmail());
         res.setUsername(volunteer.getUsername());
         res.setDescription(volunteer.getDescription());

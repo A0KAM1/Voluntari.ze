@@ -13,8 +13,7 @@ import lombok.NoArgsConstructor;
 public class Follower {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "followers_sq")
-    @SequenceGenerator(name = "followers_sq", sequenceName = "followers_sq", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
     @JoinColumn(name = "ong_id")

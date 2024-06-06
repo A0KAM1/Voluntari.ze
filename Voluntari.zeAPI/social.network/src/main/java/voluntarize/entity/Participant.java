@@ -13,8 +13,7 @@ import lombok.NoArgsConstructor;
 public class Participant {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "participants_sq")
-    @SequenceGenerator(name = "participants_sq", sequenceName = "participants_sq", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
     @JoinColumn(name = "presence_check")

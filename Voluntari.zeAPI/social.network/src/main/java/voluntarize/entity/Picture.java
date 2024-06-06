@@ -13,8 +13,7 @@ import lombok.NoArgsConstructor;
 public class Picture {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pictures_sq")
-    @SequenceGenerator(name = "pictures_sq", sequenceName = "pictures_sq", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String url;
     @ManyToOne

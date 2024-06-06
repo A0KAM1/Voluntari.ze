@@ -1,13 +1,14 @@
 package voluntarize.service.interfaces;
 
 import voluntarize.dto.PostDto;
-import voluntarize.request.PublicationRequest;
+import voluntarize.request.PostRequest;
 
 import java.util.List;
 
 public interface IPostService {
-    PostDto createPublication(PublicationRequest request);
-    boolean deletePublication(Long id);
-    boolean updatePublication(Long id, PublicationRequest request);
-    List<PostDto> getPosts(Long id);
+    PostDto createPost(PostRequest request);
+    boolean deletePost(Long id);
+    boolean updatePost(Long id, PostRequest request);
+    List<PostDto> getPostsByUser(Long id);
+    List<PostDto> getPosts();
 }

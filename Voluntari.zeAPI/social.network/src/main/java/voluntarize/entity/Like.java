@@ -17,8 +17,7 @@ import java.util.Date;
 public class Like {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "likes_sq")
-    @SequenceGenerator(name = "likes_sq", sequenceName = "likes_sq", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @CreationTimestamp
     @Column(name = "created_at")

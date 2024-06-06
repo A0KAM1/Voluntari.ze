@@ -13,7 +13,8 @@ import lombok.NoArgsConstructor;
 public class Presence {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "presence_sq")
+    @SequenceGenerator(name = "presence_sq", sequenceName = "presence_sq", initialValue = 1, allocationSize = 1)
     private Long id;
     private String name;
 }

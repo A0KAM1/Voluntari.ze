@@ -1,7 +1,11 @@
 package voluntarize.service.interfaces;
 
+import voluntarize.dto.EventDto;
+import voluntarize.dto.ParticipantsDto;
 import voluntarize.dto.PostDto;
 import voluntarize.request.EventRequest;
+
+import java.util.List;
 
 public interface IEventService {
     PostDto createEvent(EventRequest request);
@@ -13,4 +17,6 @@ public interface IEventService {
     void confirmAbsence(Long event, Long volunteer);
     void subscribeToEvent(Long id, Long event);
     void abandonEvent(Long id, Long event);
+    List<ParticipantsDto> getListOfParticipants(Long id);
+    List<EventDto> getMyEvents(Long id);
 }

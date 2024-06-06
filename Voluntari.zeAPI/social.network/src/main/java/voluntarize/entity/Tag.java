@@ -12,8 +12,7 @@ import lombok.NoArgsConstructor;
 @Table(name="tags")
 public class Tag {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tags_sq")
-    @SequenceGenerator(name = "tags_sq", sequenceName = "tags_sq", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
     @JoinColumn(name = "ong_id")
