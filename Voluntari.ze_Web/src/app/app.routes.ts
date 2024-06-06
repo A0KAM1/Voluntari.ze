@@ -8,6 +8,8 @@ import { MyProfileComponent } from "./ngo/my-profile/my-profile.component";
 import { inject } from "@angular/core";
 import { NgoService } from "./ngo/ngo.service";
 import { catchError, of } from "rxjs";
+import { RegisterUserComponent } from "./sign-up/register-user/register-user.component";
+import { RegisterNgoComponent } from "./sign-up/register-ngo/register-ngo.component";
 
 const routeConfig: Routes = [
     {
@@ -30,6 +32,14 @@ const routeConfig: Routes = [
     {
         path: 'my-subscriptions',
         component: MySubscriptionsComponent
+    },
+    {
+        path: 'sign-up-user',
+        component: RegisterUserComponent
+    },
+    {
+        path: 'sign-up-ong',
+        component: RegisterNgoComponent
     },
     {
         path: 'my-profile',

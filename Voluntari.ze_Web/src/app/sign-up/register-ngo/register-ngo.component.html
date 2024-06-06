@@ -1,1 +1,90 @@
-<p>register-ngo works!</p>
+<div class="login-background">
+    <p-card class="login-card">
+        <div class="logo">
+            <img src="assets/images/Logo.jpg" width="350">
+        </div>
+        <div>
+            <button pButton pRipple label="Cadastro de Perfil" class="perfil" ></button>
+            <button pButton pRipple label="Cadastro de ONG" class="ong" ></button>
+        </div>
+
+        <form class="">
+            <h3 class="personalInfo">Informações Pessoais</h3>
+            <div>
+                <h4>Imagem de perfil</h4>
+                <p-fileUpload mode="basic" chooseLabel="Escolher imagem" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" maxFileSize="1000000"></p-fileUpload>
+            </div>
+            <span class="p-float-label">
+                <input class="input-fname input" pInputText id="fname">
+                <label class="input-fname-label input-label" for="fname">Nome Completo</label>
+            </span>
+            <span class="p-float-label">
+                <input class="input-cpf input" pInputText id="cpf">
+                <label class="input-cpf-label input-label" for="cpf">CPF</label>
+            </span>
+            <span class="p-float-label">
+                <input class="input-phone input" pInputText id="phone">
+                <label class="input-phone-label input-label" for="phone">Telefone/Celular</label>
+            </span>
+            <span class="p-float-label">
+                <input class="input-description input" pInputText id="description">
+                <label class="input-description-label input-label" for="description">Descrição</label>
+            </span>
+            <span class="p-float-label">
+                <input class="input-username input" pInputText id="username">
+                <label class="input-username-label input-label" for="username">Nome de usuário</label>
+            </span>
+            <span class="p-float-label">
+                <input class="input-email input" pInputText id="email">
+                <label class="input-email-label input-label" for="email">E-mail</label>
+            </span>
+            <span class="p-float-label">
+                <input class="input-password input" pInputText id="password" type="password">
+                <label class="input-password-label input-label" for="password">Senha</label>
+            </span>
+            <span class="p-float-label">
+                <input class="input-cpassword input" pInputText id="cpassword" type="password">
+                <label class="input-cpassword-label input-label" for="cpassword">Confirme sua senha</label>
+            </span>
+
+            <p-divider></p-divider>
+            <h3 class="regionInfo">Informações Regionais</h3>
+
+            <span class="p-float-label">
+                <input class="input-cep input" pInputText id="cep">
+                <label class="input-cep-label input-label" for="cep">CEP</label>
+            </span>
+            <span class="p-float-label">
+                <input class="input-country input" pInputText id="country">
+                <label class="input-country-label input-label" for="country">País</label>
+            </span>
+            <span class="p-float-label">
+                <input class="input-city input" pInputText id="city">
+                <label class="input-city-label input-label" for="city">Cidade</label>
+            </span>
+
+            <span class="p-float-label">
+                <input class="input-street input" pInputText id="street">
+                <label class="input-street-label input-label" for="street">Logradouro</label>
+            </span>
+            <span class="p-float-label">
+                <input class="input-number input" pInputText id="number">
+                <label class="input-number-label input-label" for="number">Número</label>
+            </span>
+            <p-dropdown formControlName="selectedCity" [options]="[]" optionLabel="name" placeholder="Escolha o estado"></p-dropdown>
+        </form>
+
+ 
+        <div class="button-sign-in">
+            <button pButton pRipple label="Cadastrar" class="sign-in-button" ></button>
+        </div>
+        <div class="center">
+            <p class="accountExist">
+                Já tem uma conta? Então 
+                
+                <a class="voluntariZE" href="">Voluntarize</a>
+                
+            </p>
+        </div>
+    </p-card>
+</div>
