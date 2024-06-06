@@ -89,18 +89,21 @@ span{
 }
 
 .perfil{
-    background-color: #90c612;
-    color: #fdfdfd;
-    width: 280px;
-    margin-left: 100px;
-    border: none;
-}
-.ong{
     background-color: #d6dddc;
     color:#90c612;
     width: 280px;
+    margin-left: 100px;
+    border: none;
+    
+    
+}
+.ong{
+    background-color: #90c612;
+    color: #fdfdfd;
+    width: 280px;
     margin-left: 25px;
     margin-right: 75px;
+    
     border: none;
 }
 
@@ -129,6 +132,11 @@ span{
     border-color: #08A3D3;
     border-width: 2px;
     width: 700px;
+}
+
+.teste{
+    width: 1000;
+    background-color: #08A3D3;
 }
 
 //verde

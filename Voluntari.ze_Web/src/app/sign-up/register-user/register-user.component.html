@@ -4,14 +4,14 @@
             <img src="assets/images/Logo.jpg" width="350">
         </div>
         <div>
-            <button pButton pRipple label="Cadastro de Perfil" class="perfil" ></button>
-            <button pButton pRipple label="Cadastro de ONG" class="ong" ></button>
+            <button pButton pRipple label="Cadastro de Perfil" class="perfil" [routerLink]="['/sign-up-user']" ></button>
+            <button pButton pRipple label="Cadastro de ONG" class="ong" [routerLink]="['/sign-up-ong']" ></button>
         </div>
 
         <form class="">
             <h3 class="personalInfo">Informações Pessoais</h3>
-            <div>
-                <h4>Imagem de perfil</h4>
+            <div class="pfp">
+                <h4>Foto de perfil</h4>
                 <p-fileUpload mode="basic" chooseLabel="Escolher imagem" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" maxFileSize="1000000"></p-fileUpload>
             </div>
             <span class="p-float-label">
@@ -71,7 +71,10 @@
                 <input class="input-number input" pInputText id="number">
                 <label class="input-number-label input-label" for="number">Número</label>
             </span>
-            <p-dropdown formControlName="selectedCity" [options]="[]" optionLabel="name" placeholder="Escolha o estado"></p-dropdown>
+            <span class="p-float-label">
+                <input class="input-state input" pInputText id="state">
+                <label class="input-state-label input-label" for="state">Estado</label>
+            </span>
         </form>
 
  

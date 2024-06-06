@@ -4,23 +4,23 @@
             <img src="assets/images/Logo.jpg" width="350">
         </div>
         <div>
-            <button pButton pRipple label="Cadastro de Perfil" class="perfil" ></button>
-            <button pButton pRipple label="Cadastro de ONG" class="ong" ></button>
+            <button pButton pRipple label="Cadastro de Perfil" class="perfil" [routerLink]="['/sign-up-user']" ></button>
+            <button pButton pRipple label="Cadastro de ONG" class="ong" [routerLink]="['/sign-up-ong']" ></button>
         </div>
 
         <form class="">
-            <h3 class="personalInfo">Informações Pessoais</h3>
-            <div>
-                <h4>Imagem de perfil</h4>
+            <h3 class="personalInfo">Informações Gerais</h3>
+            <div class="pfp">
+                <h4>Foto de perfil</h4>
                 <p-fileUpload mode="basic" chooseLabel="Escolher imagem" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" maxFileSize="1000000"></p-fileUpload>
             </div>
             <span class="p-float-label">
                 <input class="input-fname input" pInputText id="fname">
-                <label class="input-fname-label input-label" for="fname">Nome Completo</label>
+                <label class="input-fname-label input-label" for="fname">Nome</label>
             </span>
             <span class="p-float-label">
-                <input class="input-cpf input" pInputText id="cpf">
-                <label class="input-cpf-label input-label" for="cpf">CPF</label>
+                <input class="input-cnpj input" pInputText id="cnpj">
+                <label class="input-cnpj-label input-label" for="cnpj">CNPJ</label>
             </span>
             <span class="p-float-label">
                 <input class="input-phone input" pInputText id="phone">
@@ -38,6 +38,9 @@
                 <input class="input-email input" pInputText id="email">
                 <label class="input-email-label input-label" for="email">E-mail</label>
             </span>
+
+                <p-dropdown class="teste" formControlName="selectedCity" [options]="[]" optionLabel="name" placeholder="Escolha as categorias"></p-dropdown>
+            
             <span class="p-float-label">
                 <input class="input-password input" pInputText id="password" type="password">
                 <label class="input-password-label input-label" for="password">Senha</label>
@@ -71,7 +74,10 @@
                 <input class="input-number input" pInputText id="number">
                 <label class="input-number-label input-label" for="number">Número</label>
             </span>
-            <p-dropdown formControlName="selectedCity" [options]="[]" optionLabel="name" placeholder="Escolha o estado"></p-dropdown>
+            <span class="p-float-label">
+                <input class="input-state input" pInputText id="state">
+                <label class="input-state-label input-label" for="state">Estado</label>
+            </span>
         </form>
 
  
