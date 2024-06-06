@@ -19,4 +19,5 @@ public interface IEventService {
     void abandonEvent(Long id, Long event);
     List<ParticipantsDto> getListOfParticipants(Long id);
     List<EventDto> getMyEvents(Long id);
+    List<EventDto> getMySubscriptions(Long id);
 }

@@ -138,6 +138,11 @@ public class EventService implements IEventService {
         return res.stream().map(this::getEventDto).collect(Collectors.toList());
     }
 
+    public List<EventDto> getMySubscriptions(Long id){
+        List<Event> res = _eventRepository.findByVolunteer(_volunteerRepository.findById(id).orElseThrow());
+        return res.stream().map(this::getEventDto).collect(Collectors.toList());
+    }
+
     private Post getPostAttributes(EventRequest request){
         Optional<Ong> ong = this._ongRepository.findById(request.ongId);
         Post res = new Post();

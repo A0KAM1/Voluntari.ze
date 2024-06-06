@@ -7,10 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class OngSearchViewModel {
-    public Long id;
-    public Long userId;
-    public String name;
-    public String username;
-    public String profilePicture;
+public class FollowersViewModel {
+    private Long user;
+    private Long volunteer;
+    private String name;
+    private String lastName;
 }

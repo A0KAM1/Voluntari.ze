@@ -101,6 +101,13 @@ public class EventController {
         return ResponseEntity.ok(res.stream().map(this::getEventViewModel).collect(Collectors.toList()));
     }
 
+    @Operation(summary = "view my subscriptions", tags = "Events")
+    @GetMapping("/{me}/subscriptions")
+    public ResponseEntity<List<EventViewModel>> viewMySubscriptions(@PathVariable Long me){
+        List<EventDto> res = _eventService.getMySubscriptions(me);
+        return ResponseEntity.ok(res.stream().map(this::getEventViewModel).collect(Collectors.toList()));
+    }
+
     private EventViewModel getEventViewModel(EventDto dto){
         EventViewModel res = new EventViewModel();
         res.setId(dto.getId());

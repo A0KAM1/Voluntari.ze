@@ -8,7 +8,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OngViewModel {
-    public Long id;
+    public Long userId;
+    public Long ongId;
     public String name;
     public String username;
     public String email;

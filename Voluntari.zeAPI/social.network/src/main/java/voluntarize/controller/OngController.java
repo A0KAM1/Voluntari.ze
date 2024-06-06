@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import voluntarize.dto.OngDto;
+import voluntarize.dto.VolunteerDto;
 import voluntarize.request.OngRequest;
 import voluntarize.service.OngService;
 import voluntarize.viewModel.*;
@@ -66,14 +67,22 @@ public class OngController {
 
     @Operation(summary = "add categories to ong", tags = "Ongs")
     @PostMapping("{id}/categories")
-    public ResponseEntity<Void> addCategories(@PathVariable Long id, @RequestBody Long category){
+    public ResponseEntity<Void> addCategories(@PathVariable Long id, @RequestParam Long category){
         _ongService.addCategories(id, category);
         return ResponseEntity.ok().build();
     }
 
+    @Operation(summary = "view my followers", tags = "Ongs")
+    @GetMapping("{id}/followers")
+    public ResponseEntity<List<FollowersViewModel>> getMyFollowers(@PathVariable Long id){
+        List<VolunteerDto> res = _ongService.followers(id);
+        return ResponseEntity.ok(res.stream().map(this::getFollowerViewModel).collect(Collectors.toList()));
+    }
+
     private OngSearchViewModel ongToSearchViewModel(OngDto dto){
         OngSearchViewModel res = new OngSearchViewModel();
-        res.setId(dto.getId());
+        res.setId(dto.getOngId());
+        res.setUserId(dto.getUserId());
         res.setName(dto.getName());
         res.setUsername(dto.getUsername());
         res.setProfilePicture(dto.getProfilePicture());
@@ -81,7 +90,8 @@ public class OngController {
     }
     private OngViewModel ongToViewModel(OngDto dto){
         OngViewModel res = new OngViewModel();
-        res.setId(dto.getId());
+        res.setUserId(dto.getUserId());
+        res.setOngId(dto.getOngId());
         res.setGovernmentCode(dto.getGovernmentCode());
         res.setAddress(dto.getAddress());
         res.setQrCode(dto.getQrCode());
@@ -94,6 +104,14 @@ public class OngController {
         res.setCity(dto.getCity());
         res.setState(dto.getState());
         res.setCountry(dto.getCountry());
+        return res;
+    }
+    private FollowersViewModel getFollowerViewModel(VolunteerDto dto){
+        FollowersViewModel res = new FollowersViewModel();
+        res.setUser(dto.getUserId());
+        res.setVolunteer(dto.getId());
+        res.setName(dto.getName());
+        res.setLastName(dto.getLastName());
         return res;
     }
 

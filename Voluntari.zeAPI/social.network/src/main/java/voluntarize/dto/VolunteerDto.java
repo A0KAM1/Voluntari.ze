@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class VolunteerDto {
     private Long id;
+    private Long userId;
     private String name;
     private String email;
     private String username;

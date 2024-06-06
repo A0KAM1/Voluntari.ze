@@ -5,9 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import voluntarize.dto.OngDto;
 import voluntarize.dto.VolunteerDto;
 import voluntarize.request.VolunteerRequest;
 import voluntarize.service.VolunteerService;
+import voluntarize.viewModel.FollowingViewModel;
 import voluntarize.viewModel.VolunteerViewModel;
 
 import java.util.List;
@@ -24,7 +26,7 @@ public class VolunteerController {
     @Operation(summary = "create a new volunteer", tags = "Volunteer")
     @PostMapping
     public ResponseEntity<VolunteerViewModel> create(@RequestBody VolunteerRequest request){
-        VolunteerDto res = _volunteerService.create(request);
+        VolunteerDto res = _volunteerService.createVolunteer(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(this.volunteerToViewModel(res));
     }
 
@@ -43,14 +45,14 @@ public class VolunteerController {
     }
 
     @Operation(summary = "like publication", tags = "Volunteer")
-    @PostMapping("/{id}/{post}")
+    @PostMapping("/{id}/{post}/like")
     public ResponseEntity<Void> likePublication(@PathVariable Long id, @PathVariable Long post){
         _volunteerService.likePost(id, post);
         return ResponseEntity.ok().build();
     }
 
     @Operation(summary = "follow an ong", tags = "Volunteer")
-    @PostMapping("/{me}/{ong}")
+    @PostMapping("/{me}/{ong}/follow")
     public ResponseEntity<Void> followAnOng(@PathVariable Long me, @PathVariable Long ong){
         _volunteerService.followOng(me, ong);
         return ResponseEntity.ok().build();
@@ -61,6 +63,13 @@ public class VolunteerController {
     public ResponseEntity<Void> makeADonation(@PathVariable Long id, @RequestBody float amount){
         _volunteerService.donate(id, amount);
         return ResponseEntity.ok().build();
+    }
+
+    @Operation(summary = "see my follows", tags = "Volunteer")
+    @PostMapping("{id}/following")
+    public ResponseEntity<List<FollowingViewModel>> follows(@PathVariable Long id){
+        List<OngDto> res = _volunteerService.seeMyFollows(id);
+        return ResponseEntity.ok(res.stream().map(this::getFollowingViewModel).collect(Collectors.toList()));
     }
 
     private VolunteerViewModel volunteerToViewModel(VolunteerDto volunteer){
@@ -79,6 +88,14 @@ public class VolunteerController {
         res.setCpf(volunteer.getCpf());
         res.setBirthday(volunteer.getBirthday());
         res.setLevel(volunteer.getLevel());
+        return res;
+    }
+    private FollowingViewModel getFollowingViewModel(OngDto dto){
+        FollowingViewModel res = new FollowingViewModel();
+        res.setId(dto.getOngId());
+        res.setUserId(dto.getUserId());
+        res.setName(dto.getName());
+        res.setProfilePic(dto.getProfilePicture());
         return res;
     }
 

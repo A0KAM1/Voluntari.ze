@@ -2,10 +2,12 @@ package voluntarize.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import voluntarize.dto.OngDto;
 import voluntarize.dto.VolunteerDto;
 import voluntarize.entity.*;
 import voluntarize.repository.*;
 import voluntarize.request.VolunteerRequest;
+import voluntarize.service.interfaces.IVolunteerService;
 
 import javax.swing.text.html.Option;
 import java.util.List;
@@ -13,7 +15,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class VolunteerService {
+public class VolunteerService implements IVolunteerService {
 
     @Autowired
     private VolunteerRepository _volunteerRepository;
@@ -36,7 +38,7 @@ public class VolunteerService {
     @Autowired
     private DonationRepository _donationRepository;
 
-    public VolunteerDto create(VolunteerRequest request){
+    public VolunteerDto createVolunteer(VolunteerRequest request){
         User user = _userRepository.save(this.getUserAttributes(request));
         Volunteer res = _volunteerRepository.save(this.volunteerEntity(request, user));
         return this.volunteerToDto(res);
@@ -49,8 +51,7 @@ public class VolunteerService {
 
     public VolunteerDto findById(Long id){
         Optional<Volunteer> res = _volunteerRepository.findById(id);
-        if(res.isPresent()) return this.volunteerToDto(res.get());
-        return null;
+        return res.map(this::volunteerToDto).orElse(null);
     }
 
     public boolean delete(Long id){
@@ -65,10 +66,8 @@ public class VolunteerService {
     public boolean update(Long id, VolunteerRequest request){
         Optional<Volunteer> oldVolunteer = _volunteerRepository.findById(id);
         if(oldVolunteer.isPresent()){
-            Optional<User> oldUser = _userRepository.findById(oldVolunteer.get().getUser().getId());
-
             User newUser = this.getUserAttributes(request);
-            newUser.setId(oldUser.get().getId());
+            newUser.setId(oldVolunteer.get().getUser().getId());
             Volunteer res = this.volunteerEntity(request, newUser);
             res.setId(id);
 
@@ -102,6 +101,13 @@ public class VolunteerService {
         _donationRepository.save(res);
     }
 
+    public List<OngDto> seeMyFollows(Long id){
+        List<Ong> res = _ongRepository.findByVolunteer(
+                _volunteerRepository.findById(id).orElseThrow()
+        );
+        return res.stream().map(this::getOngDto).collect(Collectors.toList());
+    }
+
     private User getUserAttributes(VolunteerRequest request){
         User res = new User();
         res.setEmail(request.email);
@@ -116,7 +122,6 @@ public class VolunteerService {
         res.setCountry(request.country);
         return res;
     }
-
     private Volunteer volunteerEntity(VolunteerRequest request, User user){
         Volunteer res = new Volunteer();
         res.setCpf(request.cpf);
@@ -126,7 +131,6 @@ public class VolunteerService {
         res.setLevel(1);
         return res;
     }
-
     private VolunteerDto volunteerToDto(Volunteer volunteer){
         VolunteerDto res = new VolunteerDto();
         res.setId(volunteer.getId());
@@ -143,6 +147,25 @@ public class VolunteerService {
         res.setCpf(volunteer.getCpf());
         res.setBirthday(volunteer.getBirthday());
         res.setLevel(volunteer.getLevel());
+        return res;
+    }
+    private OngDto getOngDto(Ong ong){
+        OngDto res = new OngDto();
+        res.setUserId(ong.getUser().getId());
+        res.setOngId(ong.getId());
+        res.setGovernmentCode(ong.getGovernmentCode());
+        res.setAddress(ong.getAddress());
+        res.setQrCode(ong.getQrCode());
+        res.setName(ong.getUser().getName());
+        res.setUsername(ong.getUser().getUsername());
+        res.setEmail(ong.getUser().getEmail());
+        res.setDescription(ong.getUser().getDescription());
+        res.setPhoneNumber(ong.getUser().getPhoneNumber());
+        res.setProfilePicture(ong.getUser().getProfilePicture());
+        res.setCity(ong.getUser().getCity());
+        res.setState(ong.getUser().getState());
+        res.setCountry(ong.getUser().getCountry());
+
         return res;
     }
 }

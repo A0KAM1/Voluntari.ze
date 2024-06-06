@@ -8,7 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OngDto {
-    private Long id;
+    private Long userId;
+    private Long ongId;
     private String governmentCode;
     private String address;
     private String qrCode;

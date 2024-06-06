@@ -18,8 +18,8 @@ INSERT INTO PRESENCE (ID, NAME) VALUES (4, 'Desistiu');
 
 INSERT INTO USERS (EMAIL, PASSWORD, USERNAME, DESCRIPTION, NAME, PHONE_NUMBER, PROFILE_PICTURE, CITY, STATE, COUNTRY) VALUES ('amigosanimais@gmail.com', 'ong_password', 'anigos', 'Nossa ong resgata animais de rua, e ajuda os pets que precisam de cuidados especiais, ajude-nos!', 'Amigos dos Animais', '11111111111', 'ong.url', 'Matão', 'São Paulo', 'Brazil');
 INSERT INTO ONGS (GOVERNMENT_CODE, ADDRESS, QR_CODE, USER_ID) VALUES ('132124432432', 'Av Quinze de Novembro, 180', 'qrcode.url', 1);
-INSERT INTO TAGS (ID, ONG_ID, CATEGORY_ID) VALUES (1, 1, 4);
-INSERT INTO TAGS (ID, ONG_ID, CATEGORY_ID) VALUES (2, 1, 7);
+INSERT INTO TAGS (ONG_ID, CATEGORY_ID) VALUES (1, 4);
+INSERT INTO TAGS (ONG_ID, CATEGORY_ID) VALUES (1, 7);
 
 INSERT INTO USERS (EMAIL, PASSWORD, USERNAME, DESCRIPTION, NAME, PHONE_NUMBER, PROFILE_PICTURE, CITY, STATE, COUNTRY) VALUES ('juliaribeiro@gmail.com', 'volunteer_password', 'julia12', 'Quero ajudar animais em risco e crianças sem acesso a necessidades basicas', 'Julia', '12312312312', 'volunteer.url', 'Taquaritinga', 'São Paulo', 'Brazil');
 INSERT INTO VOLUNTEERS (CPF, LAST_NAME, BIRTHDAY, LEVEL, USER_ID) VALUES ('33333333333', 'Ribeiro', '2003-12-16', 1, 2);

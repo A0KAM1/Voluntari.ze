@@ -3,6 +3,7 @@ package voluntarize.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import voluntarize.dto.OngDto;
+import voluntarize.dto.VolunteerDto;
 import voluntarize.entity.*;
 import voluntarize.repository.*;
 import voluntarize.request.OngRequest;
@@ -23,6 +24,8 @@ public class OngService implements IOngService {
     private TagRepository _tagRepository;
     @Autowired
     private CategoryRepository _categoryRepository;
+    @Autowired
+    private VolunteerRepository _volunteerRepository;
 
     public OngDto createOng(OngRequest ong){
         User user = _userRepository.save(this.getUserAttributes(ong));
@@ -71,6 +74,13 @@ public class OngService implements IOngService {
         _tagRepository.save(tag);
     }
 
+    public List<VolunteerDto> followers(Long id){
+        List<Volunteer> res = _volunteerRepository.findByOng(
+                _ongRepository.findById(id).orElseThrow()
+        );
+        return res.stream().map(this::volunteerToDto).collect(Collectors.toList());
+    }
+
     private User getUserAttributes(OngRequest request){
         User res = new User();
         res.setEmail(request.email);
@@ -95,7 +105,8 @@ public class OngService implements IOngService {
     }
     private OngDto getOngDto(Ong ong){
         OngDto res = new OngDto();
-        res.setId(ong.getId());
+        res.setUserId(ong.getUser().getId());
+        res.setOngId(ong.getId());
         res.setGovernmentCode(ong.getGovernmentCode());
         res.setAddress(ong.getAddress());
         res.setQrCode(ong.getQrCode());
@@ -109,6 +120,25 @@ public class OngService implements IOngService {
         res.setState(ong.getUser().getState());
         res.setCountry(ong.getUser().getCountry());
 
+        return res;
+    }
+    private VolunteerDto volunteerToDto(Volunteer volunteer){
+        VolunteerDto res = new VolunteerDto();
+        res.setId(volunteer.getId());
+        res.setUserId(volunteer.getUser().getId());
+        res.setName(volunteer.getUser().getName());
+        res.setLastName(volunteer.getLastName());
+        res.setEmail(volunteer.getUser().getEmail());
+        res.setUsername(volunteer.getUser().getUsername());
+        res.setDescription(volunteer.getUser().getDescription());
+        res.setPhoneNumber(volunteer.getUser().getPhoneNumber());
+        res.setProfilePicture(volunteer.getUser().getProfilePicture());
+        res.setCity(volunteer.getUser().getCity());
+        res.setState(volunteer.getUser().getState());
+        res.setCountry(volunteer.getUser().getCountry());
+        res.setCpf(volunteer.getCpf());
+        res.setBirthday(volunteer.getBirthday());
+        res.setLevel(volunteer.getLevel());
         return res;
     }
 
