@@ -19,8 +19,6 @@ public class PostService implements IPostService {
     @Autowired
     private PostRepository _postRepository;
     @Autowired
-    private PublicationRepository _publicationRepository;
-    @Autowired
     private PictureRepository _pictureRepository;
     @Autowired
     private LikeRepository _likeRepository;

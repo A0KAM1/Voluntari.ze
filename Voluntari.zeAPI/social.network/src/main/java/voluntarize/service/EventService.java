@@ -31,8 +31,6 @@ public class EventService implements IEventService {
     @Autowired
     private OngRepository _ongRepository;
     @Autowired
-    private PublicationRepository _publicationRepository;
-    @Autowired
     private ParticipantRepository _participantRepository;
     @Autowired
     private VolunteerRepository _volunteerRepository;
