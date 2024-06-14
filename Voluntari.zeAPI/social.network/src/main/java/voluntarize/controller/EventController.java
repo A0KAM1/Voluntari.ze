@@ -1,6 +1,8 @@
 package voluntarize.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +27,11 @@ public class EventController {
     private EventService _eventService;
 
     @Operation(summary = "create event", tags = "Events")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Successfully created"),
+            @ApiResponse(responseCode = "400", description = "BadRequest"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error")
+    })
     @PostMapping()
     public ResponseEntity<PostViewModel> createEvent(@RequestBody EventRequest request){
         PostDto res = _eventService.createEvent(request);
@@ -32,6 +39,11 @@ public class EventController {
     }
 
     @Operation(summary = "delete event by id", tags = "Events")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully Deleted"),
+            @ApiResponse(responseCode = "404", description = "Not Found"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error")
+    })
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteEvent(@PathVariable Long id){
         boolean res = _eventService.deleteEvent(id);
@@ -39,6 +51,12 @@ public class EventController {
     }
 
     @Operation(summary = "update event by id", tags = "Events")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully Updated"),
+            @ApiResponse(responseCode = "404", description = "Not Found"),
+            @ApiResponse(responseCode = "400", description = "Bad Request"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error")
+    })
     @PutMapping("/{id}")
     public ResponseEntity<Void> updateEvent(@PathVariable Long id, @RequestBody EventRequest request){
         boolean res = _eventService.updateEvent(id, request);
@@ -46,6 +64,12 @@ public class EventController {
     }
 
     @Operation(summary = "complete event", tags = "Events")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully Updated"),
+            @ApiResponse(responseCode = "404", description = "Not Found"),
+            @ApiResponse(responseCode = "400", description = "Bad Request"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error")
+    })
     @PostMapping("/{id}/complete")
     public ResponseEntity<Void> completeEvent(@PathVariable Long id){
         _eventService.completeEvent(id);
@@ -53,6 +77,12 @@ public class EventController {
     }
 
     @Operation(summary = "cancel event", tags = "Events")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully Updated"),
+            @ApiResponse(responseCode = "404", description = "Not Found"),
+            @ApiResponse(responseCode = "400", description = "Bad Request"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error")
+    })
     @PostMapping("/{id}/cancel")
     public ResponseEntity<Void> cancelEvent(@PathVariable Long id){
         _eventService.cancelEvent(id);
@@ -60,6 +90,12 @@ public class EventController {
     }
 
     @Operation(summary = "confirm volunteer participation", tags = "Events")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully Updated"),
+            @ApiResponse(responseCode = "404", description = "Not Found"),
+            @ApiResponse(responseCode = "400", description = "Bad Request"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error")
+    })
     @PostMapping("/{id}/participants/{volunteer}/present")
     public ResponseEntity<Void> confirmParticipation(@PathVariable Long id, @PathVariable Long volunteer){
         _eventService.confirmParticipation(id, volunteer);
@@ -67,6 +103,12 @@ public class EventController {
     }
 
     @Operation(summary = "confirm volunteer absence", tags = "Events")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully Updated"),
+            @ApiResponse(responseCode = "404", description = "Not Found"),
+            @ApiResponse(responseCode = "400", description = "Bad Request"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error")
+    })
     @PostMapping("/{id}/participants/{volunteer}/absent")
     public ResponseEntity<Void> confirmAbsence(@PathVariable Long id, @PathVariable Long volunteer){
         _eventService.confirmAbsence(id, volunteer);
@@ -74,20 +116,37 @@ public class EventController {
     }
 
     @Operation(summary = "subscribe to event", tags = "Events")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully Updated"),
+            @ApiResponse(responseCode = "404", description = "Not Found"),
+            @ApiResponse(responseCode = "400", description = "Bad Request"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error")
+    })
     @PostMapping("/{id}/{volunteer}/subscribe")
     public ResponseEntity<Void> subscribeToEvent(@PathVariable Long id, @PathVariable Long volunteer){
-        _eventService.subscribeToEvent(volunteer, id);
+        _eventService.subscribeToEvent(id, volunteer);
         return ResponseEntity.ok().build();
     }
 
     @Operation(summary = "abandon event", tags = "Events")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully Updated"),
+            @ApiResponse(responseCode = "404", description = "Not Found"),
+            @ApiResponse(responseCode = "400", description = "Bad Request"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error")
+    })
     @PostMapping("/{id}/{volunteer}/abandon")
     public ResponseEntity<Void> abandonEvent(@PathVariable Long id, @PathVariable Long volunteer){
-        _eventService.abandonEvent(volunteer, id);
+        _eventService.abandonEvent(id, volunteer);
         return ResponseEntity.ok().build();
     }
 
     @Operation(summary = "view event participants", tags = "Events")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully Found Data"),
+            @ApiResponse(responseCode = "404", description = "Not Found"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error")
+    })
     @GetMapping("/{id}/participants")
     public ResponseEntity<List<ParticipantsViewModel>> getParticipantsList(@PathVariable Long id){
         List<ParticipantsDto> res = _eventService.getListOfParticipants(id);
@@ -95,16 +154,26 @@ public class EventController {
     }
 
     @Operation(summary = "view my events", tags = "Events")
-    @GetMapping("/{me}")
-    public ResponseEntity<List<EventViewModel>> viewMyEvents(@PathVariable Long me){
-        List<EventDto> res = _eventService.getMyEvents(me);
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully Found Data"),
+            @ApiResponse(responseCode = "404", description = "Not Found"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error")
+    })
+    @GetMapping("/{ong}")
+    public ResponseEntity<List<EventViewModel>> viewMyEvents(@PathVariable Long ong){
+        List<EventDto> res = _eventService.getMyEvents(ong);
         return ResponseEntity.ok(res.stream().map(this::getEventViewModel).collect(Collectors.toList()));
     }
 
     @Operation(summary = "view my subscriptions", tags = "Events")
-    @GetMapping("/{me}/subscriptions")
-    public ResponseEntity<List<EventViewModel>> viewMySubscriptions(@PathVariable Long me){
-        List<EventDto> res = _eventService.getMySubscriptions(me);
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully Found Data"),
+            @ApiResponse(responseCode = "404", description = "Not Found"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error")
+    })
+    @GetMapping("/{volunteer}/subscriptions")
+    public ResponseEntity<List<EventViewModel>> viewMySubscriptions(@PathVariable Long volunteer){
+        List<EventDto> res = _eventService.getMySubscriptions(volunteer);
         return ResponseEntity.ok(res.stream().map(this::getEventViewModel).collect(Collectors.toList()));
     }
 

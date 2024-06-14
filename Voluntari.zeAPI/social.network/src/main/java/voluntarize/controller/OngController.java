@@ -1,6 +1,8 @@
 package voluntarize.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,11 @@ public class OngController {
     private OngService _ongService;
 
     @Operation(summary = "Create a new ong", tags = "Ongs")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Ong successfully created"),
+            @ApiResponse(responseCode = "500", description = "Internal server error"),
+            @ApiResponse(responseCode = "400", description = "BadRequest")
+    })
     @PostMapping()
     public ResponseEntity<OngViewModel> create(@RequestBody OngRequest request){
         OngDto res = this._ongService.createOng(request);
@@ -30,6 +37,11 @@ public class OngController {
     }
 
     @Operation(summary = "Find ongs", tags = "Ongs")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully found data"),
+            @ApiResponse(responseCode = "204", description = "Successfully found empty"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
     @GetMapping()
     public ResponseEntity<List<OngSearchViewModel>> searchOngs(
             @RequestParam(required = false) String keyword,
@@ -45,6 +57,11 @@ public class OngController {
     }
 
     @Operation(summary = "Find ong by id", tags = "Ongs")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully found ong"),
+            @ApiResponse(responseCode = "404", description = "Not Found"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
     @GetMapping("/{id}")
     public ResponseEntity<OngViewModel> getOngById(@PathVariable Long id){
         OngDto res = _ongService.findById(id);
@@ -52,30 +69,52 @@ public class OngController {
     }
 
     @Operation(summary = "Update ong by id", tags = "Ongs")
-    @PutMapping("/{id}")
-    public ResponseEntity<Void> updateOng(@PathVariable Long id, @RequestBody OngRequest ong){
-        boolean res = _ongService.updateOngById(id, ong);
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully updated ong"),
+            @ApiResponse(responseCode = "404", description = "Not Found"),
+            @ApiResponse(responseCode = "400", description = "Bad Request"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
+    @PutMapping("/{me}")
+    public ResponseEntity<Void> updateOng(@PathVariable Long me, @RequestBody OngRequest ong){
+        boolean res = _ongService.updateOngById(me, ong);
         return res ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
 
     @Operation(summary = "Delete ong by id", tags = "Ongs")
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteOng(@PathVariable Long id){
-        boolean res = _ongService.deleteOngById(id);
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully deleted ong"),
+            @ApiResponse(responseCode = "404", description = "Not found"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
+    @DeleteMapping("/{me}")
+    public ResponseEntity<Void> deleteOng(@PathVariable Long me){
+        boolean res = _ongService.deleteOngById(me);
         return res ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
 
     @Operation(summary = "add categories to ong", tags = "Ongs")
-    @PostMapping("{id}/categories")
-    public ResponseEntity<Void> addCategories(@PathVariable Long id, @RequestParam Long category){
-        _ongService.addCategories(id, category);
-        return ResponseEntity.ok().build();
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully added category to Ong"),
+            @ApiResponse(responseCode = "404", description = "Not found"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
+    @PostMapping("{me}/categories")
+    public ResponseEntity<Void> addCategories(@PathVariable Long me, @RequestParam Long category){
+        boolean res = _ongService.addCategories(me, category);
+        return res ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
 
     @Operation(summary = "view my followers", tags = "Ongs")
-    @GetMapping("{id}/followers")
-    public ResponseEntity<List<FollowersViewModel>> getMyFollowers(@PathVariable Long id){
-        List<VolunteerDto> res = _ongService.followers(id);
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully found data"),
+            @ApiResponse(responseCode = "404", description = "Not Found"),
+            @ApiResponse(responseCode = "204", description = "Successfully found empty"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
+    @GetMapping("{me}/followers")
+    public ResponseEntity<List<FollowersViewModel>> getMyFollowers(@PathVariable Long me){
+        List<VolunteerDto> res = _ongService.followers(me);
         return ResponseEntity.ok(res.stream().map(this::getFollowerViewModel).collect(Collectors.toList()));
     }
 
