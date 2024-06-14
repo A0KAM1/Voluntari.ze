@@ -1,10 +1,14 @@
 package voluntarize.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import voluntarize.dto.EventDto;
 import voluntarize.dto.PostDto;
 import voluntarize.request.PostRequest;
@@ -23,13 +27,23 @@ public class PostController {
     private PostService _postService;
 
     @Operation(summary = "Create publication", tags = "Posts")
-    @PostMapping()
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Successfully Created"),
+            @ApiResponse(responseCode = "400", description = "Bad Request"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error")
+    })
+    @PostMapping("create")
     public ResponseEntity<PostViewModel> createPublication(@RequestBody PostRequest request){
         PostDto res = _postService.createPost(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(this.getPostViewModel(res));
     }
 
     @Operation(summary = "delete publication by id", tags = "Posts")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully Deleted"),
+            @ApiResponse(responseCode = "404", description = "Not Found"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error")
+    })
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePublication(@PathVariable Long id){
         boolean res = _postService.deletePost(id);
@@ -37,6 +51,12 @@ public class PostController {
     }
 
     @Operation(summary = "update publication by id", tags = "Posts")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully Updated"),
+            @ApiResponse(responseCode = "400", description = "Bad Request"),
+            @ApiResponse(responseCode = "404", description = "Not Found"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error")
+    })
     @PutMapping("/{id}")
     public ResponseEntity<Void> updatePublication(@PathVariable Long id, @RequestBody PostRequest request){
         boolean res = _postService.updatePost(id, request);
@@ -44,9 +64,15 @@ public class PostController {
     }
 
     @Operation(summary = "get posts by ong", tags = "Posts")
-    @GetMapping("/{me}")
-    public ResponseEntity<List<PostViewModel>> getPosts(@PathVariable Long me){
-        List<PostDto> posts = _postService.getPostsByUser(me);
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully Found Data"),
+            @ApiResponse(responseCode = "204", description = "No Content"),
+            @ApiResponse(responseCode = "404", description = "Not Found"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error")
+    })
+    @GetMapping("/{ong}")
+    public ResponseEntity<List<PostViewModel>> getPosts(@PathVariable Long ong){
+        List<PostDto> posts = _postService.getPostsByUser(ong);
         if(posts != null){
             List<PostViewModel> res = posts.stream().map(this::getPostViewModel)
                     .collect(Collectors.toList());
@@ -56,6 +82,11 @@ public class PostController {
     }
 
     @Operation(summary = "get all posts", tags = "Posts")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully Found Data"),
+            @ApiResponse(responseCode = "204", description = "No Content"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error")
+    })
     @GetMapping()
     public ResponseEntity<List<PostViewModel>> loadFeed(){
         List<PostDto> posts = _postService.getPosts();
@@ -66,6 +97,12 @@ public class PostController {
         }
         return ResponseEntity.noContent().build();
     }
+
+    @Operation(summary = "upload file", tags = "Posts")
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Void> uploadFile(@RequestPart MultipartFile file){
+        return ResponseEntity.ok().build();
+    };
 
     private EventViewModel getEventViewModel(EventDto dto){
         EventViewModel res = new EventViewModel();

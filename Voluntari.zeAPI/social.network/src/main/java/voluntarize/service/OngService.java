@@ -67,11 +67,17 @@ public class OngService implements IOngService {
         return false;
     }
 
-    public void addCategories(Long id, Long category){
-        Tag tag = new Tag();
-        tag.setOng(_ongRepository.findById(id).orElseThrow());
-        tag.setCategory(_categoryRepository.findById(category).orElseThrow());
-        _tagRepository.save(tag);
+    public boolean addCategories(Long id, Long category){
+        Optional<Ong> ong = _ongRepository.findById(id);
+        Optional<Category> categoryId = _categoryRepository.findById(category);
+        if(ong.isPresent() && categoryId.isPresent()){
+            Tag tag = new Tag();
+            tag.setOng(ong.get());
+            tag.setCategory(categoryId.get());
+            _tagRepository.save(tag);
+            return true;
+        }
+        return false;
     }
 
     public List<VolunteerDto> followers(Long id){

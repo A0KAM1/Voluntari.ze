@@ -12,6 +12,6 @@ public interface IOngService {
     OngDto findById(Long id);
     boolean deleteOngById(Long id);
     boolean updateOngById(Long id, OngRequest request);
-    void addCategories(Long id, Long category);
+    boolean addCategories(Long id, Long category);
     List<VolunteerDto> followers(Long id);
 }

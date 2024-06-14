@@ -38,20 +38,26 @@ public class EventService implements IEventService {
     private PresenceRepository _presenceRepository;
 
     public PostDto createEvent(EventRequest request){
-        _eventRepository.save(this.getEventEntity(request));
-        Post post = _postRepository.save(this.getPostAttributes(request));
-        _pictureRepository.saveAll(this.getListOfPhotos(request.photos, post));
-        return this.getPostDto(post);
+        Event event = _eventRepository.save(this.getEventEntity(request));
+        Post post = this.getPostAttributes(request);
+        post.setEvent(event);
+        Post res = _postRepository.save(post);
+        _pictureRepository.saveAll(this.getListOfPhotos(request.photos, res));
+        return this.getPostDto(res);
     };
 
     public boolean deleteEvent(Long id){
         Optional<Event> event = _eventRepository.findById(id);
         if(event.isPresent()){
+            List<Participant> participants = _participantRepository.findByEvent(event.get());
             Post post = _postRepository.findByEvent(event.get());
-            _eventRepository.delete(event.get());
-            _pictureRepository.deleteAll(_pictureRepository.findByPost(post));
-            _likeRepository.deleteAll(_likeRepository.findByPost(post));
+            List<Picture> pics = _pictureRepository.findByPost(post);
+            List<Like> likes = _likeRepository.findByPost(post);
+            _participantRepository.deleteAll(participants);
+            _pictureRepository.deleteAll(pics);
+            _likeRepository.deleteAll(likes);
             _postRepository.delete(post);
+            _eventRepository.delete(event.get());
             return true;
         }
         return false;
@@ -65,13 +71,13 @@ public class EventService implements IEventService {
             _eventRepository.save(res);
 
             Post post = _postRepository.findByEvent(oldEvent.get());
-            List<Picture> pics = _pictureRepository.findByPost(post);
-            _pictureRepository.deleteAll(pics);
-            _pictureRepository.saveAll(getListOfPhotos(request.photos, post));
-
             post.setContent(request.description);
             post.setEvent(res);
             _postRepository.save(post);
+
+            List<Picture> pics = _pictureRepository.findByPost(post);
+            _pictureRepository.deleteAll(pics);
+            _pictureRepository.saveAll(getListOfPhotos(request.photos, post));
             return true;
         }
         return false;
@@ -108,10 +114,13 @@ public class EventService implements IEventService {
     }
 
     public void subscribeToEvent(Long id, Long volunteer){
+        Volunteer person = _volunteerRepository.findById(volunteer).orElseThrow();
+        Event event = _eventRepository.findById(id).orElseThrow();
+        Presence presenceId = _presenceRepository.findById(1L).orElseThrow();
         Participant participate = new Participant();
-        participate.setVolunteer(_volunteerRepository.findById(volunteer).orElseThrow());
-        participate.setEvent(_eventRepository.findById(id).orElseThrow());
-        participate.setPresence(_presenceRepository.findById(1L).orElseThrow());
+        participate.setVolunteer(person);
+        participate.setEvent(event);
+        participate.setPresence(presenceId);
         _participantRepository.save(participate);
     }
 
@@ -145,8 +154,8 @@ public class EventService implements IEventService {
         Optional<Ong> ong = this._ongRepository.findById(request.ongId);
         Post res = new Post();
 
-        res.setOng(ong.orElseThrow());
         res.setContent(request.description);
+        res.setOng(ong.orElseThrow());
         return res;
     }
     private Event getEventEntity(EventRequest request){
