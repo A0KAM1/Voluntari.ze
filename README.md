@@ -3,20 +3,22 @@
 Voluntari.ze is an academic project, supposed to be a social network for non-profit organizations to interact with common people who are volunteers and want to donate and help their causes somehow.
 
 ## Parts of this project
-* The `Voluntari.zeAPI` directory contains the Web API created for the application.
+* The `Voluntari.zeAPI` directory contains the Web API created for the application, which.
 * The `Volutnari.ze_Web` directory contains the html code for the front-end of  the aplication.
-* The `Documentação` directory contains the slides and word document (containing class diagrams and others) used on a seminar to presentate our project to the res of the university.
+* The `Documentação` directory contains the slides and word document (containing class diagrams and others) used on a seminar to presentate our project to the res of the university, which was assigned to [mariacandido](https://github.com/maricandido).
 
 ## Technologies
 ### Front-end:
 * Html, javascript, css, typescrip languages
 * `Angular` Framework
 * `Primeng` Lib for styling
+* Resposibles: [moreiraisa](https://github.com/moreirasisa), [ViniciusChanes](https://github.com/ViniciusChanes)
 
 ### Back-end
 * Java language
 * `Spring Boot` Framework
 * `H2 Database` for in-emory database
+* Responsibles: [A0KAM1](https://github.com/A0KAM1)
 
 ## How-To-Run
 ### Requirements
