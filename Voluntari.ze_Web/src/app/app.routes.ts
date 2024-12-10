@@ -1,20 +1,21 @@
 import { Routes } from "@angular/router";
 import { AppComponent } from "./app.component";
-import { SignUpComponent } from "./sign-up/sign-up.component";
-import { ForgotMyPasswordComponent } from "./sign-in/forgot-my-password/forgot-my-password.component";
-import { LoginComponent } from "./sign-in/login/login.component";
-import { MySubscriptionsComponent } from "./user/my-subscriptions/my-subscriptions.component";
-import { MyProfileComponent } from "./ngo/my-profile/my-profile.component";
 import { inject } from "@angular/core";
-import { NgoService } from "./ngo/ngo.service";
 import { catchError, of } from "rxjs";
-import { RegisterUserComponent } from "./sign-up/register-user/register-user.component";
-import { RegisterNgoComponent } from "./sign-up/register-ngo/register-ngo.component";
+import { MyProfileComponent } from "./components/ngo/my-profile/my-profile.component";
+import { NgoService } from "./components/ngo/ngo.service";
+import { ForgotMyPasswordComponent } from "./components/sign-in/forgot-my-password/forgot-my-password.component";
+import { SignInComponent } from "./components/sign-in/sign-in.component";
+import { RegisterNgoComponent } from "./components/sign-up/register-ngo/register-ngo.component";
+import { RegisterUserComponent } from "./components/sign-up/register-user/register-user.component";
+import { SignUpComponent } from "./components/sign-up/sign-up.component";
+import { MySubscriptionsComponent } from "./components/user/my-subscriptions/my-subscriptions.component";
+import { FeedComponent } from "./components/feed/feed.component";
 
 const routeConfig: Routes = [
     {
         path: '',
-        component: AppComponent,
+        component: FeedComponent,
         title: 'Página Inicial'
     },
     {
@@ -23,7 +24,7 @@ const routeConfig: Routes = [
     },
     {
         path: 'sign-in',
-        component: LoginComponent
+        component: SignInComponent
     },
     {
         path: 'forgot-my-password',

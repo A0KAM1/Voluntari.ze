@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import { CardModule } from 'primeng/card';
-import { InputTextModule } from 'primeng/inputtext';
-import { ButtonModule } from 'primeng/button';
-import { DialogModule } from 'primeng/dialog';
 import { RouterModule } from '@angular/router';
+import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
+import { DialogModule } from 'primeng/dialog';
 import { ImageModule } from 'primeng/image';
+import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-sign-in',
   standalone: true,
   imports: [
     CardModule,
@@ -19,10 +19,10 @@ import { PasswordModule } from 'primeng/password';
     ImageModule,
     PasswordModule
   ],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  templateUrl: './sign-in.component.html',
+  styleUrl: './sign-in.component.scss'
 })
-export class LoginComponent {
+export class SignInComponent {
   makeDialogVisible: boolean = false;
 
   constructor() { }
