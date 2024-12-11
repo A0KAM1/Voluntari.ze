@@ -1,15 +1,16 @@
 <sidebar></sidebar>
-<header>
-  <div class="headerItemGroup">
-    <mat-icon aria-hidden="false" aria-label="open sidebar" fontIcon="menu"></mat-icon>
-    <a [routerLink]="['/']">Logo</a>
-  </div>
-  <div class="headerItemGroup">
-    <p-toggleswitch [(ngModel)]="checked" />
-    <p>pesquisar</p>
-  </div>
-</header>
-
-<main>
-  <router-outlet></router-outlet>
-</main>
+<div>
+  <header>
+    <div class="headerItemGroup">
+      <mat-icon aria-hidden="false" aria-label="open sidebar" fontIcon="menu"></mat-icon>
+      <a [routerLink]="['/']">Logo</a>
+    </div>
+    <div class="headerItemGroup">
+      <p-toggleswitch [(ngModel)]="checked" />
+      <p>pesquisar</p>
+    </div>
+  </header>
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+</div>

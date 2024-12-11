@@ -1,9 +1,6 @@
 import { Routes } from "@angular/router";
-import { AppComponent } from "./app.component";
-import { inject } from "@angular/core";
-import { catchError, of } from "rxjs";
-import { MyProfileComponent } from "./components/ngo/my-profile/my-profile.component";
-import { NgoService } from "./components/ngo/ngo.service";
+// import { inject } from "@angular/core";
+// import { catchError, of } from "rxjs";
 import { ForgotMyPasswordComponent } from "./components/sign-in/forgot-my-password/forgot-my-password.component";
 import { SignInComponent } from "./components/sign-in/sign-in.component";
 import { RegisterNgoComponent } from "./components/sign-up/register-ngo/register-ngo.component";
@@ -11,6 +8,8 @@ import { RegisterUserComponent } from "./components/sign-up/register-user/regist
 import { SignUpComponent } from "./components/sign-up/sign-up.component";
 import { MySubscriptionsComponent } from "./components/user/my-subscriptions/my-subscriptions.component";
 import { FeedComponent } from "./components/feed/feed.component";
+import { MyProfileComponent } from "./components/ngo/my-profile/my-profile.component";
+import { AbouUsComponent } from "./components/about-us/about-us.component";
 
 const routeConfig: Routes = [
     {
@@ -45,11 +44,15 @@ const routeConfig: Routes = [
     {
         path: 'my-profile',
         component: MyProfileComponent,
-        resolve: {
-            user: () => inject(NgoService).getOngInfo(1).pipe(catchError(() => {
-                return of(false)
-            }))
-        }
+        // resolve: {
+        //     user: () => inject(NgoService).getOngInfo(1).pipe(catchError(() => {
+        //         return of(false)
+        //     }))
+        // }
+    },
+    {
+        path: 'about-us',
+        component: AbouUsComponent
     }
 ];
 
