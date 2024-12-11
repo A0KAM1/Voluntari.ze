@@ -9,6 +9,7 @@ import { providePrimeNG } from 'primeng/config';
 
 import Aura from '@primeng/themes/aura';
 import { provideStore } from '@ngrx/store';
+import { sidebarReducer } from './store/sidebar/sidebar.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,6 +22,8 @@ export const appConfig: ApplicationConfig = {
             preset: Aura,
         }
     }),
-    provideStore()
+    provideStore({
+      sidebar: sidebarReducer
+    })
 ]
 };

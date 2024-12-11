@@ -11,9 +11,9 @@ nav {
 }
 
 .closedNav {
+  clip-path: inset(0 0 0 0);
   width: 0;
-  overflow: hidden;
-  white-space: nowrap;
+  padding: 0;
 }
 
 .sidebarGroup {
