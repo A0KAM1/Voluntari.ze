@@ -1,0 +1,15 @@
+{
+  "id": 1,
+  "name": "Hope For All Foundation",
+  "username": "hopeforall",
+  "email": "contact@hopeforall.org",
+  "description": "A global non-profit organization dedicated to improving education, healthcare, and sustainable development in underserved communities.",
+  "profilePicture": "https://example.com/images/hopeforall_logo.png",
+  "phoneNumber": "+1-555-123-4567",
+  "governmentCode": "NGO123456789",
+  "qrCode": "https://example.com/qrcode/hopeforall",
+  "address": "123 Philanthropy Lane",
+  "city": "Springfield",
+  "state": "Illinois",
+  "country": "USA"
+}

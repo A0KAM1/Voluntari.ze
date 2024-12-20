@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
-import {MatIconModule} from '@angular/material/icon';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
-
-import { ToggleSwitch } from 'primeng/toggleswitch';
-import { FormsModule } from '@angular/forms';
 import { PrimeNG } from 'primeng/config';
+
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @Component({
   selector: 'app-root',
@@ -13,10 +11,8 @@ import { PrimeNG } from 'primeng/config';
   imports: [
     RouterOutlet,
     RouterModule,
-    MatIconModule,
     SidebarComponent,
-    FormsModule,
-    ToggleSwitch
+    HeaderComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
@@ -29,6 +25,4 @@ export class AppComponent implements OnInit{
   ngOnInit() {
     this.primeng.ripple.set(true);
   }
-
-  checked: boolean = true;
 }

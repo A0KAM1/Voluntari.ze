@@ -1,0 +1,12 @@
+<header>
+  <div class="headerItemGroup">
+    <button type="button" onclick={handleSidebar()}>
+      <mat-icon aria-hidden="false" aria-label="open sidebar" fontIcon="menu"></mat-icon>
+    </button>
+    <a [routerLink]="['/']">Logo</a>
+  </div>
+  <div class="headerItemGroup">
+    <p-toggleswitch [(ngModel)]="checked" />
+    <p>pesquisar</p>
+  </div>
+</header>
