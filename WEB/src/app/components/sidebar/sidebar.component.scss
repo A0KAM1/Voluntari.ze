@@ -4,8 +4,15 @@ nav {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 1rem;
+  padding: 1rem 0;
   z-index: 9999;
+  transition: width 0.3s ease-in-out, padding 0.3s ease-in-out;
+
+  // a {
+  //   word-wrap: nowrap;
+  //   overflow: hidden;
+  //   text-overflow: clip;
+  // }
 
   background-color: pink;
 }
@@ -13,12 +20,10 @@ nav {
 .closed {
   clip-path: inset(0 0 0 0);
   width: 0;
-  padding: 0;
 }
 
 .expanded {
   width: 10rem;
-  border: solid blue;
 }
 
 .sidebarGroup {

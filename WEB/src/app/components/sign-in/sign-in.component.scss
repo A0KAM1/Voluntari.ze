@@ -1,56 +1,72 @@
-
-.logo {
+.cardContainer {
+  width: 100%;
+  height: 100%;
   display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-.login-card {
-  display: flex;
-  justify-content: center;
   align-items: center;
-  border: 5px solid;
-  border-image: linear-gradient(to right, #08A3D3, #37AF91, #FFD602, #91C612) 10;
+
+  border: solid yellow;
+
+  .signInCard {
+    border: 5px solid;
+    border-radius: 15px;
+    border-image: linear-gradient(to right, #08A3D3, #37AF91, #FFD602, #91C612) 10;
+
+    .logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .formGroup {
+      // display: flex;
+    }
+
+    input {
+      color: #08A3D3;
+      width: 100%;
+    }
+  }
 }
 
-.input-email-label,
-.input-password-label {
-  color: #08A3D3;
-  font-weight: 600;
-}
+// .input-email-label,
+// .input-password-label {
+//   color: #08A3D3;
+//   font-weight: 600;
+// }
 
-.input-email,
-.input-password {
-  border-color: #08A3D3;
-  border-width: 2px;
-  width: 500px;
-}
+// .input-email,
+// .input-password {
+//   border-color: #08A3D3;
+//   border-width: 2px;
+//   width: 500px;
+// }
 
-.p-float-label {
-  margin-top: 15px;
-  margin-bottom: 25px;
-}
+// .p-float-label {
+//   margin-top: 15px;
+//   margin-bottom: 25px;
+// }
 
-.forgot-password-link {
-  color: #D12B49E5;
-  margin-bottom: 10px;
-}
+// .forgot-password-link {
+//   color: #D12B49E5;
+//   margin-bottom: 10px;
+// }
 
-.button-sign-in {
-  margin-top: 10px;
-  display: flex;
-  justify-content: center;
-}
+// .button-sign-in {
+//   margin-top: 10px;
+//   display: flex;
+//   justify-content: center;
+// }
 
-.sign-in-button {
-  background-color: #08A3D3;
-  width: 280px;
-}
+// .sign-in-button {
+//   background-color: #08A3D3;
+//   width: 280px;
+// }
 
-.create-profile-link {
-  margin-top: 20px;
-  color: #08A3D3;
-  display: flex;
-  justify-content: center;
-  font-weight: 600;
-}
+// .create-profile-link {
+//   margin-top: 20px;
+//   color: #08A3D3;
+//   display: flex;
+//   justify-content: center;
+//   font-weight: 600;
+// }
