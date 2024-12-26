@@ -1,0 +1,23 @@
+nav {
+  position: absolute;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+  z-index: 9999;
+
+  background-color: pink;
+}
+
+.closedNav {
+  clip-path: inset(0 0 0 0);
+  width: 0;
+  padding: 0;
+}
+
+.sidebarGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
