@@ -5,7 +5,7 @@ import { RouterModule } from "@angular/router";
 import { ToggleSwitch } from 'primeng/toggleswitch';
 import { FormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { toggleSidebar } from 'app/store/sidebar/sidebar.actions';
+import { toggleSidebar } from 'app/store/sidebar/sidebar.actions';  
 
 @Component({
   selector: 'top-header',
@@ -14,7 +14,8 @@ import { toggleSidebar } from 'app/store/sidebar/sidebar.actions';
     RouterModule,
     MatIconModule,
     FormsModule,
-    ToggleSwitch,
+    ToggleSwitch
+
    ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
@@ -25,6 +26,6 @@ export class HeaderComponent {
   constructor(private store: Store){}
 
   handleSidebar() {
-    this.store.dispatch(toggleSidebar())
+    this.store.dispatch(toggleSidebar());
   }
 }

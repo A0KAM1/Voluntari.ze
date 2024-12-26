@@ -1,5 +1,11 @@
-import { createFeatureSelector, State } from "@ngrx/store";
+import { createFeatureSelector, createSelector } from "@ngrx/store";
+import { ISidebarState } from "./sidebar.reducer";
 
 export const sidebarKey = 'sidebar';
 
-export const selectSideBar = createFeatureSelector<State>(sidebarKey);
+export const selectSideBarState = createFeatureSelector<ISidebarState>(sidebarKey);
+
+export const selectIsOpen = createSelector(
+  selectSideBarState,
+  (state: ISidebarState) => state.isOpen
+)

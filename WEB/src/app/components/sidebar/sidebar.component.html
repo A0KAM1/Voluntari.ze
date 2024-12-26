@@ -1,4 +1,5 @@
-<nav class="closedNav">
+<nav [ngClass]="(isOpen$ | async) ? 'expanded' : 'closed' ">
+  <button class="closeButton" (click)="handleSidebar()">X</button>
   <div class="sidebarGroup">
     <a  [routerLink]="['/sign-in']">Sign In</a>
     <a  [routerLink]="['/sign-up']">Sign Up</a>

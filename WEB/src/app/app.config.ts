@@ -3,7 +3,7 @@ import { provideRouter } from '@angular/router';
 
 import routeConfig from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
 
@@ -15,15 +15,13 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routeConfig),
     provideClientHydration(),
-    provideHttpClient(),
+    provideHttpClient(withFetch()),
     provideAnimationsAsync(),
     providePrimeNG({
         theme: {
             preset: Aura,
         }
     }),
-    provideStore({
-      sidebar: sidebarReducer
-    })
+    provideStore({ sidebar: sidebarReducer})
 ]
 };

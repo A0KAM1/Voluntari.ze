@@ -1,6 +1,4 @@
 import { Routes } from "@angular/router";
-// import { inject } from "@angular/core";
-// import { catchError, of } from "rxjs";
 import { ForgotMyPasswordComponent } from "./components/sign-in/forgot-my-password/forgot-my-password.component";
 import { SignInComponent } from "./components/sign-in/sign-in.component";
 import { RegisterNgoComponent } from "./components/sign-up/register-ngo/register-ngo.component";
