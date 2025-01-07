@@ -1,46 +1,88 @@
+// TODO: Add variables globally
+$sidebarWidth: 14rem;
+$headerHeight: 50px;
+$sidebarAnimationDuration: 0.3s;
+
 nav {
   position: absolute;
   height: 100%;
+  padding: 0 1rem 1rem;
+  // TODO: theme variable
+  background-color: pink;
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 1rem 0;
   z-index: 9999;
-  transition: width 0.3s ease-in-out, padding 0.3s ease-in-out;
 
-  // a {
-  //   word-wrap: nowrap;
-  //   overflow: hidden;
-  //   text-overflow: clip;
-  // }
+  transition:
+    width $sidebarAnimationDuration ease-in-out,
+    padding $sidebarAnimationDuration ease-in-out;
 
-  background-color: pink;
-}
+  * {
+    opacity: 1;
+    transition:  opacity $sidebarAnimationDuration ease-in-out;
+  }
 
-.closed {
-  clip-path: inset(0 0 0 0);
-  width: 0;
-}
+  &.closed {
+    clip-path: inset(0 0 0 0);
+    width: 0;
+    padding: 0 0 1rem;
 
-.expanded {
-  width: 10rem;
-}
+    * {
+      opacity: 0;
+      transition:  opacity $sidebarAnimationDuration ease-in-out;
+    }
+  }
 
-.sidebarGroup {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+  &.expanded {
+    width: $sidebarWidth;
+  }
 
-.closeButton {
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 1rem;
-  width: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  .sidebarHeader {
+    height: $headerHeight;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
 
-  border: solid yellow;
+    .closeButton {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .linksGroup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+
+    .userIcon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: fit-content;
+      width: fit-content;
+      font-size: 8rem;
+    }
+
+    > a, button {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: clip;
+      padding: 0.5rem;
+      width: 100%;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+  }
+
 }

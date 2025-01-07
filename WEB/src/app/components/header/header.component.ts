@@ -5,10 +5,10 @@ import { RouterModule } from "@angular/router";
 import { ToggleSwitch } from 'primeng/toggleswitch';
 import { FormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { toggleSidebar } from 'app/store/sidebar/sidebar.actions';  
+import { toggleSidebar } from 'app/store/sidebar/sidebar.actions';
 
 @Component({
-  selector: 'top-header',
+  selector: 'app-header',
   standalone: true,
   imports: [
     RouterModule,
@@ -21,7 +21,7 @@ import { toggleSidebar } from 'app/store/sidebar/sidebar.actions';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  checked: boolean = true;
+  checked = true;
 
   constructor(private store: Store){}
 

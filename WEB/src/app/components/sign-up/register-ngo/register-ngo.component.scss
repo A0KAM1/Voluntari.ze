@@ -1,145 +1,31 @@
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+  margin: 1rem 0;
 
-
-.login-background {
+  .formGroup{
+    width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    min-width: 850px;
-    min-height: 700px;
-    background-color: #EEF6F4;
-}
+    flex-direction: column;
+    gap: 1.5rem;
 
-.logo {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-}
+    h3 {
+      color: #91C612;
+    }
 
+    .inputGroup {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+  }
 
-.login-card {
-    // width: 800px;
-    // height: 650px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 5px solid;
-    border-image: linear-gradient(to right, #08A3D3, #37AF91, #FFD602, #91C612) 10;
+  textarea {
+    width: 100%;
+  }
 }
-
-.input-email-label,
-.input-password-label {
-    color: #08A3D3;
-    font-weight: 600;
-}
-
-span{
-    margin-top: 200px;
-}
-
-.pfp{
-   
-    margin-bottom: 40px;
-}
-.input{
-    border-color: #08A3D3;
-    border-width: 2px;
-    width: 700px;
-
-}
-
-.input-label{
-    color: #08A3D3;
-    font-weight: 600;
-}
-
-.input-email,
-.input-password {
-    border-color: #08A3D3;
-    border-width: 2px;
-    width: 700px;
-}
-
-.p-float-label {
-    margin-top: 15px;
-    margin-bottom: 25px;
-}
-
-.forgot-password-link {
-    color: #D12B49E5;
-    margin-bottom: 10px;
-}
-
-.button-sign-in {
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
-}
-
-.sign-in-button {
-    background-color: #08A3D3;
-    width: 280px;
-}
-
-.create-profile-link {
-    margin-top: 20px;
-    color: #08A3D3;
-    display: flex;
-    justify-content: center;
-    font-weight: 600;
-}
-
-.perfil{
-    background-color: #d6dddc;
-    color:#90c612;
-    width: 280px;
-    margin-left: 100px;
-    border: none;
-    
-    
-}
-.ong{
-    background-color: #90c612;
-    color: #fdfdfd;
-    width: 280px;
-    margin-left: 25px;
-    margin-right: 75px;
-    
-    border: none;
-}
-
-.accountExist{
-    color: #08A3D3;
-}
-
-.voluntariZE, .voluntariZE a:visited{
-    color: #90c612;
-    text-decoration: none;
-}
-
-.center{
-    text-align: center;
-}
-
-.personalInfo, .regionInfo{
-    color: #90c612;
-}
-
-.regionInfo{
-    margin-bottom: 40px;
-}
-
-.drop{
-    border-color: #08A3D3;
-    border-width: 2px;
-    width: 700px;
-}
-
-.teste{
-    width: 1000;
-    background-color: #08A3D3;
-}
-
-//verde
-//#90c612
-//çinza
-//#d6dddc

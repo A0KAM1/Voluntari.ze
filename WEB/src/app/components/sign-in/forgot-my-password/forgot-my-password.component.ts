@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
@@ -9,7 +10,8 @@ import { InputTextModule } from 'primeng/inputtext';
   imports: [
     CardModule,
     InputTextModule,
-    ButtonModule
+    ButtonModule,
+    RouterModule
   ],
   templateUrl: './forgot-my-password.component.html',
   styleUrl: './forgot-my-password.component.scss'

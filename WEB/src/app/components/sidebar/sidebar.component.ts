@@ -5,11 +5,12 @@ import { RouterModule } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { closeSideBar } from "app/store/sidebar/sidebar.actions";
 import { selectIsOpen } from "app/store/sidebar/sidebar.selectors";
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'sidebar',
+  selector: 'app-sidebar',
   standalone: true,
-  imports: [ CommonModule, RouterModule ],
+  imports: [ CommonModule, RouterModule, MatIconModule ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })
@@ -23,6 +24,7 @@ export class SidebarComponent implements OnInit {
   }
 
   handleSidebar(){
+    console.log('apertou')
     this.store.dispatch(closeSideBar())
   }
 }

@@ -19,3 +19,26 @@ app-root {
   position: relative;
   display: block;
 }
+
+input, textarea {
+  /* TODO: theme variable */
+  border: solid #08A3D3;
+  border-radius: 5px;
+  width: 100%;
+  padding: 0.45rem;
+  /* TODO: theme variable */
+  background: white;
+
+  &:focus{
+    outline: none;
+  }
+}
+
+/* TODO: find a way to apply these styles to EVERY mat-icon */
+/* mat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: fit-content;
+  width: fit-content;
+} */

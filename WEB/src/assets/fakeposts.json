@@ -1,0 +1,21 @@
+{
+  "id": 12345,
+  "content": "This is a sample content for the event.",
+  "ongId": 67890,
+  "createdAt": "2023-12-25T10:15:30Z",
+  "updatedAt": "2023-12-26T15:45:00Z",
+  "event": {
+    "id": 54321,
+    "date": "2024-01-15",
+    "time": "09:00:00",
+    "address": "123 Main Street, Central City",
+    "requirements": "Bring a reusable water bottle and comfortable shoes.",
+    "statusId": 1
+  },
+  "pictures": [
+    "https://example.com/pic1.jpg",
+    "https://example.com/pic2.jpg",
+    "https://example.com/pic3.jpg"
+  ],
+  "likes": 256
+}

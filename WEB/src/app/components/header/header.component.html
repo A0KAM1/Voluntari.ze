@@ -1,9 +1,12 @@
 <div class="header">
   <div class="headerItemGroup">
-    <button type="button" (click)="handleSidebar()">
-      <mat-icon aria-hidden="false" aria-label="open sidebar" fontIcon="menu"></mat-icon>
+    <button type="button" (click)="handleSidebar()" aria-label="open sidebar">
+      <mat-icon aria-hidden="false" aria-label="menu icon" fontIcon="menu" class="icon"></mat-icon>
     </button>
-    <a [routerLink]="['/']">Logo</a>
+    <a [routerLink]="['/']" class="logo" aria-label="Navigate to home">
+      <img src="../../../assets/images/AtomVector.svg" width="30" alt="Atom">
+      <img src="../../../assets/images/Name.svg" width="150" alt="Logo">
+    </a>
   </div>
   <div class="headerItemGroup">
     <p-toggleswitch [(ngModel)]="checked" />

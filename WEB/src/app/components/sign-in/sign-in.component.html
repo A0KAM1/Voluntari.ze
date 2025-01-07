@@ -1,51 +1,19 @@
 <div class="cardContainer">
   <div class="signInCard">
     <div class="logo">
-        <img src="../../../assets/images/Atom.svg" width="50">
-        <img src="../../../assets/images/NameAndMoto.svg" width="150" class="teste">
+      <img src="../../../assets/images/Atom.svg" width="60" alt="Atom" />
+      <img src="../../../assets/images/NameAndMoto.svg" width="150" alt="Logo" class="teste" />
     </div>
+
     <div class="formGroup">
-      <input class="input-email" pInputText id="email" placeholder="E-mail">
+      <input placeholder="E-mail" />
     </div>
+
     <div class="formGroup">
-      <input class="input-password" pInputText id="password" type="password" placeholder="Senha">
-      <a
-        class="forgot-password-link"
-        (click)="showDialog()"
-        [routerLink]="['/forgot-my-password']"
-      >
-        Esqueceu a senha?
-      </a>
+      <input placeholder="Senha" />
+      <a [routerLink]="['/forgot-my-password']" class="inputHint">Esqueceu a senha?</a>
     </div>
-    <div>
-        <a class="create-profile-link">Não possui um perfil?</a>
-    </div>
+
+    <a [routerLink]="['/sign-up']">Não possui um perfil?</a>
   </div>
 </div>
-
-
-
-
-<!-- <p-card class="login-card">
-    <div class="logo">
-        <img src="assets/images/Logo.jpg" width="350">
-    </div>
-    <span class="p-float-label">
-        <input class="input-email" pInputText id="email">
-        <label class="input-email-label" for="email">E-mail</label>
-    </span>
-    <span class="p-float-label">
-        <input class="input-password" pInputText id="password" type="password">
-        <label class="input-password-label" for="password">Senha</label>
-    </span>
-    <div>
-        <a class="forgot-password-link" (click)="showDialog()" [routerLink]="['/forgot-my-password']">Esqueceu a
-            senha?</a>
-    </div>
-    <div class="button-sign-in">
-        <button pButton pRipple label="Entrar" class="sign-in-button" [routerLink]="['/my-profile']"></button>
-    </div>
-    <div>
-        <a class="create-profile-link">Não possui um perfil?</a>
-    </div>
-</p-card> -->

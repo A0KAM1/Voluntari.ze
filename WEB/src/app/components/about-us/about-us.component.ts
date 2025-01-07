@@ -1,11 +1,9 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 
 @Component({
-    selector: 'about-us',
-    standalone: true,
-    imports: [],
-    templateUrl: './about-us.component.html'
+  selector: 'app-about-us',
+  standalone: true,
+  imports: [],
+  templateUrl: './about-us.component.html',
 })
-export class AbouUsComponent {
-
-}
+export class AbouUsComponent {}

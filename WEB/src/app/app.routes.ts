@@ -17,7 +17,17 @@ const routeConfig: Routes = [
     },
     {
         path: 'sign-up',
-        component: SignUpComponent
+        component: SignUpComponent,
+        children: [
+          {
+            path: 'ngo',
+            component: RegisterNgoComponent
+          },
+          {
+            path: 'volunteer',
+            component: RegisterUserComponent
+          }
+        ]
     },
     {
         path: 'sign-in',

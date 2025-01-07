@@ -19,5 +19,5 @@ import { TableModule } from 'primeng/table';
   styleUrl: './my-subscriptions.component.scss'
 })
 export class MySubscriptionsComponent {
-  sidebarVisible: boolean = false;
+  sidebarVisible = false;
 }

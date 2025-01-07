@@ -1,93 +1,54 @@
-<div class="login-background">
-    <p-card class="login-card">
-        <div class="logo">
-            <img src="assets/images/Logo.jpg" width="350">
-        </div>
-        <div>
-            <button pButton pRipple label="Cadastro de Perfil" class="perfil" [routerLink]="['/sign-up-user']" ></button>
-            <button pButton pRipple label="Cadastro de ONG" class="ong" [routerLink]="['/sign-up-ong']" ></button>
-        </div>
 
-        <form class="">
-            <h3 class="personalInfo">Informações Pessoais</h3>
-            <div class="pfp">
-                <h4>Foto de perfil</h4>
-                <p-fileUpload mode="basic" chooseLabel="Escolher imagem" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" maxFileSize="1000000"></p-fileUpload>
-            </div>
-            <span class="p-float-label">
-                <input class="input-fname input" pInputText id="fname">
-                <label class="input-fname-label input-label" for="fname">Nome Completo</label>
-            </span>
-            <span class="p-float-label">
-                <input class="input-cpf input" pInputText id="cpf">
-                <label class="input-cpf-label input-label" for="cpf">CPF</label>
-            </span>
-            <span class="p-float-label">
-                <input class="input-phone input" pInputText id="phone">
-                <label class="input-phone-label input-label" for="phone">Telefone/Celular</label>
-            </span>
-            <span class="p-float-label">
-                <input class="input-description input" pInputText id="description">
-                <label class="input-description-label input-label" for="description">Descrição</label>
-            </span>
-            <span class="p-float-label">
-                <input class="input-username input" pInputText id="username">
-                <label class="input-username-label input-label" for="username">Nome de usuário</label>
-            </span>
-            <span class="p-float-label">
-                <input class="input-email input" pInputText id="email">
-                <label class="input-email-label input-label" for="email">E-mail</label>
-            </span>
-            <span class="p-float-label">
-                <input class="input-password input" pInputText id="password" type="password">
-                <label class="input-password-label input-label" for="password">Senha</label>
-            </span>
-            <span class="p-float-label">
-                <input class="input-cpassword input" pInputText id="cpassword" type="password">
-                <label class="input-cpassword-label input-label" for="cpassword">Confirme sua senha</label>
-            </span>
+<form>
+  <div class="formGroup">
+    <h3>Informações Pessoais</h3>
 
-            <p-divider></p-divider>
-            <h3 class="regionInfo">Informações Regionais</h3>
+    <div class="inputGroup">
+      <p-fileUpload mode="basic" chooseLabel="Escolher imagem" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" maxFileSize="1000000"></p-fileUpload>
 
-            <span class="p-float-label">
-                <input class="input-cep input" pInputText id="cep">
-                <label class="input-cep-label input-label" for="cep">CEP</label>
-            </span>
-            <span class="p-float-label">
-                <input class="input-country input" pInputText id="country">
-                <label class="input-country-label input-label" for="country">País</label>
-            </span>
-            <span class="p-float-label">
-                <input class="input-city input" pInputText id="city">
-                <label class="input-city-label input-label" for="city">Cidade</label>
-            </span>
+      <div class="formGroup">
+        <input placeholder="Nome" id="fname" type="text">
+        <input placeholder="CPF" id="cpf" type="text">
+        <input placeholder="Tel" id="phone" type="tel">
+      </div>
+    </div>
 
-            <span class="p-float-label">
-                <input class="input-street input" pInputText id="street">
-                <label class="input-street-label input-label" for="street">Logradouro</label>
-            </span>
-            <span class="p-float-label">
-                <input class="input-number input" pInputText id="number">
-                <label class="input-number-label input-label" for="number">Número</label>
-            </span>
-            <span class="p-float-label">
-                <input class="input-state input" pInputText id="state">
-                <label class="input-state-label input-label" for="state">Estado</label>
-            </span>
-        </form>
+    <div class="inputGroup">
+      <textarea placeholder="Description" id="description"></textarea>
+    </div>
 
- 
-        <div class="button-sign-in">
-            <button pButton pRipple label="Cadastrar" class="sign-in-button" ></button>
-        </div>
-        <div class="center">
-            <p class="accountExist">
-                Já tem uma conta? Então 
-                
-                <a class="voluntariZE" href="">Voluntarize</a>
-                
-            </p>
-        </div>
-    </p-card>
-</div>
+    <div class="inputGroup">
+      <input placeholder="Userename" id="username" type="text">
+    </div>
+
+    <div class="inputGroup">
+      <input placeholder="E-mail" id="email" type="email">
+    </div>
+
+    <div class="inputGroup">
+      <input placeholder="Senha" id="password" type="password">
+      <input placeholder="Repita sua senha" id="cpassword" type="password">
+    </div>
+  </div>
+
+  <div class="formGroup">
+    <h3>Informações Regionais</h3>
+
+    <div class="inputGroup">
+      <input placeholder="CEP" id="cep" type="text">
+      <input placeholder="País" id="country" type="text">
+      <input placeholder="Cidade" id="city" type="text">
+    </div>
+
+    <div class="inputGroup">
+      <input placeholder="Rua" id="street" type="text">
+      <input placeholder="Numero" id="number" type="number">
+      <input placeholder="Estado" id="state" type="text">
+    </div>
+  </div>
+
+  <div class="formGroup">
+    <button type="button">Cadastrar</button>
+  </div>
+</form>
+
