@@ -27,10 +27,26 @@ $headerHeight: 50px;
   .headerItemGroup {
     display: flex;
     gap: 1rem;
+
+    :last-child(1) {
+      visibility: hidden;
+    }
   }
 
   .logo {
     display: flex;
     gap: 0.5rem;
+  }
+}
+
+@media(max-width: 950px) {
+  .headerItemGroup {
+    :first-child() {
+      visibility: hidden;
+    }
+
+    :last-child(1) {
+      visibility: visible;
+    }
   }
 }

@@ -5,29 +5,49 @@
   align-items: center;
   justify-content: center;
 
-  .signInCard {
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-
-    // TODO: add globally
-    border: 5px solid;
-    border-image: linear-gradient(to right, #08A3D3, #37AF91, #FFD602, #91C612) 10;
+  //TODO: add globally
+  .cardBorder {
     border-radius: 15px;
+    background: linear-gradient(to right, #08A3D3, #37AF91, #FFD602, #91C612);
+    width: min(90%, 800px);
+        
+    .signInCard {
+      //TODO: add globally
+        border: 5px solid transparent;
+        border-radius: 15px;
+        //TODO: theme variable (card backgrounds)
+        background-color: #EEF6F4;
+        background-clip: padding-box;
 
-    //TODO: add globally
-    .logo {
+      padding: 1rem;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
       gap: 1rem;
-    }
+      color: #08A3D3;
 
-    .formGroup {
-      width: 100%;
+      //TODO: add globally
+      .logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+      }
+
+      .formGroup {
+      }
+
+      .inputHint {
+        color: #D12B49E5;
+      }
+
+      button {
+        background-color: #08A3D3;
+        width: 70%;
+        padding: 0.5rem;
+        border-radius: 5px;
+        color: white;
+      }
     }
   }
 }

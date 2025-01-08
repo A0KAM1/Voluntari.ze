@@ -19,9 +19,10 @@
     //TODO: Add globally (default width for big containers)
     width: 800px;
 
-    border: 5px transparent;
+    // TODO: add globally
+    border: 5px solid;
+    border-image: linear-gradient(to right, #08A3D3, #37AF91, #FFD602, #91C612) 10;
     border-radius: 15px;
-    background-image: linear-gradient(to right, #08A3D3, #37AF91, #FFD602, #91C612);
 
     .logo {
       display: flex;
