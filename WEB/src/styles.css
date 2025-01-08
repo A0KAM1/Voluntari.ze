@@ -20,16 +20,17 @@ app-root {
   display: block;
 }
 
-input, textarea {
+input,
+textarea {
   /* TODO: theme variable */
-  border: solid #08A3D3;
+  border: solid #08a3d3;
+  /* TODO: theme variable */
+  background: white;
   border-radius: 5px;
   width: 100%;
   padding: 0.45rem;
-  /* TODO: theme variable */
-  background: white;
 
-  &:focus{
+  &:focus {
     outline: none;
   }
 }

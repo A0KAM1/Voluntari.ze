@@ -1,54 +1,56 @@
-
 <form>
-  <div class="formGroup">
+  <div class="form_group">
     <h3>Informações Pessoais</h3>
 
-    <div class="inputGroup">
-      <p-fileUpload mode="basic" chooseLabel="Escolher imagem" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" maxFileSize="1000000"></p-fileUpload>
+    <div class="input_group">
+      <p-fileUpload mode="basic" chooseLabel="Escolher imagem" name="demo[]"
+        url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" maxFileSize="1000000"></p-fileUpload>
 
-      <div class="formGroup">
+      <div class="form_group">
         <input placeholder="Nome" id="fname" type="text">
         <input placeholder="CPF" id="cpf" type="text">
         <input placeholder="Tel" id="phone" type="tel">
       </div>
     </div>
 
-    <div class="inputGroup">
-      <textarea placeholder="Description" id="description"></textarea>
+    <div class="input_group">
+      <textarea placeholder="Descrição" id="description"></textarea>
     </div>
 
-    <div class="inputGroup">
-      <input placeholder="Userename" id="username" type="text">
+    <div class="input_group">
+      <input placeholder="Usuário" id="username" type="text">
     </div>
 
-    <div class="inputGroup">
+    <div class="input_group">
       <input placeholder="E-mail" id="email" type="email">
     </div>
 
-    <div class="inputGroup">
+    <div class="input_group">
       <input placeholder="Senha" id="password" type="password">
-      <input placeholder="Repita sua senha" id="cpassword" type="password">
+
+      <input placeholder="Confirmar senha" id="cpassword" type="password">
     </div>
   </div>
 
-  <div class="formGroup">
+  <div class="form_group">
     <h3>Informações Regionais</h3>
 
-    <div class="inputGroup">
+    <div class="input_group">
       <input placeholder="CEP" id="cep" type="text">
+
       <input placeholder="País" id="country" type="text">
+
       <input placeholder="Cidade" id="city" type="text">
     </div>
 
-    <div class="inputGroup">
-      <input placeholder="Rua" id="street" type="text">
-      <input placeholder="Numero" id="number" type="number">
+    <div class="input_group">
       <input placeholder="Estado" id="state" type="text">
+
+      <input placeholder="Rua" id="street" type="text">
+
+      <input placeholder="Numero" id="number" type="number">
     </div>
   </div>
 
-  <div class="formGroup">
-    <button type="button">Cadastrar</button>
-  </div>
+  <button type="button">Cadastrar</button>
 </form>
-

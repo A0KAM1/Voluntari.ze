@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AttendToEventModalComponent } from './attend-to-event-modal.component';
+import { AttendToEventModalComponent } from '../attend-to-event-modal.component';
 
 describe('AttendToEventModalComponent', () => {
   let component: AttendToEventModalComponent;
@@ -8,10 +8,9 @@ describe('AttendToEventModalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AttendToEventModalComponent]
-    })
-    .compileComponents();
-    
+      imports: [AttendToEventModalComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(AttendToEventModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

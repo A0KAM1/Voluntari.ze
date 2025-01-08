@@ -1,21 +1,21 @@
 <nav [ngClass]="(isOpen$ | async) ? 'expanded' : 'closed' ">
-<!-- <nav class="expanded"> -->
+  <!-- <nav class="expanded"> -->
   <div>
-    <div class="sidebarHeader">
-      <button (click)="handleSidebar()" aria-label="close sidebar" class="closeButton">
+    <div class="sidebar_header">
+      <button (click)="handleSidebar()" aria-label="close sidebar" class="close_button">
         <mat-icon aria-hidden="false" aria-label="close sidebar" fontIcon="arrow_back"></mat-icon>
       </button>
     </div>
-    <div class="linksGroup">
-      <mat-icon aria-hidden="false" aria-label="user icon" fontIcon="account_circle" class="userIcon"></mat-icon>
+    <div class="links_group">
+      <mat-icon aria-hidden="false" aria-label="user icon" fontIcon="account_circle" class="user_icon"></mat-icon>
       <a [routerLink]="['/sign-in']">Sign In</a>
       <a [routerLink]="['/sign-up']">Sign Up</a>
     </div>
   </div>
-  <div class="linksGroup">
+  <div class="links_group">
     <a [routerLink]="['/about-us']">About Us</a>
     <button type="button">
-      <mat-icon aria-hidden="false" aria-label="logout icon" fontIcon="logout" class="logoutIcon"></mat-icon>
+      <mat-icon aria-hidden="false" aria-label="logout icon" fontIcon="logout" class="logout_icon"></mat-icon>
       <span>Logout</span>
     </button>
   </div>

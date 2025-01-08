@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NgoComponent } from './ngo.component';
+import { NgoComponent } from '../ngo.component';
 
 describe('NgoComponent', () => {
   let component: NgoComponent;
@@ -8,10 +8,9 @@ describe('NgoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NgoComponent]
-    })
-    .compileComponents();
-    
+      imports: [NgoComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(NgoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

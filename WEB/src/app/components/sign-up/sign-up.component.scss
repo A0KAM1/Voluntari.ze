@@ -1,4 +1,4 @@
-.cardContainer {
+.card_container {
   width: 100vw;
   height: 100%;
   display: flex;
@@ -7,42 +7,71 @@
   scrollbar-gutter: stable;
   padding: 2rem 0;
 
-  .signUpCard {
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
+  .card_border {
+    border-radius: 15px;
+    background: linear-gradient(to right, #08a3d3, #37af91, #ffd602, #91c612);
+    //TODO: Add globally (default width for big containers)
+    width: min(80%, 1000px);
     height: fit-content;
 
-    //TODO: Add globally (default width for big containers)
-    width: 800px;
-
-    // TODO: add globally
-    border: 5px solid;
-    border-image: linear-gradient(to right, #08A3D3, #37AF91, #FFD602, #91C612) 10;
-    border-radius: 15px;
-
-    .logo {
+    .signUp_card {
+      //TODO: add globally
+      border: 5px solid transparent;
+      border-radius: 15px;
+      //TODO: theme variable (card backgrounds)
+      background-color: #eef6f4;
+      background-clip: padding-box;
+      padding: 2rem 7rem;
+      gap: 2rem;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 1rem;
-    }
+      color: #08a3d3;
 
-    .perfil{
-      background-color: #90c612;
-      color: #fdfdfd;
-      width: 280px;
-      border: none;
-    }
+      .logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
 
-    .ong{
-      background-color: #d6dddc;
-      color:#90c612;
-      width: 280px;
-      border: none;
+        .atom {
+          width: 35px;
+        }
+        .name {
+          width: 100px;
+        }
+
+        @media (min-width: 950px) {
+          .atom {
+            width: 70px;
+          }
+          .name {
+            width: 200px;
+          }
+        }
+      }
+
+      .perfil,
+      .ong {
+        background-color: #91c612;
+        color: #fdfdfd;
+        text-align: center;
+        padding: 0.5rem;
+        border-radius: 5px;
+        border: none;
+        width: 250px;
+      }
+
+      .content {
+        width: 100%;
+
+        div {
+          text-align: center;
+          a {
+            color: #91c612;
+          }
+        }
+      }
     }
   }
 }

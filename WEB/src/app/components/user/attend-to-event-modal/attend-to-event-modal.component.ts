@@ -5,8 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './attend-to-event-modal.component.html',
-  styleUrl: './attend-to-event-modal.component.scss'
+  styleUrl: './attend-to-event-modal.component.scss',
 })
-export class AttendToEventModalComponent {
-
-}
+export class AttendToEventModalComponent {}

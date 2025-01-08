@@ -1,50 +1,51 @@
 <form>
-  <div class="formGroup">
+  <div class="form_group">
     <h3>Informações Gerais</h3>
 
-    <div class="inputGroup">
-      <p-fileUpload mode="basic" chooseLabel="Escolher imagem" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" maxFileSize="1000000"></p-fileUpload>
+    <div class="input_group">
+      <p-fileUpload mode="basic" chooseLabel="Escolher imagem" name="demo[]"
+        url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" maxFileSize="1000000"></p-fileUpload>
 
-      <div class="formGroup">
-        <div class="inputGroup">
+      <div class="form_group">
+        <div class="input_group">
           <input id="fname" type="text" placeholder="Nome">
         </div>
 
-        <div class="inputGroup">
+        <div class="input_group">
           <input id="cnpj" type="number" placeholder="CNPJ">
         </div>
 
-        <div class="inputGroup">
+        <div class="input_group">
           <input id="phone" type="number" placeholder="Tel">
         </div>
       </div>
     </div>
 
-    <div class="inputGroup">
+    <div class="input_group">
       <textarea id="description" placeholder="Descrição"></textarea>
     </div>
 
-    <div class="inputGroup">
+    <div class="input_group">
       <input id="username" type="text" placeholder="Usuário">
 
       <input id="email" type="email" placeholder="E-mail">
     </div>
 
-    <div class="inputGroup">
+    <div class="input_group">
       <input id="password" type="text" placeholder="Escolha as categorias">
     </div>
 
-    <div class="inputGroup">
+    <div class="input_group">
       <input id="password" type="password" placeholder="Senha">
 
       <input id="cpassword" type="password" placeholder="Confirmar senha">
     </div>
   </div>
 
-  <div class="formGroup">
+  <div class="form_group">
     <h3>Informações Regionais</h3>
 
-    <div class="inputGroup">
+    <div class="input_group">
       <input id="cep" type="text" placeholder="CEP">
 
       <input id="country" placeholder="País">
@@ -52,7 +53,7 @@
       <input id="city" placeholder="Cidade">
     </div>
 
-    <div class="inputGroup">
+    <div class="input_group">
       <input id="state" placeholder="Estado">
 
       <input id="street" placeholder="Rua">
@@ -61,8 +62,5 @@
     </div>
   </div>
 
-  <div class="formGroup">
-    <button type="submit">Cadastrar</button>
-  </div>
+  <button type="submit">Cadastrar</button>
 </form>
-

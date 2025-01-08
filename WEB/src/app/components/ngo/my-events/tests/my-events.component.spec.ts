@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MyEventsComponent } from './my-events.component';
+import { MyEventsComponent } from '../my-events.component';
 
 describe('MyEventsComponent', () => {
   let component: MyEventsComponent;
@@ -8,10 +8,9 @@ describe('MyEventsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MyEventsComponent]
-    })
-    .compileComponents();
-    
+      imports: [MyEventsComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(MyEventsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

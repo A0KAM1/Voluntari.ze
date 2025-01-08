@@ -9,11 +9,29 @@ $headerHeight: 50px;
   justify-content: space-between;
   padding: 1rem;
   // TODO: theme variable
-  background-color: red;
+  background-color: #91c612;
 
-  * {
-    // TODO: theme variable
-    color: white;
+  .headerItem_group {
+    display: flex;
+    gap: 1rem;
+
+    .batata {
+      display: none;
+    }
+    .search_icon {
+      display: block;
+    }
+
+    @media (min-width: 950px) {
+      .batata {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      .search_icon {
+        display: none;
+      }
+    }
   }
 
   .icon {
@@ -24,29 +42,8 @@ $headerHeight: 50px;
     width: fit-content;
   }
 
-  .headerItemGroup {
-    display: flex;
-    gap: 1rem;
-
-    :last-child(1) {
-      visibility: hidden;
-    }
-  }
-
   .logo {
     display: flex;
     gap: 0.5rem;
-  }
-}
-
-@media(max-width: 950px) {
-  .headerItemGroup {
-    :first-child() {
-      visibility: hidden;
-    }
-
-    :last-child(1) {
-      visibility: visible;
-    }
   }
 }

@@ -1,5 +1,5 @@
 <div class="header">
-  <div class="headerItemGroup">
+  <div class="headerItem_group">
     <button type="button" (click)="handleSidebar()" aria-label="open sidebar">
       <mat-icon aria-hidden="false" aria-label="menu icon" fontIcon="menu" class="icon"></mat-icon>
     </button>
@@ -8,13 +8,11 @@
       <img src="../../../assets/images/Name.svg" width="150" alt="Logo">
     </a>
   </div>
-  <div class="headerItemGroup">
-    <div>
+  <div class="headerItem_group">
+    <div class="batata">
       <p-toggleswitch [(ngModel)]="checked" />
-      <p>pesquisar</p>
+      <input placeholder="pesquisar" type="text">
     </div>
-    <div>
-      <mat-icon aria-hidden="false" aria-label="search icon" fontIcon="search"></mat-icon>
-    </div>
+    <mat-icon aria-hidden="false" aria-label="search icon" fontIcon="search" class="search_icon"></mat-icon>
   </div>
 </div>

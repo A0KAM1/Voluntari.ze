@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DonateModalComponent } from './donate-modal.component';
+import { DonateModalComponent } from '../donate-modal.component';
 
 describe('DonateModalComponent', () => {
   let component: DonateModalComponent;
@@ -8,10 +8,9 @@ describe('DonateModalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DonateModalComponent]
-    })
-    .compileComponents();
-    
+      imports: [DonateModalComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(DonateModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

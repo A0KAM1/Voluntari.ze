@@ -21,7 +21,7 @@ nav {
 
   * {
     opacity: 1;
-    transition:  opacity $sidebarAnimationDuration ease-in-out;
+    transition: opacity $sidebarAnimationDuration ease-in-out;
   }
 
   &.closed {
@@ -31,7 +31,7 @@ nav {
 
     * {
       opacity: 0;
-      transition:  opacity $sidebarAnimationDuration ease-in-out;
+      transition: opacity $sidebarAnimationDuration ease-in-out;
     }
   }
 
@@ -39,26 +39,26 @@ nav {
     width: $sidebarWidth;
   }
 
-  .sidebarHeader {
+  .sidebar_header {
     height: $headerHeight;
     display: flex;
     align-items: center;
     margin-bottom: 1rem;
 
-    .closeButton {
+    .close_button {
       display: flex;
       align-items: center;
       justify-content: center;
     }
   }
 
-  .linksGroup {
+  .links_group {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
 
-    .userIcon {
+    .user_icon {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -67,7 +67,8 @@ nav {
       font-size: 8rem;
     }
 
-    > a, button {
+    > a,
+    button {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: clip;
@@ -82,7 +83,5 @@ nav {
         text-decoration: underline;
       }
     }
-
   }
-
 }

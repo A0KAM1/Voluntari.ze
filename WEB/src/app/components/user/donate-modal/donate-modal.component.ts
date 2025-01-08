@@ -5,8 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './donate-modal.component.html',
-  styleUrl: './donate-modal.component.scss'
+  styleUrl: './donate-modal.component.scss',
 })
-export class DonateModalComponent {
-
-}
+export class DonateModalComponent {}
