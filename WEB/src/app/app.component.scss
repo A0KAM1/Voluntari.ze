@@ -5,21 +5,26 @@ main {
   flex-direction: column;
 
   .content_container {
-    flex: 1;
-    max-width: 100vw;
+    height: 100%;
     display: flex;
     overflow: hidden;
 
-    border: solid red;
-    .content {
+    .content_wrapper {
       flex: 1;
-      display: flex;
-      justify-content: center;
-      padding: 2rem;
+      padding: 2rem 0;
       overflow-y: auto;
+      scrollbar-gutter: stable;
       position: relative;
-
       border: solid blue;
+
+      .content {
+        width: min(90%, 1000px);
+        min-height: 100%;
+        margin: auto;
+        border: solid;
+        display: flexbox;
+        align-content: start;
+      }
     }
   }
 }

@@ -1,8 +1,18 @@
+// .card_container {
+//   width: 100%;
+//   height: 100%;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   border: solid;
+// }
+
 //TODO: add globally
 .card_border {
   border-radius: 15px;
   background: linear-gradient(to right, #08a3d3, #37af91, #ffd602, #91c612);
-  width: min(90%, 600px);
+  width: min(100%, 600px);
+  margin: auto;
 }
 
 //TODO: add globally
@@ -12,7 +22,7 @@
   //TODO: theme variable (card backgrounds)
   background-color: #eef6f4;
   background-clip: padding-box;
-  padding: 2rem;
+  padding: 2rem 0;
   gap: 2rem;
   display: flex;
   flex-direction: column;
@@ -65,7 +75,8 @@ button {
     width: 90%;
   }
 
-  .signIn_card {
+  .card {
     gap: 1rem;
+    padding: 1rem;
   }
 }

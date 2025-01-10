@@ -1,3 +1,5 @@
 .content_container {
+  flex: 1;
   border: solid violet;
+  place-self: auto;
 }

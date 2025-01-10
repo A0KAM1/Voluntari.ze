@@ -1,13 +1,17 @@
+.card_container {
+  border: solid;
+}
+
 //TODO: add globally
 .card_border {
   border-radius: 15px;
   background: linear-gradient(to right, #08a3d3, #37af91, #ffd602, #91c612);
-
-  height: fit-content;
+  max-width: 100%;
+  order: -9999;
 }
 
 //TODO: add globally
-.signUp_card {
+.card {
   border: 5px solid transparent;
   border-radius: 15px;
   //TODO: theme variable (card backgrounds)
@@ -44,7 +48,6 @@
   padding: 0.5rem;
   border-radius: 5px;
   border: none;
-  width: 250px;
 }
 
 .content {
@@ -73,5 +76,6 @@
 
   .card {
     gap: 1rem;
+    padding: 1rem;
   }
 }
