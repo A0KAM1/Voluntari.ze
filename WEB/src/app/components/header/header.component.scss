@@ -16,20 +16,21 @@ $headerHeight: 50px;
     gap: 1rem;
 
     .batata {
-      display: none;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
     }
     .search_icon {
-      display: block;
+      display: none;
     }
 
-    @media (min-width: 950px) {
+    //mobile
+    @media (max-width: 950px) {
       .batata {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
+        display: none;
       }
       .search_icon {
-        display: none;
+        display: block;
       }
     }
   }

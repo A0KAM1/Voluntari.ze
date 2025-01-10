@@ -1,24 +1,22 @@
-<div class="card_container">
-  <div class="card_border">
-    <form>
-      <div class="signIn_card">
-        <div class="logo">
-          <img src="../../../assets/images/Atom.svg" width="60" alt="Atom" />
-          <img src="../../../assets/images/NameAndMoto.svg" width="150" alt="Logo" class="teste" />
-        </div>
-
-        <div class="form_group">
-          <input placeholder="E-mail" />
-        </div>
-
-        <div class="form_group">
-          <input placeholder="Senha" />
-          <a [routerLink]="['/forgot-my-password']" class="inputHint">Esqueceu a senha?</a>
-        </div>
-
-        <button type="submit">Entrar</button>
-        <a [routerLink]="['/sign-up']">Não possui um perfil?</a>
+<div class="card_border">
+  <form>
+    <div class="card">
+      <div class="logo">
+        <img src="../../../assets/images/Atom.svg" width="60" alt="atom" class="atom" />
+        <img src="../../../assets/images/NameAndMoto.svg" width="150" alt="logo" class="name" />
       </div>
-    </form>
-  </div>
+
+      <div class="form_group">
+        <input placeholder="E-mail" />
+      </div>
+
+      <div class="form_group">
+        <input placeholder="Senha" />
+        <a [routerLink]="['/forgot-my-password']" class="inputHint">Esqueceu a senha?</a>
+      </div>
+
+      <button type="submit">Entrar</button>
+      <a [routerLink]="['/sign-up']">Não possui um perfil?</a>
+    </div>
+  </form>
 </div>

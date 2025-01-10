@@ -1,14 +1,12 @@
 // TODO: Add variables globally
-$sidebarWidth: 14rem;
 $headerHeight: 50px;
 $sidebarAnimationDuration: 0.3s;
 
-nav {
-  position: absolute;
+.nav {
   height: 100%;
   padding: 0 1rem 1rem;
   // TODO: theme variable
-  background-color: pink;
+  background-color: #91c612;
 
   display: flex;
   flex-direction: column;
@@ -36,7 +34,7 @@ nav {
   }
 
   &.expanded {
-    width: $sidebarWidth;
+    width: var(--sidebar-width);
   }
 
   .sidebar_header {

@@ -35,6 +35,10 @@ textarea {
   }
 }
 
+:root {
+  --sidebar-width: 14rem;
+}
+
 /* TODO: find a way to apply these styles to EVERY mat-icon */
 /* mat-icon {
   display: flex;
