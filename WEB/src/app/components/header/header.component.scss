@@ -10,12 +10,21 @@ $headerHeight: 50px;
   padding: 1rem;
   // TODO: theme variable
   background-color: #91c612;
+  color: white;
 
-  .headerItem_group {
+  .left_side,
+  .right_side {
     display: flex;
     gap: 1rem;
+  }
 
-    .batata {
+  .hidden_menu {
+    display: none;
+    transition: display 0.3s 0.3s ease-in-out;
+  }
+
+  .right_side {
+    .desktop_view {
       display: flex;
       align-items: center;
       gap: 1rem;
@@ -26,7 +35,7 @@ $headerHeight: 50px;
 
     //mobile
     @media (max-width: 950px) {
-      .batata {
+      .desktop_view {
         display: none;
       }
       .search_icon {
@@ -35,7 +44,7 @@ $headerHeight: 50px;
     }
   }
 
-  .icon {
+  .menu_icon {
     display: flex;
     align-items: center;
     justify-content: center;

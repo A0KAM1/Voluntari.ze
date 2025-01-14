@@ -1,16 +1,20 @@
 <div class="header">
-  <div class="headerItem_group">
-    <button type="button" (click)="handleSidebar()" aria-label="open sidebar">
-      <mat-icon aria-hidden="false" aria-label="menu icon" fontIcon="menu" class="icon"></mat-icon>
+  <div class="left_side">
+    <button type="button" (click)="handleSidebar()" aria-label="open sidebar"
+      [ngClass]=" (isOpen$ | async) ? 'hidden_menu' : ''">
+      <mat-icon aria-hidden="false" aria-label="menu icon" fontIcon="menu" class="menu_icon"></mat-icon>
     </button>
-    <a [routerLink]="['/']" class="logo" aria-label="Navigate to home">
+    <a [routerLink]="['/']" aria-label="Navigate to home" class="logo">
       <img src="../../../assets/images/AtomVector.svg" width="30" alt="Atom">
       <img src="../../../assets/images/Name.svg" width="150" alt="Logo">
     </a>
   </div>
-  <div class="headerItem_group">
-    <div class="batata">
-      <p-toggleswitch [(ngModel)]="checked" />
+  <div class="right_side">
+    <div class="desktop_view">
+      <p-button type="button" (onClick)="toggleDarkMode()" aria-label="toggle dark/light mode">
+        <mat-icon aria-hidden="false" aria-label="sun icon" fontIcon="light_mode" class="menu_icon"></mat-icon>
+        <mat-icon aria-hidden="false" aria-label="sun icon" fontIcon="dark_mode" class="menu_icon"></mat-icon>
+      </p-button>
       <input placeholder="pesquisar" type="text">
     </div>
     <mat-icon aria-hidden="false" aria-label="search icon" fontIcon="search" class="search_icon"></mat-icon>

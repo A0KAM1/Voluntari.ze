@@ -7,9 +7,9 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
 
-import Lara from '@primeng/themes/lara';
 import { provideStore } from '@ngrx/store';
 import { sidebarReducer } from './store/sidebar/sidebar.reducer';
+import ThemePreset from './themepreset';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,7 +19,10 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {
-        preset: Lara,
+        preset: ThemePreset,
+        options: {
+          darkModeSelector: '.dark-mode',
+        },
       },
     }),
     provideStore({ sidebar: sidebarReducer }),

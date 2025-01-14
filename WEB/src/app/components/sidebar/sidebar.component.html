@@ -1,6 +1,10 @@
-<di [ngClass]=" (isOpen$ | async) ? 'expanded' : 'closed'" class="nav">
+<div [ngClass]=" (isOpen$ | async) ? 'expanded' : 'closed'" class="nav">
   <!-- <nav class="expanded"> -->
-  <div>
+  <div class="sidebar_header">
+    <button type="button" (click)="handleSidebar()" aria-label="hide sidebar">
+      <mat-icon aria-hidden="false" aria-label="arrow back icon" fontIcon="arrow_back" class="user_icon"></mat-icon>
+    </button>
+
     <div class="links_group">
       <mat-icon aria-hidden="false" aria-label="user icon" fontIcon="account_circle" class="user_icon"></mat-icon>
       <a [routerLink]="['/sign-in']">Sign In</a>
@@ -14,4 +18,4 @@
       <span>Logout</span>
     </button>
   </div>
-</di>
+</div>

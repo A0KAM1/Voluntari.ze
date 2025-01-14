@@ -6,11 +6,14 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  color-scheme: none !important;
 }
 
-body {
+body,
+html {
   height: 100vh;
   width: 100%;
+  background-color: #eef6f4;
 }
 
 app-root {
@@ -35,8 +38,21 @@ textarea {
   }
 }
 
+.dark-mode {
+  body,
+  html {
+    background-color: #222224;
+    color: white;
+  }
+}
+
 :root {
+  --primary-bg-color: #eef6f4;
   --sidebar-width: 14rem;
+}
+
+[data-theme='dark-mode'] {
+  --primary-bg-color: #222224;
 }
 
 /* TODO: find a way to apply these styles to EVERY mat-icon */

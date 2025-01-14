@@ -4,14 +4,14 @@ $sidebarAnimationDuration: 0.3s;
 
 .nav {
   height: 100%;
-  padding: 0 1rem 1rem;
+  padding: 1rem;
   // TODO: theme variable
   background-color: #91c612;
+  color: white;
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  z-index: 9999;
 
   transition:
     width $sidebarAnimationDuration ease-in-out,
@@ -25,7 +25,7 @@ $sidebarAnimationDuration: 0.3s;
   &.closed {
     clip-path: inset(0 0 0 0);
     width: 0;
-    padding: 0 0 1rem;
+    padding: 1rem 0;
 
     * {
       opacity: 0;
@@ -35,19 +35,6 @@ $sidebarAnimationDuration: 0.3s;
 
   &.expanded {
     width: var(--sidebar-width);
-  }
-
-  .sidebar_header {
-    height: $headerHeight;
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
-
-    .close_button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
   }
 
   .links_group {
