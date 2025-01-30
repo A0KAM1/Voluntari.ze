@@ -6,14 +6,15 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  color-scheme: none !important;
+  font-family: 'Big Shoulders Text', serif;
+
+  transition: background-color 0.2s ease-in-out;
 }
 
-body,
-html {
+body {
   height: 100vh;
   width: 100%;
-  background-color: #eef6f4;
+  background-color: var(--primary-bg-color);
 }
 
 app-root {
@@ -24,35 +25,71 @@ app-root {
 }
 
 input,
-textarea {
-  /* TODO: theme variable */
-  border: solid #08a3d3;
-  /* TODO: theme variable */
-  background: white;
-  border-radius: 5px;
+textarea,
+.p-inputnumber {
   width: 100%;
-  padding: 0.45rem;
+}
 
-  &:focus {
-    outline: none;
+input,
+textarea {
+  border: 3px solid !important;
+
+  &:hover {
+    border: 3px solid var(--p-primary-400) !important;
+    color: var(--p-primary-400);
+
+    &::placeholder {
+      color: var(--p-primary-400);
+    }
   }
 }
 
-.dark-mode {
-  body,
-  html {
-    background-color: #222224;
-    color: white;
+/* TODO: add to theme-preset */
+.p-card {
+  border: 5px solid transparent;
+  border-radius: var(--card-border-radius) !important;
+  background-clip: padding-box !important;
+  color: var(--p-primary-0);
+}
+
+#profilePictureUpload .p-fileupload {
+  .p-fileupload-content {
+    display: none !important;
   }
+
+  .p-fileupload-header {
+    flex-direction: column !important;
+    justify-content: center;
+    color: var(--p-primary-0);
+    /* TODO: add responsivity */
+    height: 200px;
+    width: 200px;
+
+    .p-button {
+      border: none;
+      background: var(--p-primary-0) !important;
+
+      &:hover {
+        background: transparent !important;
+      }
+    }
+  }
+}
+
+/* TODO: find another way */
+div:has(.p-password) {
+  width: 100%;
 }
 
 :root {
-  --primary-bg-color: #eef6f4;
   --sidebar-width: 14rem;
+  --card-border-radius: 15px;
+
+  --primary-bg-color: var(--p-surface-50);
 }
 
-[data-theme='dark-mode'] {
-  --primary-bg-color: #222224;
+:root[class='dark-mode'] {
+  --primary-bg-color: var(--p-surface-900);
 }
 
 /* TODO: find a way to apply these styles to EVERY mat-icon */

@@ -1,0 +1,24 @@
+<div class="feedContainer">
+  feed works
+
+  <p-button type="button" [rounded]="true" (click)="showDialog()" aria-label="add publication" class="addButton">
+    <mat-icon aria-hidden="false" aria-label="add icon" fontIcon="add" class="addIcon"></mat-icon>
+  </p-button>
+
+  <p-dialog [modal]="true" [(visible)]="visible" [closeOnEscape]="true" [style]="{width: '65%'}">
+    <ng-template #headless>
+      <div class="addPublicationModal">
+        <div class="head">
+          <button type="button" (click)="closeDialog()" aria-label="close popup">
+            <mat-icon aria-hidden="false" aria-label="close icon" fontIcon="close" class="closeModalIcon"></mat-icon>
+          </button>
+
+          <h2>Novo Evento</h2>
+        </div>
+
+        <app-new-post></app-new-post>
+      </div>
+    </ng-template>
+  </p-dialog>
+
+</div>

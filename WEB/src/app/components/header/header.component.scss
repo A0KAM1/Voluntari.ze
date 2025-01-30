@@ -8,9 +8,7 @@ $headerHeight: 50px;
   align-items: center;
   justify-content: space-between;
   padding: 1rem;
-  // TODO: theme variable
-  background-color: #91c612;
-  color: white;
+  background-color: var(--p-primary-400);
 
   .left_side,
   .right_side {
@@ -31,6 +29,10 @@ $headerHeight: 50px;
     }
     .search_icon {
       display: none;
+    }
+
+    .p-inputtext.search_input {
+      border: none !important;
     }
 
     //mobile

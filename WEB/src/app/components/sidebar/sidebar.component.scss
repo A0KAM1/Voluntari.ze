@@ -5,9 +5,7 @@ $sidebarAnimationDuration: 0.3s;
 .nav {
   height: 100%;
   padding: 1rem;
-  // TODO: theme variable
-  background-color: #91c612;
-  color: white;
+  background-color: var(--p-primary-400);
 
   display: flex;
   flex-direction: column;

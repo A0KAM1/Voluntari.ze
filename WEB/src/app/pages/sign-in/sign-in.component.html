@@ -1,0 +1,24 @@
+<div class="card_container">
+  <div class="card_border">
+    <p-card>
+      <form>
+        <div class="logo">
+          <img src="../../../assets/images/Atom.svg" alt="atom" class="atom" />
+          <img src="../../../assets/images/NameAndMoto.svg" alt="logo" class="name" />
+        </div>
+
+        <div class="form_group">
+          <input pInputText variant="filled" id="email" placeholder="E-mail" />
+        </div>
+
+        <div class="form_group">
+          <input pInputText variant="filled" id="password" placeholder="Senha" />
+          <a [routerLink]="['/forgot-my-password']" class="input_hint">*Esqueceu a senha?</a>
+        </div>
+
+        <button type="submit">Entrar</button>
+        <a [routerLink]="['/sign-up']">Não possui um perfil?</a>
+      </form>
+    </p-card>
+  </div>
+</div>

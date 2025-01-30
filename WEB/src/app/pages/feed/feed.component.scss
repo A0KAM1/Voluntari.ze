@@ -1,0 +1,43 @@
+.feedContainer {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  overflow-y: auto;
+}
+
+// TODO: change button color
+.addButton {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+
+  .addIcon {
+    width: fit-content;
+    height: fit-content;
+    font-size: 2.5rem;
+  }
+}
+
+.addPublicationModal {
+  padding: 1rem;
+  background: lightgrey;
+  border-radius: 15px;
+  color: #08a3d3;
+
+  .head {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    .closeModalIcon {
+      width: fit-content;
+      height: fit-content;
+      font-size: 2rem;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  }
+}

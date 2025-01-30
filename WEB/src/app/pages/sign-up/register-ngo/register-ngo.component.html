@@ -1,0 +1,71 @@
+<form>
+  <div class="form_group">
+    <h3>Informações Gerais</h3>
+
+    <div class="input_group">
+      <p-fileUpload name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*"
+        maxFileSize="1000000" id="profilePictureUpload">
+        <ng-template #header let-files let-chooseCallback="chooseCallback">
+          <p-button [rounded]="true" onclick="choose($event, chooseCallback)" class="uploadPicture_btn">
+            <ng-template #icon>
+              <mat-icon aria-hidden="false" aria-label="menu icon" fontIcon="photo_camera"></mat-icon>
+            </ng-template>
+          </p-button>
+          <p>Foto de Perfil</p>
+        </ng-template>
+      </p-fileUpload>
+
+      <div class="form_group">
+        <input pInputText variant="filled" id="name" placeholder="Nome">
+
+        <p-inputnumber variant="filled" useGrouping="false" inputId="cnpj" placeholder="CNPJ" />
+
+        <p-inputnumber variant="filled" useGrouping="false" inputId="phone" placeholder="Tel" />
+      </div>
+    </div>
+
+    <textarea pTextarea variant="filled" id="description" placeholder="Descrição"></textarea>
+
+    <div class="input_group">
+      <input pInputText variant="filled" id="username" placeholder="Usuário">
+
+      <input pInputText variant="filled" id="email" placeholder="E-mail">
+    </div>
+
+    <input pInputText variant="filled" id="categories" placeholder="Escolha as categorias">
+
+    <div class="input_group">
+      <!-- TODO: find another way to format correctly -->
+      <div>
+        <p-password variant="filled" fluid="true" [toggleMask]="true" feedback="false" inputId="password"
+          placeholder="Senha" />
+      </div>
+
+      <div>
+        <p-password variant="filled" fluid="true" [toggleMask]="true" feedback="false" placeholder="Confirmar senha" />
+      </div>
+    </div>
+  </div>
+
+  <div class="form_group">
+    <h3>Informações Regionais</h3>
+
+    <div class="input_group">
+      <p-inputnumber variant="filled" useGrouping="false" inputId="cep" placeholder="CEP" />
+
+      <input pInputText variant="filled" id="country" placeholder="País">
+
+      <input pInputText variant="filled" id="city" placeholder="Cidade">
+    </div>
+
+    <div class="input_group">
+      <input pInputText variant="filled" id="state" placeholder="Estado">
+
+      <input pInputText variant="filled" id="street" placeholder="Rua">
+
+      <p-inputnumber variant="filled" useGrouping="false" inputId="number" placeholder="Numero" />
+    </div>
+  </div>
+
+  <button type="submit">Cadastrar</button>
+</form>

@@ -1,9 +1,11 @@
 <div class="header">
   <div class="left_side">
-    <button type="button" (click)="handleSidebar()" aria-label="open sidebar"
+    <p-button type="button" (click)="handleSidebar()" aria-label="open sidebar"
       [ngClass]=" (isOpen$ | async) ? 'hidden_menu' : ''">
-      <mat-icon aria-hidden="false" aria-label="menu icon" fontIcon="menu" class="menu_icon"></mat-icon>
-    </button>
+      <ng-template #icon>
+        <mat-icon aria-hidden="false" aria-label="menu icon" fontIcon="menu" class="menu_icon"></mat-icon>
+      </ng-template>
+    </p-button>
     <a [routerLink]="['/']" aria-label="Navigate to home" class="logo">
       <img src="../../../assets/images/AtomVector.svg" width="30" alt="Atom">
       <img src="../../../assets/images/Name.svg" width="150" alt="Logo">
@@ -11,11 +13,16 @@
   </div>
   <div class="right_side">
     <div class="desktop_view">
-      <p-button type="button" (onClick)="toggleDarkMode()" aria-label="toggle dark/light mode">
-        <mat-icon aria-hidden="false" aria-label="sun icon" fontIcon="light_mode" class="menu_icon"></mat-icon>
-        <mat-icon aria-hidden="false" aria-label="sun icon" fontIcon="dark_mode" class="menu_icon"></mat-icon>
+      <p-button type="button" [rounded]="true" (onClick)="toggleDarkMode()" aria-label="toggle screen mode">
+        <!-- TODO: this may break because the initial theme is set according to the SYSTEM theme, fix it -->
+        <ng-template #icon>
+          <mat-icon *ngIf="this.theme == 'dark'" aria-hidden="false" aria-label="sun icon" fontIcon="light_mode"
+            class="menu_icon"></mat-icon>
+          <mat-icon *ngIf="this.theme == 'light'" aria-hidden="false" aria-label="sun icon" fontIcon="dark_mode"
+            class="menu_icon"></mat-icon>
+        </ng-template>
       </p-button>
-      <input placeholder="pesquisar" type="text">
+      <input pInputText variant="filled" placeholder="pesquisar" class="search_input">
     </div>
     <mat-icon aria-hidden="false" aria-label="search icon" fontIcon="search" class="search_icon"></mat-icon>
   </div>
