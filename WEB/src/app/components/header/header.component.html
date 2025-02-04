@@ -1,13 +1,16 @@
 <div class="header">
-  <div class="page_title">
-    <h1>{{this.pageTitle}}</h1>
-  </div>
-
   <div class="left_side">
-    <p-button type="button" (click)="handleSidebar()" aria-label="open sidebar"
-      [ngClass]=" (isOpen$ | async) ? 'hidden_menu' : ''">
+    <p-button
+      type="button"
+      (click)="handleSidebar()"
+      aria-label="open sidebar"
+      [ngClass]="(isOpen$ | async) ? 'hidden_menu' : ''">
       <ng-template #icon>
-        <mat-icon aria-hidden="false" aria-label="menu icon" fontIcon="menu" class="menu_icon"></mat-icon>
+        <mat-icon
+          aria-hidden="false"
+          aria-label="menu icon"
+          fontIcon="menu"
+          class="menu_icon"></mat-icon>
       </ng-template>
     </p-button>
     <a [routerLink]="['/']" aria-label="Navigate to home" class="logo">
@@ -17,17 +20,41 @@
 
   <div class="right_side">
     <div class="desktop_view">
-      <p-button type="button" [rounded]="true" (onClick)="toggleDarkMode()" aria-label="toggle screen mode">
+      <p-button
+        type="button"
+        [rounded]="true"
+        (onClick)="toggleDarkMode()"
+        aria-label="toggle screen mode">
         <!-- TODO: this may break because the initial theme is set according to the SYSTEM theme, fix it -->
         <ng-template #icon>
-          <mat-icon *ngIf="this.theme == 'dark'" aria-hidden="false" aria-label="sun icon" fontIcon="light_mode"
+          <mat-icon
+            *ngIf="this.theme == 'dark'"
+            aria-hidden="false"
+            aria-label="sun icon"
+            fontIcon="light_mode"
             class="menu_icon"></mat-icon>
-          <mat-icon *ngIf="this.theme == 'light'" aria-hidden="false" aria-label="sun icon" fontIcon="dark_mode"
+          <mat-icon
+            *ngIf="this.theme == 'light'"
+            aria-hidden="false"
+            aria-label="sun icon"
+            fontIcon="dark_mode"
             class="menu_icon"></mat-icon>
         </ng-template>
       </p-button>
-      <input pInputText variant="filled" placeholder="pesquisar" class="search_input">
+      <input
+        pInputText
+        variant="filled"
+        placeholder="pesquisar"
+        class="search_input" />
     </div>
-    <mat-icon aria-hidden="false" aria-label="search icon" fontIcon="search" class="search_icon"></mat-icon>
+    <mat-icon
+      aria-hidden="false"
+      aria-label="search icon"
+      fontIcon="search"
+      class="search_icon"></mat-icon>
+  </div>
+
+  <div class="page_title">
+    <h1>{{ this.pageTitle }}</h1>
   </div>
 </div>

@@ -28,6 +28,7 @@ $headerHeight: 50px;
 .right_side {
   display: flex;
   gap: 1rem;
+  z-index: 10;
 }
 
 .hidden_menu {
