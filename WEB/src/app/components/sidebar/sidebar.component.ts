@@ -1,30 +1,29 @@
 import { Observable, of } from 'rxjs';
-import { CommonModule } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
-import { RouterModule } from "@angular/router";
-import { Store } from "@ngrx/store";
-import { closeSideBar } from "app/store/sidebar/sidebar.actions";
-import { selectIsOpen } from "app/store/sidebar/sidebar.selectors";
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { closeSideBar } from 'app/store/sidebar/sidebar.actions';
+import { selectIsOpen } from 'app/store/sidebar/sidebar.selectors';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [ CommonModule, RouterModule, MatIconModule ],
+  imports: [CommonModule, RouterModule, MatIconModule],
   templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.scss'
+  styleUrl: './sidebar.component.scss',
 })
 export class SidebarComponent implements OnInit {
   isOpen$: Observable<boolean> = of(false);
 
-  constructor(private store: Store){}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
     this.isOpen$ = this.store.select(selectIsOpen);
   }
 
-  handleSidebar(){
-    console.log('apertou')
-    this.store.dispatch(closeSideBar())
+  handleSidebar() {
+    this.store.dispatch(closeSideBar());
   }
 }

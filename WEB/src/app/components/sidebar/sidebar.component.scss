@@ -6,10 +6,11 @@ $sidebarAnimationDuration: 0.3s;
   height: 100%;
   padding: 1rem;
   background-color: var(--p-primary-400);
+  color: var(--secondary-text-color);
 
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-items: start;
 
   transition:
     width $sidebarAnimationDuration ease-in-out,
@@ -35,11 +36,12 @@ $sidebarAnimationDuration: 0.3s;
     width: var(--sidebar-width);
   }
 
-  .links_group {
+  ul {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
+    justify-content: space-between;
+    width: 100%;
 
     .user_icon {
       display: flex;
@@ -50,20 +52,29 @@ $sidebarAnimationDuration: 0.3s;
       font-size: 8rem;
     }
 
-    > a,
-    button {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: clip;
-      padding: 0.5rem;
-      width: 100%;
-      text-align: center;
+    .links_group {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
+      gap: 0.5rem;
 
-      &:hover {
-        text-decoration: underline;
+      li {
+        a,
+        button {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: clip;
+          padding: 0.5rem;
+          width: 100%;
+          text-align: center;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
       }
     }
   }

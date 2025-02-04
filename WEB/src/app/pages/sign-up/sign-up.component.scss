@@ -1,3 +1,14 @@
+:host {
+  position: relative;
+}
+
+h1 {
+  border: solid red;
+  position: sticky;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
 //TODO: add globally
 .card_border {
   border-radius: var(--card-border-radius);
@@ -8,6 +19,49 @@
     var(--p-primary-700),
     var(--p-primary-400)
   );
+}
+
+.card_content {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1rem !important;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10%;
+
+  a {
+    background-color: var(--primary-bg-color);
+    color: var(--p-primary-400);
+    text-align: center;
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: none;
+    width: 30%;
+  }
+}
+
+.content {
+  width: 100%;
+
+  div {
+    text-align: center;
+    a {
+      color: var(--p-primary-400);
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.active_link {
+  background-color: var(--p-primary-400) !important;
+  color: #fdfdfd !important;
 }
 
 //TODO add globally
@@ -26,33 +80,8 @@
   }
 }
 
-.perfil,
-.ong {
-  background-color: var(--p-primary-400);
-  color: #fdfdfd;
-  text-align: center;
-  padding: 0.5rem;
-  border-radius: 5px;
-  border: none;
-}
-
-.content {
-  width: 100%;
-
-  div {
-    text-align: center;
-    a {
-      color: var(--p-primary-400);
-
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-  }
-}
-
 //mobile
-@media (max-width: 950px) {
+@media (max-width: 768px) {
   .logo {
     .atom {
       width: 35px;
@@ -60,9 +89,5 @@
     .name {
       width: 100px;
     }
-  }
-
-  .card {
-    padding: 1rem;
   }
 }

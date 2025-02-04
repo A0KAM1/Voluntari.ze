@@ -18,36 +18,34 @@ const routeConfig: Routes = [
   {
     path: 'sign-up',
     component: SignUpComponent,
+    title: 'Cadastro',
     children: [
       {
         path: 'ngo',
         component: RegisterNgoComponent,
+        title: 'Cadastro de Ong',
       },
       {
         path: 'volunteer',
         component: RegisterUserComponent,
+        title: 'Cadastro de Voluntário',
       },
     ],
   },
   {
     path: 'sign-in',
     component: SignInComponent,
+    title: 'Sign In',
   },
   {
     path: 'forgot-my-password',
     component: ForgotMyPasswordComponent,
+    title: 'Esqueci Minha Senha',
   },
   {
     path: 'my-subscriptions',
     component: MySubscriptionsComponent,
-  },
-  {
-    path: 'sign-up-user',
-    component: RegisterUserComponent,
-  },
-  {
-    path: 'sign-up-ong',
-    component: RegisterNgoComponent,
+    title: 'Minhas Inscrições',
   },
   {
     path: 'my-profile',
@@ -61,6 +59,7 @@ const routeConfig: Routes = [
   {
     path: 'about-us',
     component: AbouUsComponent,
+    title: 'Sobre Nós',
   },
 ];
 

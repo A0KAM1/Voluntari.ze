@@ -1,22 +1,25 @@
 <div class="card_border">
   <p-card>
-    <div class="logo">
-      <img src="../../../assets/images/Atom.svg" alt="Atom" class="atom">
-      <img src="../../../assets/images/NameAndMoto.svg" alt="Logo" class="name">
-    </div>
+    <div class="card_content">
+      <div class="logo">
+        <img src="../../../assets/images/Atom.svg" alt="Atom" class="atom">
+        <img src="../../../assets/images/NameAndMoto.svg" alt="Logo" class="name">
+      </div>
 
-    <div class="logo">
-      <a pTooltip="Sou um voluntário" tooltipPosition="top" [routerLink]="['volunteer']" class="perfil">Cadastro de
-        Perfil</a>
-      <a pTooltip="Represento uma ONG!" tooltipPosition="top" [routerLink]="['ngo']" class="ong">Cadastro de ONG</a>
-    </div>
+      <nav>
+        <a pTooltip="Sou um voluntário" tooltipPosition="top" [routerLink]="['volunteer']"
+          routerLinkActive="active_link">Cadastro de Perfil</a>
+        <a pTooltip="Represento uma ONG!" tooltipPosition="top" [routerLink]="['ngo']"
+          routerLinkActive="active_link">Cadastro de ONG</a>
+      </nav>
 
-    <div class="content">
-      <router-outlet r-outlet></router-outlet>
+      <div class="content">
+        <router-outlet r-outlet></router-outlet>
 
-      <div>
-        <span>Já tem uma conta? Então </span>
-        <a [routerLink]="['/sign-in']">Voluntarize</a>
+        <div>
+          <span>Já tem uma conta? Então </span>
+          <a [routerLink]="['/sign-in']">Voluntarize</a>
+        </div>
       </div>
     </div>
   </p-card>

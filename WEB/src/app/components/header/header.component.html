@@ -1,4 +1,8 @@
 <div class="header">
+  <div class="page_title">
+    <h1>{{this.pageTitle}}</h1>
+  </div>
+
   <div class="left_side">
     <p-button type="button" (click)="handleSidebar()" aria-label="open sidebar"
       [ngClass]=" (isOpen$ | async) ? 'hidden_menu' : ''">
@@ -7,10 +11,10 @@
       </ng-template>
     </p-button>
     <a [routerLink]="['/']" aria-label="Navigate to home" class="logo">
-      <img src="../../../assets/images/AtomVector.svg" width="30" alt="Atom">
-      <img src="../../../assets/images/Name.svg" width="150" alt="Logo">
+      <app-logo></app-logo>
     </a>
   </div>
+
   <div class="right_side">
     <div class="desktop_view">
       <p-button type="button" [rounded]="true" (onClick)="toggleDarkMode()" aria-label="toggle screen mode">

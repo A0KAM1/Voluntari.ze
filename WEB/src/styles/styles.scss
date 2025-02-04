@@ -44,14 +44,6 @@ textarea {
   }
 }
 
-/* TODO: add to theme-preset */
-.p-card {
-  border: 5px solid transparent;
-  border-radius: var(--card-border-radius) !important;
-  background-clip: padding-box !important;
-  color: var(--p-primary-0);
-}
-
 #profilePictureUpload .p-fileupload {
   .p-fileupload-content {
     display: none !important;
@@ -76,6 +68,19 @@ textarea {
   }
 }
 
+p-button {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.card_border {
+  .p-card {
+    border: 5px solid transparent;
+    background-clip: padding-box !important;
+  }
+}
+
 /* TODO: find another way */
 div:has(.p-password) {
   width: 100%;
@@ -86,10 +91,12 @@ div:has(.p-password) {
   --card-border-radius: 15px;
 
   --primary-bg-color: var(--p-surface-50);
+  --secondary-text-color: var(--p-surface-50);
 }
 
 :root[class='dark-mode'] {
   --primary-bg-color: var(--p-surface-900);
+  --secondary-text-color: var(--p-surface-900);
 }
 
 /* TODO: find a way to apply these styles to EVERY mat-icon */

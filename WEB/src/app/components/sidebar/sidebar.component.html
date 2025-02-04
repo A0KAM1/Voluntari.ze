@@ -1,21 +1,32 @@
 <div [ngClass]=" (isOpen$ | async) ? 'expanded' : 'closed'" class="nav">
-  <!-- <nav class="expanded"> -->
-  <div class="sidebar_header">
-    <button type="button" (click)="handleSidebar()" aria-label="hide sidebar">
-      <mat-icon aria-hidden="false" aria-label="arrow back icon" fontIcon="arrow_back" class="user_icon"></mat-icon>
-    </button>
+  <!-- <div class="nav expanded"> -->
+  <button type="button" (click)="handleSidebar()" aria-label="hide sidebar">
+    <mat-icon aria-hidden="false" aria-label="arrow back icon" fontIcon="arrow_back"></mat-icon>
+  </button>
+
+  <ul>
+    <div class="links_group">
+      <li>
+        <mat-icon aria-hidden="false" aria-label="user icon" fontIcon="account_circle" class="user_icon"></mat-icon>
+      </li>
+      <li>
+        <a [routerLink]="['/sign-in']">Sign In</a>
+      </li>
+      <li>
+        <a [routerLink]="['/sign-up']">Sign Up</a>
+      </li>
+    </div>
 
     <div class="links_group">
-      <mat-icon aria-hidden="false" aria-label="user icon" fontIcon="account_circle" class="user_icon"></mat-icon>
-      <a [routerLink]="['/sign-in']">Sign In</a>
-      <a [routerLink]="['/sign-up']">Sign Up</a>
+      <li>
+        <a [routerLink]="['/about-us']">About Us</a>
+      </li>
+      <li>
+        <button type="button">
+          <mat-icon aria-hidden="false" aria-label="logout icon" fontIcon="logout" class="logout_icon"></mat-icon>
+          <span>Logout</span>
+        </button>
+      </li>
     </div>
-  </div>
-  <div class="links_group">
-    <a [routerLink]="['/about-us']">About Us</a>
-    <button type="button">
-      <mat-icon aria-hidden="false" aria-label="logout icon" fontIcon="logout" class="logout_icon"></mat-icon>
-      <span>Logout</span>
-    </button>
-  </div>
+  </ul>
 </div>

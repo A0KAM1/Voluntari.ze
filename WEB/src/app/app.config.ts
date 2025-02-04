@@ -9,7 +9,7 @@ import { providePrimeNG } from 'primeng/config';
 
 import { provideStore } from '@ngrx/store';
 import { sidebarReducer } from './store/sidebar/sidebar.reducer';
-import ThemePreset from './themepreset';
+import ThemePreset from '../styles/themepreset';
 
 export const appConfig: ApplicationConfig = {
   providers: [

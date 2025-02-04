@@ -26,12 +26,12 @@ const ThemePreset = definePreset(Lara, {
           hoverColor: '{primary.300}',
           activeColor: '{primary.0}',
         },
-        // highlight: {
-        //   color: '#000000',
-        //   background: '#08a3d3',
-        //   focusBackground: '#08a3d3',
-        //   focusColor: '#e100ff',
-        // },
+        highlight: {
+          color: '#000000',
+          background: '{primary.0}',
+          focusBackground: '{primary.300}',
+          focusColor: '#e100ff',
+        },
         surface: {
           0: '#EEF6F4',
           50: '#DFE7E5',
@@ -46,7 +46,6 @@ const ThemePreset = definePreset(Lara, {
           900: '#344D49',
           950: '#233E39',
         },
-        contentBackground: '{surface.0}',
       },
       dark: {
         primary: {
@@ -55,12 +54,12 @@ const ThemePreset = definePreset(Lara, {
           hoverColor: '{primary.3000}',
           activeColor: '{primary.0}',
         },
-        // highlight: {
-        //   color: '#000000',
-        //   background: '#08a3d3',
-        //   focusBackground: '#08a3d3',
-        //   focusColor: '#e100ff',
-        // },
+        highlight: {
+          color: '#000000',
+          background: '{primary.0}',
+          focusBackground: '{primary.300}',
+          focusColor: '#e100ff',
+        },
         surface: {
           0: '#ffffff',
           50: '#e6e6e8',
@@ -75,7 +74,6 @@ const ThemePreset = definePreset(Lara, {
           900: '#252528',
           950: '#222224',
         },
-        contentBackground: '{surface.700}',
       },
     },
   },
@@ -159,6 +157,27 @@ const ThemePreset = definePreset(Lara, {
         },
         dark: {
           header: {
+            background: '{surface.700}',
+          },
+        },
+      },
+    },
+    card: {
+      root: {
+        borderRadius: '15px',
+        color: '{primary.0}',
+      },
+      content: {
+        gap: '2rem',
+      },
+      colorScheme: {
+        light: {
+          root: {
+            background: '{surface.0}',
+          },
+        },
+        dark: {
+          root: {
             background: '{surface.700}',
           },
         },

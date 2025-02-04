@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { ActivationEnd, Event, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -12,6 +12,7 @@ import { Button } from 'primeng/button';
 import { InputText } from 'primeng/inputtext';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
+import { LogoComponent } from '../logo/logo.component';
 
 @Component({
   selector: 'app-header',
@@ -25,6 +26,7 @@ import { InputIconModule } from 'primeng/inputicon';
     InputText,
     IconFieldModule,
     InputIconModule,
+    LogoComponent,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
@@ -33,11 +35,22 @@ export class HeaderComponent {
   checked = true;
   isOpen$: Observable<boolean> = of(false);
   theme: 'dark' | 'light' = 'light';
+  pageTitle: string = '';
 
-  constructor(private store: Store) {}
+  constructor(
+    private store: Store,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.isOpen$ = this.store.select(selectIsOpen);
+
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof ActivationEnd) {
+        this.pageTitle =
+          event.snapshot.routeConfig?.title?.toString() || 'Pagina Inicial';
+      }
+    });
   }
 
   handleSidebar() {
